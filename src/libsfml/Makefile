@@ -6,12 +6,12 @@
 ##
 
 CC	=	g++
-NAME	=	aracde
+NAME	=	libsfml.so
 NAME_TEST = unit_tests
-FLAGS	=	-W -c -Wall -Wextra -pedantic -g3
+FLAGS	=	-W -c -fpic -Wall -Werror -Wextra -pedantic -g3
 EXT := cpp
 
-SRC_FOLDER	:= src
+SRC_FOLDER	:= src/
 IGNORE_SRC := .
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
@@ -23,16 +23,14 @@ TEST_FOLDER	:= .
 IGNORE_TEST := .
 TEST :=	$(filter-out $(IGNORE_TEST), $(sort $(shell find $(TEST_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
-LFOLDER :=	src/libfoo src/libnon src/liboui
+LFOLDER :=
 LIB_FOLDER := 	#-L $(LFOLDER)
 LIB_NAME :=
-LIB_EXT :=	-lcriterion -ldl
+LIB_EXT :=	-lcriterion
 
 OBJ_PATH :=	obj/
 OBJ_FOLDER := $(addprefix $(OBJ_PATH), $(SRC_FOLDER))
 OBJ :=	$(addprefix $(OBJ_PATH), $(SRC:.$(EXT)=.o))
-
-LIBR := $(R)
 
 #----Parameter----#
 SYSFILES := ./errors
@@ -69,10 +67,12 @@ $(NAME):	$(OBJ)
 	echo -e "╠══Now, build your project!"
 	echo -e "║"
 	echo -e "╠══Build in progress..."
-	$(CC) -o $(NAME) $^ $(LDFLAGS) -L./ -ldl	\
+	$(CC) -o $(NAME) $^ $(LDFLAGS) -shared -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio	\
 		&& echo -e "╚$(COLOR)$(GREEN)$(END_COLOR)Your project was successfully built congratulation! $(RESET)"	\
 		|| echo -e "╠$(COLOR)$(BOLD);$(BLINK);$(RED)$(END_COLOR)WARNING$(R_BLINK)$(R_BOLD) Your project is bad change this and retry newbie!$(RESET)"\
 		"\n╚$(COLOR);$(RED)$(END_COLOR)Look in the error_list to see what is your problem.$(RESET)"
+	mv $(NAME) ../../
+
 
 $(OBJ):	$(OBJ_PATH)%.o:	%.$(EXT)
 	$(CC) -c $< -o $@ $(INC) $(FLAGS) $(REDIRECT)	\
@@ -92,10 +92,17 @@ fclean:	clean
 
 re: fclean all
 
-lib: $(LFOLDER)
+lib:
+		make -C $(LFOLDER)
 
-$(LFOLDER):
-		make -C $@ $(LIBR)
+libre:
+		make -C $(LFOLDER) re
+
+libclean:
+		make -C $(LFOLDER) clean
+
+libfclean:
+		make -C $(LFOLDER) fclean
 
 tests_run:
 	g++ -o $(NAME_TEST) $(SRC) $(TEST) $(INC) --coverage -lcriterion
