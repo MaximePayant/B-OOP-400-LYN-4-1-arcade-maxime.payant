@@ -6,9 +6,9 @@
 ##
 
 CC	=	g++
-NAME	=	arcade
+NAME	=	arcade_nibbler.so
 NAME_TEST = unit_tests
-FLAGS	=	-W -c -Wall -Wextra -pedantic -g3
+FLAGS	=	-W -c -fpic -Wall -Werror -Wextra -pedantic -g3
 EXT := cpp
 
 SRC_FOLDER	:= src
@@ -23,16 +23,14 @@ TEST_FOLDER	:= .
 IGNORE_TEST := .
 TEST :=	$(filter-out $(IGNORE_TEST), $(sort $(shell find $(TEST_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
-LFOLDER :=	src/libfoo src/libnon src/liboui
+LFOLDER :=
 LIB_FOLDER := 	#-L $(LFOLDER)
 LIB_NAME :=
-LIB_EXT :=	-lcriterion -ldl
+LIB_EXT :=	-lcriterion
 
 OBJ_PATH :=	obj/
 OBJ_FOLDER := $(addprefix $(OBJ_PATH), $(SRC_FOLDER))
 OBJ :=	$(addprefix $(OBJ_PATH), $(SRC:.$(EXT)=.o))
-
-LIBR := $(R)
 
 #----Parameter----#
 SYSFILES := ./errors
@@ -52,11 +50,10 @@ BOLD	=	1
 BLINK	=	5
 END_COLOR	=	m
 
-all:	core games graphicals
+all:	introduction $(NAME)
 
 
 introduction: $(OBJ_FOLDER)
-	@mkdir lib
 	echo -e "╔══Initialization compile"
 	echo -e "║"
 	echo -e "║"
@@ -70,10 +67,12 @@ $(NAME):	$(OBJ)
 	echo -e "╠══Now, build your project!"
 	echo -e "║"
 	echo -e "╠══Build in progress..."
-	$(CC) -o $(NAME) $^ $(LDFLAGS) -L./ -ldl	\
+	$(CC) -o $(NAME) $^ $(LDFLAGS) -shared	\
 		&& echo -e "╚$(COLOR)$(GREEN)$(END_COLOR)Your project was successfully built congratulation! $(RESET)"	\
 		|| echo -e "╠$(COLOR)$(BOLD);$(BLINK);$(RED)$(END_COLOR)WARNING$(R_BLINK)$(R_BOLD) Your project is bad change this and retry newbie!$(RESET)"\
 		"\n╚$(COLOR);$(RED)$(END_COLOR)Look in the error_list to see what is your problem.$(RESET)"
+	mv $(NAME) ../../lib
+
 
 $(OBJ):	$(OBJ_PATH)%.o:	%.$(EXT)
 	$(CC) -c $< -o $@ $(INC) $(FLAGS) $(REDIRECT)	\
@@ -90,25 +89,20 @@ clean:
 
 fclean:	clean
 	@rm -f $(NAME)
-	rm -r lib
 
 re: fclean all
 
-#lib: $(LFOLDER)
+lib:
+		make -C $(LFOLDER)
 
-core: introduction $(NAME)
+libre:
+		make -C $(LFOLDER) re
 
-games:
-	make re -C src/pacman
-	make re -C src/nibbler
+libclean:
+		make -C $(LFOLDER) clean
 
-graphicals:
-	make re -C src/libncurses
-	make re -C src/libsdl
-	make re -C src/libsfml
-
-$(LFOLDER):
-		make -C $@ $(LIBR)
+libfclean:
+		make -C $(LFOLDER) fclean
 
 tests_run:
 	g++ -o $(NAME_TEST) $(SRC) $(TEST) $(INC) --coverage -lcriterion
@@ -119,4 +113,4 @@ rm_tests:
 	rm *.gcda
 	rm $(NAME_TEST)
 
-.PHONY: tests_run all fclean clean core graphicals games
+.PHONY: tests_run
