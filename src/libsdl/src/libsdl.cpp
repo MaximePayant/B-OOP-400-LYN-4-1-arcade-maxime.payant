@@ -35,6 +35,7 @@ m_window(nullptr)
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         std::cerr << this->getName() << SDL_GetError() << std::endl;
     m_window = SDL_CreateWindow("arcade_sdl", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, 0);
+    m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 }
 
 SdlModule::~SdlModule()
@@ -61,4 +62,14 @@ std::string SdlModule::getName() const
 bool SdlModule::isOk()
 {
     return (false);
+}
+
+void SdlModule::clearWindow()
+{
+    SDL_RenderClear(m_renderer);
+}
+
+void SdlModule::draw()
+{
+
 }

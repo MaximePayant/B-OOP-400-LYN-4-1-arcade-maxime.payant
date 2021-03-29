@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <SFML/Window/Event.hpp>
 #include "../inc/SfmlModule.hpp"
 
 __attribute__((constructor))
@@ -51,5 +52,20 @@ std::string SfmlModule::getName() const
 
 bool SfmlModule::isOk()
 {
+    sf::Event event;
+
+    while (m_window.pollEvent(event))
+        if (event.type == sf::Event::Closed)
+            m_window.close();
     return (m_window.isOpen());
+}
+
+void SfmlModule::clearWindow()
+{
+    m_window.clear();
+}
+
+void SfmlModule::draw()
+{
+    m_window.display();
 }

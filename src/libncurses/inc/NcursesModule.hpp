@@ -20,6 +20,8 @@ public:
     virtual void stop() override;
     virtual std::string getName() const override;
     virtual bool isOk() override;
+    void clearWindow() override;
+    void draw() override;
 };
 
 extern "C" void *entryPoint();

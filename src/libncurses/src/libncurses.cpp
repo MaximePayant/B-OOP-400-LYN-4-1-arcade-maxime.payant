@@ -66,3 +66,13 @@ bool NcursesModule::isOk()
 {
     return (getch() != 'l');
 }
+
+void NcursesModule::clearWindow()
+{
+
+}
+
+void NcursesModule::draw()
+{
+
+}

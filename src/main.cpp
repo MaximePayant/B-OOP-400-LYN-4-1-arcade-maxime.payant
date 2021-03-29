@@ -7,33 +7,38 @@
 
 #include <dlfcn.h>
 #include <iostream>
-#include "libsfml/inc/SfmlModule.hpp"
-#include "libsdl/inc/SdlModule.hpp"
 #include "../inc/IDisplayModule.hpp"
+#include "../inc/IGame.hpp"
 
 int main(int ac, char **av)
 {
-    if (ac != 2)
+    if (ac != 3)
         return (84);
-    void *handle_oui = dlopen(av[1], RTLD_LAZY);
-    void *(*oui_entry)();
+    void *module = dlopen(av[1], RTLD_LAZY);
+    void *game = dlopen(av[2], RTLD_LAZY);
+    void *(*moduleEntry)();
+    void *(*gameEntry)();
 
-    if (!handle_oui) {
+    if (!module || !game) {
         std::cerr << "Lib cannot be loaded: " << dlerror() << std::endl;
         return (84);
     }
-    *(void **)(&oui_entry) = dlsym(handle_oui, "entryPoint");
+    *(void **)(&moduleEntry) = dlsym(module, "entryPoint");
+    *(void **)(&gameEntry) = dlsym(game, "entryPoint");
 
     const char *error = dlerror();
     if (error) {
         std::cerr << "Function cannot be found: " << error << std::endl;
         return (84);
     }
-    auto *test = static_cast<IDisplayModule *>(oui_entry());
+    auto *moduleFunc = static_cast<IDisplayModule *>(moduleEntry());
+    auto *gameFunc = static_cast<IGame *>(gameEntry());
 
-    while (test->isOk());
+    while (moduleFunc->isOk()) {
+        gameFunc->update(moduleFunc);
+    }
 
-    delete (test);
-    dlclose(handle_oui);
+    delete (moduleFunc);
+    dlclose(module);
     return (0);
 }

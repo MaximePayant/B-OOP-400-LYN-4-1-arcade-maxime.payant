@@ -6,7 +6,7 @@
 ##
 
 CC	=	g++
-NAME	=	aracde
+NAME	=	arcade
 NAME_TEST = unit_tests
 FLAGS	=	-W -c -Wall -Wextra -pedantic -g3
 EXT := cpp
@@ -52,10 +52,11 @@ BOLD	=	1
 BLINK	=	5
 END_COLOR	=	m
 
-all:	introduction $(NAME)
+all:	core games graphicals
 
 
 introduction: $(OBJ_FOLDER)
+	@mkdir lib
 	echo -e "╔══Initialization compile"
 	echo -e "║"
 	echo -e "║"
@@ -89,10 +90,21 @@ clean:
 
 fclean:	clean
 	@rm -f $(NAME)
+	rm -r lib
 
 re: fclean all
 
-lib: $(LFOLDER)
+#lib: $(LFOLDER)
+
+core: introduction $(NAME)
+
+games:
+	make re -C src/pacman
+
+graphicals:
+	make re -C src/libncurses
+	make re -C src/libsdl
+	make re -C src/libsfml
 
 $(LFOLDER):
 		make -C $@ $(LIBR)
@@ -106,4 +118,4 @@ rm_tests:
 	rm *.gcda
 	rm $(NAME_TEST)
 
-.PHONY: tests_run
+.PHONY: tests_run all fclean clean core graphicals games

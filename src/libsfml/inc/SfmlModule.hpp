@@ -17,10 +17,12 @@ private:
     std::string m_name;
 public:
     SfmlModule();
-    virtual void init() override;
-    virtual void stop() override;
-    virtual std::string getName() const override;
-    virtual bool isOk() override;
+    void init() override;
+    void stop() override;
+    std::string getName() const override;
+    bool isOk() override;
+    void clearWindow() override;
+    void draw() override;
 };
 
 extern "C" void *entryPoint();

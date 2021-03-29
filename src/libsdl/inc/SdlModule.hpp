@@ -15,6 +15,7 @@ class SdlModule : IDisplayModule {
 private:
     std::string m_name;
     SDL_Window *m_window;
+    SDL_Renderer *m_renderer;
 public:
     SdlModule();
     ~SdlModule();
@@ -22,6 +23,8 @@ public:
     void stop() override;
     std::string getName() const override;
     bool isOk() override;
+    void clearWindow() override;
+    void draw() override;
 };
 
 #endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE
