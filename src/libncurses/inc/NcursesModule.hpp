@@ -8,11 +8,15 @@
 #ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
 #define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
 
+#include <unordered_map>
+#include <memory>
 #include "../../../inc/IDisplayModule.hpp"
+#include "Text.hpp"
 
 class NcursesModule : public IDisplayModule {
 private:
     std::string m_name;
+    std::unordered_map<std::string, Text*> m_TextMap;
 public:
     NcursesModule();
     ~NcursesModule() override;
@@ -22,6 +26,9 @@ public:
     virtual bool isOk() override;
     void clearWindow() override;
     void draw() override;
+    IText *createText(std::string name, std::string text, unsigned int size, std::string font) override;
+    IText *getText(std::string name) override;
+    void displayText(IText *text) override;
 };
 
 extern "C" void *entryPoint();

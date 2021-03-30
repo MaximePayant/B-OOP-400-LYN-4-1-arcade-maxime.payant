@@ -10,6 +10,7 @@
 
 #include "../../../inc/IDisplayModule.hpp"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 class SdlModule : IDisplayModule {
 private:
@@ -25,6 +26,7 @@ public:
     bool isOk() override;
     void clearWindow() override;
     void draw() override;
+    SDL_Renderer getRenderer() const;
 };
 
 #endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE

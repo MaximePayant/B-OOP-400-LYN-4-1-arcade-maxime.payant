@@ -8,7 +8,7 @@
 CC	=	g++
 NAME	=	arcade
 NAME_TEST = unit_tests
-FLAGS	=	-W -c -Wall -Wextra -pedantic -g3
+FLAGS	=	-W -c -Wall -Wextra -pedantic -g3 -std=c++2a
 EXT := cpp
 
 SRC_FOLDER	:= src
@@ -104,7 +104,7 @@ games:
 
 graphicals:
 	make re -C src/libncurses
-	make re -C src/libsdl
+	#make re -C src/libsdl
 	make re -C src/libsfml
 
 $(LFOLDER):

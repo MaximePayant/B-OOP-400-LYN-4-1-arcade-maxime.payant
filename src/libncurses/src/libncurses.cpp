@@ -37,7 +37,7 @@ m_name("Ncurses")
     keypad(stdscr, true);
     noecho();
     timeout(0);
-    curs_set(false);
+    curs_set(true);
 }
 
 NcursesModule::~NcursesModule()
@@ -45,6 +45,8 @@ NcursesModule::~NcursesModule()
     std::cout << this->getName() << " stopping...\n";
     curs_set(true);
     endwin();
+    for (auto& [_, obj] : m_TextMap)
+        delete (obj);
 }
 
 void NcursesModule::init()
@@ -69,10 +71,31 @@ bool NcursesModule::isOk()
 
 void NcursesModule::clearWindow()
 {
-
+    clear();
 }
 
 void NcursesModule::draw()
 {
+    refresh();
+}
 
+IText *NcursesModule::createText(std::string name, std::string text, unsigned int size,
+                                 std::string font)
+{
+    m_TextMap.emplace(name, new Text(text, size, font));
+    return (getText(name));
+}
+
+IText *NcursesModule::getText(std::string name)
+{
+    auto result = m_TextMap.find(name);
+
+    if (result != m_TextMap.end())
+        return (result->second);
+    throw std::runtime_error("Text not found");
+}
+
+void NcursesModule::displayText(IText *text)
+{
+    printw(text->getText().c_str());
 }

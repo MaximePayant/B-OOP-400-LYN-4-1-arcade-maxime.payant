@@ -69,3 +69,24 @@ void SfmlModule::draw()
 {
     m_window.display();
 }
+
+IText *SfmlModule::createText(std::string name, std::string text, unsigned int size,
+                                 std::string font)
+{
+    m_TextMap.emplace(name, new Text(text, size, font));
+    return (getText(name));
+}
+
+IText *SfmlModule::getText(std::string name)
+{
+    auto result = m_TextMap.find(name);
+
+    if (result != m_TextMap.end())
+        return (result->second);
+    throw std::runtime_error("Text not found");
+}
+
+void SfmlModule::displayText(IText *text)
+{
+    m_window.draw(dynamic_cast<Text*>(text)->getComponent());
+}

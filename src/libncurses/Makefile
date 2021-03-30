@@ -8,7 +8,7 @@
 CC	=	g++
 NAME	=	arcade_ncurses.so
 NAME_TEST = unit_tests
-FLAGS	=	-W -c -fpic -Wall -Werror -Wextra -pedantic -g3
+FLAGS	=	-W -c -fpic -Wall -Werror -Wextra -pedantic -g3 -std=c++2a
 EXT := cpp
 
 SRC_FOLDER	:= src/

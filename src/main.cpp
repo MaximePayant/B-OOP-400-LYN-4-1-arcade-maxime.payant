@@ -34,8 +34,11 @@ int main(int ac, char **av)
     auto *moduleFunc = static_cast<IDisplayModule *>(moduleEntry());
     auto *gameFunc = static_cast<IGame *>(gameEntry());
 
+    gameFunc->start(moduleFunc);
     while (moduleFunc->isOk()) {
+        moduleFunc->clearWindow();
         gameFunc->update(moduleFunc);
+        moduleFunc->draw();
     }
 
     delete (moduleFunc);
