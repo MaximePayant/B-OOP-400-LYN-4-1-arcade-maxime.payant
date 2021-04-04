@@ -7,22 +7,33 @@
 
 #include <dlfcn.h>
 #include <iostream>
-#include "../inc/IDisplayModule.hpp"
-#include "../inc/IGame.hpp"
+#include "IDisplayModule.hpp"
+#include "IGame.hpp"
+
+void *loadLibrary(const char *filename, int mode)
+{
+    void *lib = dlopen(filename, mode);
+
+    if (!lib) {
+        std::cerr << "Lib " << filename << " cannot be loaded: " << dlerror() << std::endl;
+        return (NULL);
+    }
+    return (lib);
+}
 
 int main(int ac, char **av)
 {
     if (ac != 3)
         return (84);
-    void *module = dlopen(av[1], RTLD_LAZY);
-    void *game = dlopen(av[2], RTLD_LAZY);
+
+    void *module = loadLibrary(av[1], RTLD_LAZY);
+    void *game = loadLibrary(av[2], RTLD_LAZY);
     void *(*moduleEntry)();
     void *(*gameEntry)();
 
-    if (!module || !game) {
-        std::cerr << "Lib cannot be loaded: " << dlerror() << std::endl;
+    if (!module || !game)
         return (84);
-    }
+
     *(void **)(&moduleEntry) = dlsym(module, "entryPoint");
     *(void **)(&gameEntry) = dlsym(game, "entryPoint");
 
@@ -31,13 +42,16 @@ int main(int ac, char **av)
         std::cerr << "Function cannot be found: " << error << std::endl;
         return (84);
     }
-    auto *moduleFunc = static_cast<IDisplayModule *>(moduleEntry());
-    auto *gameFunc = static_cast<IGame *>(gameEntry());
+    auto *moduleFunc = static_cast<arc::IDisplayModule *>(moduleEntry());
+    auto *gameFunc = static_cast<arc::IGame *>(gameEntry());
 
-    while (moduleFunc->isOk()) {
+    gameFunc->start(moduleFunc);
+    while (gameFunc->isOk(moduleFunc))
         gameFunc->update(moduleFunc);
-    }
+    gameFunc->end(moduleFunc);
 
+    delete (gameFunc);
+    dlclose(game);
     delete (moduleFunc);
     dlclose(module);
     return (0);

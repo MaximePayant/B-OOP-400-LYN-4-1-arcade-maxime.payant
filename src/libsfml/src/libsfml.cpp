@@ -6,66 +6,80 @@
 */
 
 #include <iostream>
-#include <SFML/Window/Event.hpp>
-#include "../inc/SfmlModule.hpp"
+
+#include "../inc/Module.hpp"
 
 __attribute__((constructor))
 void libSfml_constructor()
 {
-    printf("[Sfml Module] Starting SFML module...\n");
+    printf("[Sfml Module]: Starting SFML module...\n");
 }
 
 __attribute__((destructor))
 void libSfml_destructor()
 {
-    printf("[Sfml Module] SFML module stopped.\n");
+    printf("[Sfml Module]: SFML module stopped.\n");
+}
+
+std::string sfml::Module::getName()
+{
+    return ("[" + m_name + " Module]");
 }
 
 extern "C" void *entryPoint()
 {
-    auto *module = new SfmlModule();
+    auto *module = new sfml::Module();
+
     std::cout << module->getName() << ": Loaded!" << std::endl;
-    return (new SfmlModule());
+    return (module);
 }
 
-SfmlModule::SfmlModule() : IDisplayModule(),
-                                 m_window(),
-                                 m_name("libSfml")
+sfml::Module::Module() :
+    m_name("Sfml"),
+    m_window(),
+    m_event()
 {
     m_window.create({1920, 1080, 32}, "arcade_sfml");
 }
 
-void SfmlModule::init()
+void sfml::Module::init()
 {
-    std::cout << "[" << m_name << "] initializing..." << std::endl;
+    std::cout << getName() << ": initializing..." << std::endl;
 }
 
-void SfmlModule::stop()
+void sfml::Module::stop()
 {
-    std::cout << "[" << m_name << "] stopping...\n";
+    std::cout << getName() << ": stopping...\n";
 }
 
-std::string SfmlModule::getName() const
+bool sfml::Module::isOk()
 {
-    return (std::string("[" + m_name + "]"));
-}
-
-bool SfmlModule::isOk()
-{
-    sf::Event event;
-
-    while (m_window.pollEvent(event))
-        if (event.type == sf::Event::Closed)
-            m_window.close();
     return (m_window.isOpen());
 }
 
-void SfmlModule::clearWindow()
+bool sfml::Module::pollEvent()
 {
-    m_window.clear();
+    return (m_window.pollEvent(m_event));
 }
 
-void SfmlModule::draw()
+void sfml::Module::closeWindow()
+{
+    if (m_event.type == sf::Event::Closed)
+        m_window.close();
+}
+
+void sfml::Module::clear()
+{
+    m_window.clear(sf::Color(28, 28, 28));
+}
+
+template <typename... Args>
+void sfml::Module::draw(Args... values)
+{
+    m_window.draw(values...);
+}
+
+void sfml::Module::display()
 {
     m_window.display();
 }

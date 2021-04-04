@@ -27,18 +27,35 @@ extern "C" void *entryPoint()
     return (game);
 }
 
-PacMan::PacMan() : IGame()
+PacMan::PacMan()
 {}
 
-PacMan::~PacMan()
-= default;
-
-void PacMan::start(IDisplayModule *module)
+void PacMan::start(arc::IDisplayModule *module)
 {
-    (void) module;
+    (void)module;
+    std::cout << "Ah" << std::endl;
+    arc::IText *text = module->createText("Text");
+    text->setString("Lol");
+    std::cout << "Bai" << std::endl;
 }
 
-void PacMan::update(IDisplayModule *module)
+void PacMan::update(arc::IDisplayModule *module)
 {
-    (void) module;
+    while (module->pollEvent())
+        module->closeWindow();
+    module->clear();
+    module->display();
+}
+
+bool PacMan::isOk(arc::IDisplayModule *module)
+{
+    return (module->isOk());
+}
+
+void PacMan::end(arc::IDisplayModule *module)
+{
+    (void)module;
+    std::cout << "Cé" << std::endl;
+    //module->deleteComponent<arc::AText>("Text");
+    std::cout << "Des" << std::endl;
 }

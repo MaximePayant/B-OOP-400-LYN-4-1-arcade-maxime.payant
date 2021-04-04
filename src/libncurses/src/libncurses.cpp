@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <curses.h>
-#include "../inc/NcursesModule.hpp"
+#include "../inc/Module.hpp"
 
 __attribute__((constructor))
 void libNcurses_constructor()
@@ -23,15 +23,16 @@ void libNcurses_destructor()
 
 extern "C" void *entryPoint()
 {
-    auto *module = new NcursesModule();
+    auto *module = new ncs::Module();
 
     return (module);
 }
 
-NcursesModule::NcursesModule() : IDisplayModule(),
-m_name("Ncurses")
+ncs::Module::Module() :
+    arc::ADisplayModule(),
+    m_name("Ncurses")
 {
-    std::cout << this->getName() << " initializing..." << std::endl;
+    std::cout << m_name << " initializing..." << std::endl;
     initscr();
     cbreak();
     keypad(stdscr, true);
@@ -40,39 +41,36 @@ m_name("Ncurses")
     curs_set(false);
 }
 
-NcursesModule::~NcursesModule()
+ncs::Module::~Module()
 {
-    std::cout << this->getName() << " stopping...\n";
+    std::cout << m_name << " stopping...\n";
     curs_set(true);
     endwin();
 }
 
-void NcursesModule::init()
+void ncs::Module::init()
 {
-    std::cout << this->getName() << " initializing..." << std::endl;
+    std::cout << m_name << " initializing..." << std::endl;
 }
 
-void NcursesModule::stop()
+void ncs::Module::stop()
 {
-    std::cout << this->getName() << " stopping...\n";
+    std::cout << m_name << " stopping...\n";
 }
 
-std::string NcursesModule::getName() const
-{
-    return (std::string("[" + m_name + "]"));
-}
-
-bool NcursesModule::isOk()
+/*
+bool ncs::Module::isOk()
 {
     return (getch() != 'l');
 }
 
-void NcursesModule::clearWindow()
+void ncs::Module::clearWindow()
 {
 
 }
 
-void NcursesModule::draw()
+void ncs::Module::draw()
 {
 
 }
+*/

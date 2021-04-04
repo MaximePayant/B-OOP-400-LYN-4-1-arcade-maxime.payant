@@ -8,7 +8,7 @@
 CC	=	g++
 NAME	=	arcade
 NAME_TEST = unit_tests
-FLAGS	=	-W -c -Wall -Wextra -pedantic -g3
+FLAGS	=	-W -c -Wall -Wextra -pedantic -g3 -std=c++20
 EXT := cpp
 
 SRC_FOLDER	:= src
@@ -23,7 +23,7 @@ TEST_FOLDER	:= .
 IGNORE_TEST := .
 TEST :=	$(filter-out $(IGNORE_TEST), $(sort $(shell find $(TEST_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
-LFOLDER :=	src/libfoo src/libnon src/liboui
+LFOLDER :=	src/libsfml
 LIB_FOLDER := 	#-L $(LFOLDER)
 LIB_NAME :=
 LIB_EXT :=	-lcriterion -ldl
@@ -100,12 +100,12 @@ core: introduction $(NAME)
 
 games:
 	make re -C src/pacman
-	make re -C src/nibbler
+	#make re -C src/nibbler
 
 graphicals:
-	make re -C src/libncurses
-	make re -C src/libsdl
 	make re -C src/libsfml
+	#make re -C src/libncurses
+	#make re -C src/libsdl
 
 $(LFOLDER):
 		make -C $@ $(LIBR)

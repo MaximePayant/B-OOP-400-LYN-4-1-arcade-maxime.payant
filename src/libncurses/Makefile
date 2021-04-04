@@ -15,7 +15,8 @@ SRC_FOLDER	:= src/
 IGNORE_SRC := .
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
-INC_FOLDER =	inc
+INC_FOLDER =	inc \
+				../inc
 IGNORE_INC := 	.
 INC := $(filter-out $(IGNORE_INC), $(addprefix -I, $(INC_FOLDER)))
 
