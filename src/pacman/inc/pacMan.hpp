@@ -5,8 +5,8 @@
 ** pacMan.hpp.h
 */
 
-#ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_PACMAN
-#define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_PACMAN
+#ifndef PACMAN
+#define PACMAN
 
 #include "../../../inc/IDisplayModule.hpp"
 #include "../../../inc/IGame.hpp"
@@ -21,4 +21,4 @@ public:
 
 extern "C" void *entryPoint();
 
-#endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_PACMAN
+#endif //PACMAN

@@ -100,7 +100,7 @@ core: introduction $(NAME)
 
 games:
 	make re -C src/pacman
-	#make re -C src/nibbler
+	make re -C src/nibbler
 
 graphicals:
 	make re -C src/libsfml
