@@ -33,12 +33,12 @@ PacMan::PacMan() : IGame()
 PacMan::~PacMan()
 = default;
 
-void PacMan::start(IDisplayModule *module)
+void PacMan::start(arc::IDisplayModule *module)
 {
     (void) module;
 }
 
-void PacMan::update(IDisplayModule *module)
+void PacMan::update(arc::IDisplayModule *module)
 {
     (void) module;
 }

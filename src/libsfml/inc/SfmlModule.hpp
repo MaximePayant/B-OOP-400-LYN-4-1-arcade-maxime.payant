@@ -14,23 +14,28 @@
 #include <unordered_map>
 #include "Text.hpp"
 
-class SfmlModule : IDisplayModule {
-private:
-    sf::RenderWindow m_window;
-    std::string m_name;
-    std::unordered_map<std::string, Text*> m_TextMap;
-public:
-    SfmlModule();
-    void init() override;
-    void stop() override;
-    std::string getName() const override;
-    bool isOk() override;
-    void clearWindow() override;
-    void draw() override;
-    IText *createText(std::string name, std::string text, unsigned int size, std::string font) override;
-    IText *getText(std::string name) override;
-    void displayText(IText *text) override;
-};
+namespace sfml
+{
+    class SfmlModule : arc::IDisplayModule {
+        private:
+            sf::RenderWindow m_window;
+            std::string m_name;
+            std::unordered_map<std::string, Text*> m_TextMap;
+        public:
+            SfmlModule();
+            ~SfmlModule();
+            void init() override;
+            void stop() override;
+            std::string getName() const override;
+            bool isOk() override;
+            void clearWindow() override;
+            void draw() override;
+            IText *createText(std::string name, std::string text, unsigned int size, std::string font) override;
+            IText *getText(std::string name) override;
+            void displayText(IText *text) override;
+    };
+}
+
 
 extern "C" void *entryPoint();
 

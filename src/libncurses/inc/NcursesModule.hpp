@@ -13,7 +13,7 @@
 #include "../../../inc/IDisplayModule.hpp"
 #include "Text.hpp"
 
-class NcursesModule : public IDisplayModule {
+class NcursesModule : public arc::IDisplayModule {
 private:
     std::string m_name;
     std::unordered_map<std::string, Text*> m_TextMap;

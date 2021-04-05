@@ -25,6 +25,7 @@ extern "C" void *entryPoint()
 {
     auto *module = new NcursesModule();
 
+    std::cout << module->getName() << " Entry point created!" << std::endl;
     return (module);
 }
 

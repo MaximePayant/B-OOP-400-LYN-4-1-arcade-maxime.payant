@@ -33,13 +33,12 @@ PacMan::PacMan() : IGame()
 PacMan::~PacMan()
 = default;
 
-void PacMan::start(IDisplayModule *module)
+void PacMan::start(arc::IDisplayModule *module)
 {
     module->createText("Title", "Choose your game!", 10, "rsc/verdana.ttf")->setPosition(100, 100);
-
 }
 
-void PacMan::update(IDisplayModule *module)
+void PacMan::update(arc::IDisplayModule *module)
 {
     module->displayText(module->getText("Title"));
 }

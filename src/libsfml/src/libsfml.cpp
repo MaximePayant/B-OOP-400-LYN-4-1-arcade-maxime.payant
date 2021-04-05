@@ -23,34 +23,41 @@ void libSfml_destructor()
 
 extern "C" void *entryPoint()
 {
-    auto *module = new SfmlModule();
-    std::cout << module->getName() << ": Loaded!" << std::endl;
-    return (new SfmlModule());
+    auto *module = new sfml::SfmlModule();
+
+    std::cout << module->getName() << " Entry point created!" << std::endl;
+    return (module);
 }
 
-SfmlModule::SfmlModule() : IDisplayModule(),
+sfml::SfmlModule::SfmlModule() : IDisplayModule(),
                                  m_window(),
                                  m_name("libSfml")
 {
+    std::cout << this->getName() << " initializing..." << std::endl;
     m_window.create({1920, 1080, 32}, "arcade_sfml");
 }
 
-void SfmlModule::init()
+sfml::SfmlModule::~SfmlModule()
 {
-    std::cout << "[" << m_name << "] initializing..." << std::endl;
+    std::cout << this->getName() << " stopping...\n";
 }
 
-void SfmlModule::stop()
+void sfml::SfmlModule::init()
 {
-    std::cout << "[" << m_name << "] stopping...\n";
+    std::cout << getName() << " initializing..." << std::endl;
 }
 
-std::string SfmlModule::getName() const
+void sfml::SfmlModule::stop()
+{
+    std::cout << getName() << " stopping...\n";
+}
+
+std::string sfml::SfmlModule::getName() const
 {
     return (std::string("[" + m_name + "]"));
 }
 
-bool SfmlModule::isOk()
+bool sfml::SfmlModule::isOk()
 {
     sf::Event event;
 
@@ -60,24 +67,24 @@ bool SfmlModule::isOk()
     return (m_window.isOpen());
 }
 
-void SfmlModule::clearWindow()
+void sfml::SfmlModule::clearWindow()
 {
     m_window.clear();
 }
 
-void SfmlModule::draw()
+void sfml::SfmlModule::draw()
 {
     m_window.display();
 }
 
-IText *SfmlModule::createText(std::string name, std::string text, unsigned int size,
+IText *sfml::SfmlModule::createText(std::string name, std::string text, unsigned int size,
                                  std::string font)
 {
     m_TextMap.emplace(name, new Text(text, size, font));
     return (getText(name));
 }
 
-IText *SfmlModule::getText(std::string name)
+IText *sfml::SfmlModule::getText(std::string name)
 {
     auto result = m_TextMap.find(name);
 
@@ -86,7 +93,7 @@ IText *SfmlModule::getText(std::string name)
     throw std::runtime_error("Text not found");
 }
 
-void SfmlModule::displayText(IText *text)
+void sfml::SfmlModule::displayText(IText *text)
 {
     m_window.draw(dynamic_cast<Text*>(text)->getComponent());
 }

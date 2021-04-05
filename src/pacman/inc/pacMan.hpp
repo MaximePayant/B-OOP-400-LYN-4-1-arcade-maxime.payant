@@ -11,12 +11,12 @@
 #include "../../../inc/IDisplayModule.hpp"
 #include "../../../inc/IGame.hpp"
 
-class PacMan : public IGame {
+class PacMan : public arc::IGame {
 public:
     PacMan();
     ~PacMan() override;
-    void start(IDisplayModule *) override;
-    void update(IDisplayModule *) override;
+    void start(arc::IDisplayModule *) override;
+    void update(arc::IDisplayModule *) override;
 };
 
 extern "C" void *entryPoint();
