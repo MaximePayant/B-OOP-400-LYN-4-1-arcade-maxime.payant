@@ -25,12 +25,12 @@ extern "C" void *entryPoint()
 {
     auto *module = new SfmlModule();
     std::cout << module->getName() << ": Loaded!" << std::endl;
-    return (new SfmlModule());
+    return (module);
 }
 
-SfmlModule::SfmlModule() : IDisplayModule(),
-                                 m_window(),
-                                 m_name("libSfml")
+SfmlModule::SfmlModule() :
+    m_window(),
+    m_name("libSfml")
 {
     m_window.create({1920, 1080, 32}, "arcade_sfml");
 }
@@ -50,34 +50,40 @@ std::string SfmlModule::getName() const
     return (std::string("[" + m_name + "]"));
 }
 
-bool SfmlModule::isOk()
-{
-    sf::Event event;
-
-    while (m_window.pollEvent(event))
-        if (event.type == sf::Event::Closed)
-            m_window.close();
-    return (m_window.isOpen());
-}
-
 void SfmlModule::clearWindow()
 {
     m_window.clear();
 }
 
-void SfmlModule::draw()
+void SfmlModule::displayWindow()
 {
     m_window.display();
 }
 
-IText *SfmlModule::createText(std::string name, std::string text, unsigned int size,
-                                 std::string font)
+bool SfmlModule::pollEvent()
+{
+    return (m_window.pollEvent(m_event));
+}
+
+void SfmlModule::closeWindow()
+{
+    if (m_event.type == sf::Event::Closed)
+        m_window.close();
+}
+
+bool SfmlModule::isOk()
+{
+    return (m_window.isOpen());
+}
+
+IText *SfmlModule::createText(const std::string& name, const std::string& text, unsigned int size,
+                                 const std::string& font)
 {
     m_TextMap.emplace(name, new Text(text, size, font));
     return (getText(name));
 }
 
-IText *SfmlModule::getText(std::string name)
+IText *SfmlModule::getText(const std::string& name)
 {
     auto result = m_TextMap.find(name);
 
@@ -86,7 +92,16 @@ IText *SfmlModule::getText(std::string name)
     throw std::runtime_error("Text not found");
 }
 
-void SfmlModule::displayText(IText *text)
+void SfmlModule::deleteText(const std::string& name)
 {
-    m_window.draw(dynamic_cast<Text*>(text)->getComponent());
+    auto it = m_TextMap.find(name);
+
+    if (it == m_TextMap.end())
+        throw std::runtime_error("Text not found");
+    m_TextMap.erase(it);
+}
+
+void SfmlModule::drawText(const std::string& name)
+{
+    m_window.draw(dynamic_cast<Text*>(m_TextMap[name])->getComponent());
 }

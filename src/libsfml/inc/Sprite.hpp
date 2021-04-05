@@ -8,8 +8,9 @@
 #ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SPRITE
 #define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SPRITE
 
-#include "../../../inc/ISprite.hpp"
 #include <SFML/Graphics.hpp>
+
+#include "../../../inc/component/ISprite.hpp"
 
 class Sprite : public ISprite
 {

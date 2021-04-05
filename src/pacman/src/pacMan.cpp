@@ -40,7 +40,9 @@ void PacMan::start(IDisplayModule *module)
 
 void PacMan::update(IDisplayModule *module)
 {
+    while (module->pollEvent())
+        module->closeWindow();
     module->clearWindow();
-    module->displayText(module->getText("Title"));
-    module->draw();
+    module->drawText("Title");
+    module->displayWindow();
 }
