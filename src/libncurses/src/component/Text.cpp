@@ -6,7 +6,7 @@
 */
 
 #include <curses.h>
-#include "../inc/Text.hpp"
+#include "component/Text.hpp"
 
 Text::Text(std::string text, unsigned int size, std::string font) :
 m_x(0), m_y(0), m_message(text)

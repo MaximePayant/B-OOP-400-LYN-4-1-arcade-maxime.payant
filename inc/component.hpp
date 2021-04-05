@@ -5,10 +5,10 @@
 ** component.hpp
 */
 
-#ifndef __COMPONENT_H__
-#define __COMPONENT_H__
+#ifndef __ICOMPONENT_H__
+#define __ICOMPONENT_H__
 
 #include "component/ISprite.hpp"
 #include "component/IText.hpp"
 
-#endif // __COMPONENT_H__
+#endif // __ICOMPONENT_H__

@@ -33,8 +33,7 @@ class SfmlModule :
 
         void clearWindow() override;
         void displayWindow() override;
-        bool pollEvent() override;
-        void closeWindow() override;
+        void checkEvent() override;
         bool isOk() override;
 
         IText *createText(const std::string& name, const std::string& text, unsigned int size, const std::string& font) override;

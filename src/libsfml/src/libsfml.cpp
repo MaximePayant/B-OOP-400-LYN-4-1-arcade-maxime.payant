@@ -41,15 +41,11 @@ void SfmlModule::displayWindow()
     m_window.display();
 }
 
-bool SfmlModule::pollEvent()
+void SfmlModule::checkEvent()
 {
-    return (m_window.pollEvent(m_event));
-}
-
-void SfmlModule::closeWindow()
-{
-    if (m_event.type == sf::Event::Closed)
-        m_window.close();
+    while (m_window.pollEvent(m_event))
+        if (m_event.type == sf::Event::Closed)
+            m_window.close();
 }
 
 bool SfmlModule::isOk()

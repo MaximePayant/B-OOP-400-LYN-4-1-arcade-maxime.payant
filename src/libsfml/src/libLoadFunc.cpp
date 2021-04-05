@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** Tek2
 ** File description:
-** libLoad.cpp
+** libLoadFunc.cpp
 */
 
 #include <iostream>

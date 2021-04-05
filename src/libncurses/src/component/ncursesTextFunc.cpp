@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2021
 ** Tek2
 ** File description:
-** sfmlTextFunc.cpp
+** ncursesTextFunc.cpp
 */
 
-#include "SfmlModule.hpp"
+#include "NcursesModule.hpp"
 
-IText *SfmlModule::createText(const std::string& name,
+IText *NcursesModule::createText(const std::string& name,
                               const std::string& text,
                               unsigned int size,
                               const std::string& font)
@@ -19,7 +19,7 @@ IText *SfmlModule::createText(const std::string& name,
     return (it->second);
 }
 
-IText *SfmlModule::getText(const std::string& name)
+IText *NcursesModule::getText(const std::string& name)
 {
     auto it = m_TextMap.find(name);
 
@@ -28,7 +28,7 @@ IText *SfmlModule::getText(const std::string& name)
     return (it->second);
 }
 
-void SfmlModule::deleteText(const std::string& name)
+void NcursesModule::deleteText(const std::string& name)
 {
     auto it = m_TextMap.find(name);
 
@@ -37,11 +37,11 @@ void SfmlModule::deleteText(const std::string& name)
     m_TextMap.erase(it);
 }
 
-void SfmlModule::drawText(const std::string& name)
+void NcursesModule::drawText(const std::string& name)
 {
     auto it = m_TextMap.find(name);
 
     if (it == m_TextMap.end())
         throw std::runtime_error("Text not found");
-    m_window.draw(dynamic_cast<Text*>(it->second)->getComponent());
+    printw(it->second->getText().c_str());
 }

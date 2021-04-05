@@ -9,27 +9,9 @@
 #include <curses.h>
 #include "../inc/NcursesModule.hpp"
 
-__attribute__((constructor))
-void libNcurses_constructor()
-{
-    printf("[Ncurses Module] Starting Ncurses module...\n");
-}
-
-__attribute__((destructor))
-void libNcurses_destructor()
-{
-    printf("[Ncurses Module] Ncurses module stopped.\n");
-}
-
-extern "C" void *entryPoint()
-{
-    auto *module = new NcursesModule();
-
-    return (module);
-}
-
-NcursesModule::NcursesModule() : IDisplayModule(),
-m_name("Ncurses")
+NcursesModule::NcursesModule() :
+    m_isOk(true),
+    m_name("Ncurses")
 {
     std::cout << this->getName() << " initializing..." << std::endl;
     initscr();
@@ -64,38 +46,25 @@ std::string NcursesModule::getName() const
     return (std::string("[" + m_name + "]"));
 }
 
-bool NcursesModule::isOk()
-{
-    return (getch() != 'l');
-}
-
 void NcursesModule::clearWindow()
 {
     clear();
 }
 
-void NcursesModule::draw()
+void NcursesModule::displayWindow()
 {
     refresh();
 }
 
-IText *NcursesModule::createText(std::string name, std::string text, unsigned int size,
-                                 std::string font)
+void NcursesModule::checkEvent()
 {
-    m_TextMap.emplace(name, new Text(text, size, font));
-    return (getText(name));
+    char c = getch();
+
+    if (c == 'l')
+        m_isOk = false;
 }
 
-IText *NcursesModule::getText(std::string name)
+bool NcursesModule::isOk()
 {
-    auto result = m_TextMap.find(name);
-
-    if (result != m_TextMap.end())
-        return (result->second);
-    throw std::runtime_error("Text not found");
-}
-
-void NcursesModule::displayText(IText *text)
-{
-    printw(text->getText().c_str());
+    return (m_isOk);
 }

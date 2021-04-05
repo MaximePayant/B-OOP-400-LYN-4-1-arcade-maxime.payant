@@ -23,8 +23,7 @@ class IDisplayModule
 
         virtual void clearWindow() = 0;
         virtual void displayWindow() = 0;
-        virtual bool pollEvent() = 0;
-        virtual void closeWindow() = 0;
+        virtual void checkEvent() = 0;
         virtual bool isOk() = 0;
 
         virtual IText *createText(const std::string& name, const std::string& text, unsigned int size, const std::string& font) = 0;

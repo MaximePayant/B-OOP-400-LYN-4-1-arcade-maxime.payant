@@ -8,27 +8,38 @@
 #ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
 #define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
 
+#include <curses.h>
 #include <unordered_map>
 #include <memory>
-#include "../../../inc/IDisplayModule.hpp"
-#include "Text.hpp"
 
-class NcursesModule : public IDisplayModule {
-private:
-    std::string m_name;
-    std::unordered_map<std::string, Text*> m_TextMap;
-public:
-    NcursesModule();
-    ~NcursesModule() override;
-    virtual void init() override;
-    virtual void stop() override;
-    virtual std::string getName() const override;
-    virtual bool isOk() override;
-    void clearWindow() override;
-    void draw() override;
-    IText *createText(std::string name, std::string text, unsigned int size, std::string font) override;
-    IText *getText(std::string name) override;
-    void displayText(IText *text) override;
+#include "../../../inc/IDisplayModule.hpp"
+#include "component.hpp"
+
+class NcursesModule :
+    public IDisplayModule
+{
+    private:
+        bool m_isOk;
+        std::string m_name;
+        std::unordered_map<std::string, Text*> m_TextMap;
+
+    public:
+        NcursesModule();
+        ~NcursesModule() override;
+        std::string getName() const override;
+
+        void init() override;
+        void stop() override;
+
+        void clearWindow() override;
+        void displayWindow() override;
+        void checkEvent() override;
+        bool isOk() override;
+
+        IText *createText(const std::string& name, const std::string& text, unsigned int size, const std::string& font) override;
+        IText *getText(const std::string& name) override;
+        void deleteText(const std::string& name) override;
+        void drawText(const std::string& name) override;
 };
 
 extern "C" void *entryPoint();
