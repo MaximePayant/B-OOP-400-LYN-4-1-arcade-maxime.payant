@@ -105,7 +105,7 @@ games:
 graphicals:
 	make re -C src/libsfml
 	make re -C src/libncurses
-	make re -C src/libsdl
+	#make re -C src/libsdl
 
 $(LFOLDER):
 		make -C $@ $(LIBR)

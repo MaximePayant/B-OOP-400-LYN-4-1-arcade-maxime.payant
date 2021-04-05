@@ -13,10 +13,12 @@
 #include <SFML/System.hpp>
 
 #include "../../../inc/IDisplayModule.hpp"
+#include "../../../inc/Color.hpp"
 
-class SfmlModule :
-    public IDisplayModule
+namespace sfml
 {
+    class SfmlModule : public arc::IDisplayModule
+    {
 
     private:
         sf::RenderWindow m_window;
@@ -37,10 +39,11 @@ class SfmlModule :
         void checkEvent() override;
         bool isOk() override;
 
-        void drawText(const std::string& text, int characterSize) override;
+        void drawText(const std::string& text, int characterSize, arc::Color color) override;
         void drawSquare(float size) override;
 
-};
+    };
+}
 
 extern "C" void *entryPoint();
 

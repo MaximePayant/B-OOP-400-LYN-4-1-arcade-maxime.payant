@@ -8,8 +8,9 @@
 #include <iostream>
 #include <SFML/Window/Event.hpp>
 #include "../inc/SfmlModule.hpp"
+#include "../inc/SfmlColor.hpp"
 
-SfmlModule::SfmlModule() :
+sfml::SfmlModule::SfmlModule() :
     m_window(),
     m_name("libSfml"),
     m_font()
@@ -18,53 +19,52 @@ SfmlModule::SfmlModule() :
     m_window.create({1920, 1080, 32}, "arcade_sfml");
 }
 
-void SfmlModule::init()
+void sfml::SfmlModule::init()
 {
     std::cout << "[" << m_name << "] initializing..." << std::endl;
 }
 
-void SfmlModule::stop()
+void sfml::SfmlModule::stop()
 {
     std::cout << "[" << m_name << "] stopping...\n";
 }
 
-std::string SfmlModule::getName() const
+std::string sfml::SfmlModule::getName() const
 {
     return (std::string("[" + m_name + "]"));
 }
 
-void SfmlModule::clearWindow()
+void sfml::SfmlModule::clearWindow()
 {
     m_window.clear();
 }
 
-void SfmlModule::displayWindow()
+void sfml::SfmlModule::displayWindow()
 {
     m_window.display();
 }
 
-void SfmlModule::checkEvent()
+void sfml::SfmlModule::checkEvent()
 {
     while (m_window.pollEvent(m_event))
         if (m_event.type == sf::Event::Closed)
             m_window.close();
 }
 
-bool SfmlModule::isOk()
+bool sfml::SfmlModule::isOk()
 {
     return (m_window.isOpen());
 }
 
-void SfmlModule::drawText(const std::string& message, int size)
+void sfml::SfmlModule::drawText(const std::string& message, int size, arc::Color color)
 {
-    sf::Color color(sf::Color::White);
     sf::Text text(message, m_font, size);
 
-    text.setFillColor(color);
+    text.setFillColor(sfml::sfmlColorMap.find(color)->second);
     m_window.draw(text);
 }
 
-void SfmlModule::drawSquare(float size)
+void sfml::SfmlModule::drawSquare(float size)
 {
     sf::Color color(sf::Color::Cyan);
     sf::RectangleShape shape({size, size});

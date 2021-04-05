@@ -20,6 +20,15 @@ NcursesModule::NcursesModule() :
     noecho();
     timeout(0);
     curs_set(true);
+    start_color();
+    init_pair(arc::BLACK, COLOR_WHITE, COLOR_BLACK);
+    init_pair(arc::RED, COLOR_BLACK, COLOR_RED);
+    init_pair(arc::GREEN, COLOR_BLACK, COLOR_GREEN);
+    init_pair(arc::YELLOW, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(arc::BLUE, COLOR_BLACK, COLOR_BLUE);
+    init_pair(arc::MAGENTA, COLOR_BLACK, COLOR_MAGENTA);
+    init_pair(arc::CYAN, COLOR_BLACK, COLOR_CYAN);
+    init_pair(arc::WHITE, COLOR_BLACK, COLOR_WHITE);
 }
 
 NcursesModule::~NcursesModule()
@@ -67,10 +76,12 @@ bool NcursesModule::isOk()
     return (m_isOk);
 }
 
-void NcursesModule::drawText(const std::string& message, int size)
+void NcursesModule::drawText(const std::string& message, int size, arc::Color color)
 {
     (void)size;
+    attron(COLOR_PAIR(color));
     printw(message.c_str());
+    attron(COLOR_PAIR(arc::BLACK));
 }
 
 void NcursesModule::drawSquare(float size)

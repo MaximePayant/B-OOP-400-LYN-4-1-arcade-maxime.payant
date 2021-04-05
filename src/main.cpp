@@ -16,7 +16,7 @@ void *loadLibrary(const char *filename, int mode)
 
     if (!lib) {
         std::cerr << "Lib " << filename << " cannot be loaded: " << dlerror() << std::endl;
-        return (NULL);
+        return (nullptr);
     }
     return (lib);
 }
@@ -41,7 +41,7 @@ int main(int ac, char **av)
         std::cerr << "Function cannot be found: " << error << std::endl;
         return (84);
     }
-    auto *moduleFunc = static_cast<IDisplayModule *>(moduleEntry());
+    auto *moduleFunc = static_cast<arc::IDisplayModule *>(moduleEntry());
     auto *gameFunc = static_cast<IGame *>(gameEntry());
 
     gameFunc->start(moduleFunc);

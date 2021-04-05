@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "SfmlModule.hpp"
+#include "../inc/SfmlModule.hpp"
 
 __attribute__((constructor))
 void libSfml_constructor()
@@ -23,7 +23,8 @@ void libSfml_destructor()
 
 extern "C" void *entryPoint()
 {
-    auto *module = new SfmlModule();
+    auto *module = new sfml::SfmlModule();
+
     std::cout << module->getName() << ": Loaded!" << std::endl;
     return (module);
 }

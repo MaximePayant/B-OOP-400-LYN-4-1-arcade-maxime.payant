@@ -15,8 +15,8 @@ class PacMan : public IGame {
 public:
     PacMan();
     ~PacMan() override;
-    void start(IDisplayModule *) override;
-    void update(IDisplayModule *) override;
+    void start(arc::IDisplayModule *) override;
+    void update(arc::IDisplayModule *) override;
 };
 
 extern "C" void *entryPoint();

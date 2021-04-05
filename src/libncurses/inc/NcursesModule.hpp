@@ -13,9 +13,9 @@
 #include <memory>
 
 #include "../../../inc/IDisplayModule.hpp"
+#include "../../../inc/Color.hpp"
 
-class NcursesModule :
-    public IDisplayModule
+class NcursesModule : public arc::IDisplayModule
 {
     private:
         bool m_isOk;
@@ -34,7 +34,7 @@ class NcursesModule :
         void checkEvent() override;
         bool isOk() override;
 
-        void drawText(const std::string& text, int characterSize) override;
+        void drawText(const std::string& text, int characterSize, arc::Color color) override;
         void drawSquare(float size) override;
 };
 
