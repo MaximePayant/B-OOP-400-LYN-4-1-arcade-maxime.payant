@@ -36,9 +36,7 @@ int main(int ac, char **av)
 
     gameFunc->start(moduleFunc);
     while (moduleFunc->isOk()) {
-        moduleFunc->clearWindow();
         gameFunc->update(moduleFunc);
-        moduleFunc->draw();
     }
 
     delete (moduleFunc);
