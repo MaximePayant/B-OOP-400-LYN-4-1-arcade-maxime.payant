@@ -27,17 +27,6 @@ extern "C" void *entryPoint()
     return (game);
 }
 
-PacMan::PacMan() : IGame()
-{}
-
-PacMan::~PacMan()
-= default;
-
-void PacMan::start(arc::IDisplayModule *module)
-{
-    (void)module;
-}
-
 void PacMan::update(arc::IDisplayModule *module)
 {
     module->checkEvent();

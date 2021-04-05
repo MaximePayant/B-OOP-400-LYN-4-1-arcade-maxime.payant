@@ -8,12 +8,13 @@
 #ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE
 #define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE
 
-#include "../../../inc/IDisplayModule.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
+#include "../../../inc/IDisplayModule.hpp"
+
 class SdlModule :
-    public IDisplayModule
+    public arc::IDisplayModule
 {
     private:
         std::string m_name;

@@ -8,14 +8,22 @@
 #ifndef IGAME
 #define IGAME
 
-#include "IDisplayModule.hpp"
-
-class IGame
+namespace arc
 {
-    public:
-        virtual ~IGame() = default;
-        virtual void start(arc::IDisplayModule *) = 0;
-        virtual void update(arc::IDisplayModule *) = 0;
-};
+
+    class IDisplayModule;
+
+    class IGame
+    {
+
+        public:
+            virtual ~IGame() = default;
+
+            virtual void start(IDisplayModule *) = 0;
+            virtual void update(IDisplayModule *) = 0;
+
+    }; // class IGame
+
+} // namespace arc
 
 #endif //IGAME

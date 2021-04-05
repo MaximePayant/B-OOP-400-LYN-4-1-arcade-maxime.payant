@@ -13,9 +13,9 @@
 #include <memory>
 
 #include "../../../inc/IDisplayModule.hpp"
-#include "../../../inc/Color.hpp"
 
-class NcursesModule : public arc::IDisplayModule
+class NcursesModule :
+    public arc::IDisplayModule
 {
     private:
         bool m_isOk;
