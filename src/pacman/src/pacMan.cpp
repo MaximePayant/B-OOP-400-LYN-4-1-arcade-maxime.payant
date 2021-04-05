@@ -42,6 +42,6 @@ void PacMan::update(IDisplayModule *module)
 {
     module->checkEvent();
     module->clearWindow();
-    module->drawText("Title", 30);
+    module->drawText("Title", 30, {10, 10});
     module->displayWindow();
 }

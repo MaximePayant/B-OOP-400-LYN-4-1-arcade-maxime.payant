@@ -24,8 +24,8 @@ class IDisplayModule
         virtual void checkEvent() = 0;
         virtual bool isOk() = 0;
 
-        virtual void drawText(const std::string& text, int characterSize) = 0;
-        virtual void drawSquare(float size) = 0;
+        virtual void drawText(const std::string& text, int characterSize, std::pair<int, int> position) = 0;
+        virtual void drawSquare(int size, std::pair<int, int> position) = 0;
 };
 
 #endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_IDISPLAYMODULE
