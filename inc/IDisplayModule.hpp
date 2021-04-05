@@ -28,7 +28,7 @@ namespace arc
         virtual void checkEvent() = 0;
         virtual bool isOk() = 0;
 
-        virtual void drawText(const std::string& text, int characterSize, arc::Color color) = 0;
+        virtual void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) = 0;
         virtual void drawSquare(float size) = 0;
     };
 }

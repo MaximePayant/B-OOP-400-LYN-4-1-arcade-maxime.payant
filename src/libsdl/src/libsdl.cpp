@@ -79,13 +79,15 @@ void SdlModule::checkEvent()
 
 }
 
-void SdlModule::drawText(const std::string& text, int characterSize)
+void SdlModule::drawText(const std::string& text, int characterSize, std::pair<int, int> position)
 {
     (void)text;
     (void)characterSize;
+    (void)position;
 }
 
-void SdlModule::drawSquare(float size)
+void SdlModule::drawSquare(int size, std::pair<int, int> position)
 {
     (void)size;
+    (void)position;
 }
