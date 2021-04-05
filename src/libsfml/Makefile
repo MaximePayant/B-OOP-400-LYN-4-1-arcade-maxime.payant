@@ -11,8 +11,7 @@ NAME_TEST = unit_tests
 FLAGS	=	-W -c -fpic -Wall -Werror -Wextra -pedantic -g3
 EXT := cpp
 
-SRC_FOLDER	:=  src/ \
-				src/component/
+SRC_FOLDER	:=  src/
 IGNORE_SRC := .
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
@@ -27,7 +26,7 @@ TEST :=	$(filter-out $(IGNORE_TEST), $(sort $(shell find $(TEST_FOLDER) -ignore_
 LFOLDER :=
 LIB_FOLDER := 	#-L $(LFOLDER)
 LIB_NAME :=
-LIB_EXT :=	-lcriterion
+LIB_EXT :=
 
 OBJ_PATH :=	obj/
 OBJ_FOLDER := $(addprefix $(OBJ_PATH), $(SRC_FOLDER))

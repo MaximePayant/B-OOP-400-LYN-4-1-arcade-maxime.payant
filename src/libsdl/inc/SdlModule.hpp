@@ -12,21 +12,31 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-class SdlModule : IDisplayModule {
-private:
-    std::string m_name;
-    SDL_Window *m_window;
-    SDL_Renderer *m_renderer;
-public:
-    SdlModule();
-    ~SdlModule();
-    void init() override;
-    void stop() override;
-    std::string getName() const override;
-    bool isOk() override;
-    void clearWindow() override;
-    void draw() override;
-    SDL_Renderer getRenderer() const;
+class SdlModule :
+    public IDisplayModule
+{
+    private:
+        std::string m_name;
+        SDL_Window *m_window;
+        SDL_Renderer *m_renderer;
+
+    public:
+        SdlModule();
+        ~SdlModule();
+        std::string getName() const override;
+
+        void init() override;
+        void stop() override;
+
+        void clearWindow() override;
+        void displayWindow() override;
+        void checkEvent() override;
+        bool isOk() override;
+
+        void drawText(const std::string& text, int characterSize) override;
+        void drawSquare(float size) override;
+
+
 };
 
 #endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE
