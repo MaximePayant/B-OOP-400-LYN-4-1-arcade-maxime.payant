@@ -22,7 +22,7 @@ namespace sfml
         public:
             sf::Text m_text;
 
-            Text();
+            Text(const std::string& str);
             ~Text() = default;
 
             void setString(const std::string& str) override;

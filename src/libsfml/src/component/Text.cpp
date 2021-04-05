@@ -7,16 +7,21 @@
 
 #include "../../inc/Module.hpp"
 
-sfml::Text::Text() :
+sfml::Text::Text(const std::string& str) :
 m_text()
-{}
+{
+    sf::Font font;
+    font.loadFromFile("8bit.ttf");
+    m_text.setFont(font);
+    m_text.setString(str);
+}
 
 arc::IText *sfml::Module::createText(const std::string& cptName)
 {
     auto it = m_textMap.find(cptName);
 
     if (it == m_textMap.end())
-        it = m_textMap.try_emplace(cptName, std::make_unique<sfml::Text>()).first;
+        it = m_textMap.try_emplace(cptName, std::make_unique<sfml::Text>(cptName)).first;
     return (it->second.get());
 }
 
