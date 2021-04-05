@@ -5,11 +5,14 @@
 ** Text.cpp.cc
 */
 
-#include <curses.h>
-#include "../inc/Text.hpp"
+#include "component/Text.hpp"
 
 Text::Text(std::string text, unsigned int size, std::string font) :
-m_x(0), m_y(0), m_message(text), m_font(sf::Font()), m_text(sf::Text())
+    m_x(0),
+    m_y(0),
+    m_message(text),
+    m_font(sf::Font()),
+    m_text(sf::Text())
 {
     m_font.loadFromFile(font);
     m_text.setFont(m_font);
@@ -35,7 +38,7 @@ void Text::setPosition(int x, int y)
     m_text.setPosition((float)m_x, (float)m_y);
 }
 
-const sf::Text & Text::getComponent() const
+const sf::Text& Text::getComponent() const
 {
     return (m_text);
 }

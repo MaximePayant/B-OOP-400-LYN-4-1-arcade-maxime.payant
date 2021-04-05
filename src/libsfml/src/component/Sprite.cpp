@@ -5,7 +5,7 @@
 ** Sprite.cpp.cc
 */
 
-#include "../inc/Sprite.hpp"
+#include "component/Sprite.hpp"
 
 //Sprite::Sprite() : m_sprite(), m_texture()
 //{}

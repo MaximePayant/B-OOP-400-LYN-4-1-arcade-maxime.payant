@@ -11,7 +11,8 @@ NAME_TEST = unit_tests
 FLAGS	=	-W -c -fpic -Wall -Werror -Wextra -pedantic -g3
 EXT := cpp
 
-SRC_FOLDER	:= src/
+SRC_FOLDER	:=  src/ \
+				src/component/
 IGNORE_SRC := .
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
