@@ -15,8 +15,7 @@
 
 namespace sfml
 {
-    class SfmlModule :
-            public IDisplayModule
+    class SfmlModule : public arc::IDisplayModule
     {
     private:
         sf::RenderWindow m_window;
@@ -25,7 +24,7 @@ namespace sfml
         std::unordered_map<std::string, Text*> m_TextMap;
     public:
         SfmlModule();
-        ~SfmlModule() = default;
+        ~SfmlModule();
         std::string getName() const override;
 
         void init() override;

@@ -12,8 +12,10 @@
 
 #include "component.hpp"
 
-class IDisplayModule
+namespace arc
 {
+    class IDisplayModule
+    {
     public:
         virtual ~IDisplayModule() = default;
         virtual std::string getName() const = 0;
@@ -31,6 +33,7 @@ class IDisplayModule
         virtual IText *getText(const std::string& name) = 0;
         virtual void deleteText(const std::string& cptName) = 0;
         virtual void drawText(const std::string& name) = 0;
-};
+    };
+}
 
 #endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_IDISPLAYMODULE

@@ -29,10 +29,7 @@ extern "C" void *entryPoint()
     return (module);
 }
 
-sfml::SfmlModule::SfmlModule() : IDisplayModule(),
-                                 m_window(),
-                                 m_name("libSfml")
-SfmlModule::SfmlModule() :
+sfml::SfmlModule::SfmlModule() :
     m_window(),
     m_name("libSfml")
 {
@@ -89,11 +86,6 @@ void sfml::SfmlModule::closeWindow()
 {
     if (m_event.type == sf::Event::Closed)
         m_window.close();
-}
-
-bool sfml::SfmlModule::isOk()
-{
-    return (m_window.isOpen());
 }
 
 IText *sfml::SfmlModule::createText(const std::string& name, const std::string& text, unsigned int size,
