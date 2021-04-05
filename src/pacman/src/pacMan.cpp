@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2021
-** pacMan.cpp.c
+** Tek2
 ** File description:
-** pacMan.cpp.c
+** pacMan.cpp
 */
 
 #include <iostream>

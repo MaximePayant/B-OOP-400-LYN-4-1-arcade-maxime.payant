@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2021
-** pacMan.hpp.h
+** Tek2
 ** File description:
-** pacMan.hpp.h
+** pacMan.hpp
 */
 
-#ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_PACMAN
-#define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_PACMAN
+#ifndef __PACMAN_HPP__
+#define __PACMAN_HPP__
 
 #include "../../../inc/IDisplayModule.hpp"
 #include "../../../inc/IGame.hpp"
@@ -24,4 +24,4 @@ class PacMan :
 
 extern "C" void *entryPoint();
 
-#endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_PACMAN
+#endif // __PACMAN_HPP__

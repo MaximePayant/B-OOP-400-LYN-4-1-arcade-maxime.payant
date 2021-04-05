@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2021
-** liboui.cpp.c
+** Tek2
 ** File description:
-** liboui.cpp.c
+** libsfml.cpp
 */
 
 #include <iostream>
@@ -15,16 +15,12 @@ sfml::SfmlModule::SfmlModule() :
     m_name("libSfml"),
     m_font()
 {
+    std::cout << "[" << m_name << "] initializing..." << std::endl;
     m_font.loadFromFile("8bit.ttf");
     m_window.create({1920, 1080, 32}, "arcade_sfml");
 }
 
-void sfml::SfmlModule::init()
-{
-    std::cout << "[" << m_name << "] initializing..." << std::endl;
-}
-
-void sfml::SfmlModule::stop()
+sfml::SfmlModule::~SfmlModule()
 {
     std::cout << "[" << m_name << "] stopping...\n";
 }

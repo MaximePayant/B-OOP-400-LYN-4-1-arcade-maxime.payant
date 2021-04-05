@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2021
-** SfmlColor.hpp.h
+** Tek2
 ** File description:
-** SfmlColor.hpp.h
+** SdlColor.hpp
 */
 
-#ifndef SDLCOLOR
-#define SDLCOLOR
+#ifndef __SDL_COLOR_HPP__
+#define __SDL_COLOR_HPP__
 
 #include <unordered_map>
 #include <SDL2/SDL.h>
@@ -27,4 +27,4 @@ namespace sfml
     }
 }
 
-#endif //SDLCOLOR
+#endif // __SDL_COLOR_HPP__

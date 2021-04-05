@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2021
-** Color.hpp
+** Tek2
 ** File description:
 ** Color.hpp
 */
 
-#ifndef COLOR
-#define COLOR
+#ifndef __COLOR_HPP__
+#define __COLOR_HPP__
 
 namespace arc
 {
@@ -23,4 +23,4 @@ namespace arc
     };
 }
 
-#endif //COLOR
+#endif // __COLOR_HPP__

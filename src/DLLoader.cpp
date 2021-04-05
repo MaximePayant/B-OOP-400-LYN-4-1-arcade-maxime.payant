@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2021
-** DLLoader.cpp.cc
+** Tek2
 ** File description:
-** DLLoader.cpp.cc
+** DLLoader.cpp
 */
 
 #include "../inc/DLLoader.hpp"

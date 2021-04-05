@@ -2,28 +2,28 @@
 ** EPITECH PROJECT, 2021
 ** Tek2
 ** File description:
-** libLoadFunc.cpp
+** sdlLoadFunc.cpp
 */
 
 #include <iostream>
 
-#include "../inc/SfmlModule.hpp"
+#include "../inc/SdlModule.hpp"
 
 __attribute__((constructor))
-void libSfml_constructor()
+void libSdl_constructor()
 {
-    printf("[Sfml Module] Starting SFML module...\n");
+    std::cout << "[Sdl Module] Starting Sdl Module..." << std::endl;
 }
 
 __attribute__((destructor))
-void libSfml_destructor()
+void libSdl_destructor()
 {
-    printf("[Sfml Module] SFML module stopped.\n");
+    std::cout << "[Sdl Module] Sdl Module stopped." << std::endl;
 }
 
 extern "C" void *entryPoint()
 {
-    auto *module = new sfml::SfmlModule();
+    auto *module = new sdl::SdlModule();
 
     std::cout << module->getName() << " Entrypoint created." << std::endl;
     return (module);

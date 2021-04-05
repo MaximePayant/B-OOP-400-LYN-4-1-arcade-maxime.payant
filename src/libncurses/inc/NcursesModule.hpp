@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2021
-** LibFooModule.hpp.h
+** Tek2
 ** File description:
-** LibFooModule.hpp.h
+** NcursesModule.hpp
 */
 
-#ifndef NCURSESMODULE
-#define NCURSESMODULE
+#ifndef __NCURSES_MODULE_HPP__
+#define __NCURSES_MODULE_HPP__
 
 #include <curses.h>
 #include <unordered_map>
@@ -14,30 +14,34 @@
 
 #include "../../../inc/IDisplayModule.hpp"
 
-class NcursesModule :
-    public arc::IDisplayModule
+namespace ncs
 {
-    private:
-        bool m_isOk;
-        std::string m_name;
+    class NcursesModule :
+        public arc::IDisplayModule
+    {
 
-    public:
-        NcursesModule();
-        ~NcursesModule() override;
-        std::string getName() const override;
+        private:
+            bool m_isOk;
+            std::string m_name;
 
-        void init() override;
-        void stop() override;
+        public:
+            NcursesModule();
+            ~NcursesModule() override;
+            std::string getName() const override;
 
-        void clearWindow() override;
-        void displayWindow() override;
-        void checkEvent() override;
-        bool isOk() override;
+            void clearWindow() override;
+            void displayWindow() override;
+            void checkEvent() override;
+            bool isOk() override;
 
-        void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
-        void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
-};
+            void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
+            void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
+
+    }; // class NcursesModule
+
+} // namespace ncs
+
 
 extern "C" void *entryPoint();
 
-#endif //NCURSESMODULE
+#endif // __NCURSES_MODULE_HPP__

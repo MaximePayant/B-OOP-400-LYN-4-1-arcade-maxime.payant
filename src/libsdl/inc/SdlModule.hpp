@@ -1,21 +1,21 @@
 /*
 ** EPITECH PROJECT, 2021
-** LibFooModule.hpp.h
+** Tek2
 ** File description:
-** LibFooModule.hpp.h
+** SdlModule.hpp
 */
 
-#ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE
-#define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE
+#ifndef __SDL_MODULE_HPP__
+#define __SDL_MODULE_HPP__
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-
 #include "../../../inc/IDisplayModule.hpp"
 
-class SdlModule :
-    public arc::IDisplayModule
+namespace sdl
 {
+    class SdlModule : public arc::IDisplayModule
+    {
     private:
         std::string m_name;
         SDL_Window *m_window;
@@ -26,18 +26,14 @@ class SdlModule :
         ~SdlModule();
         std::string getName() const override;
 
-        void init() override;
-        void stop() override;
-
         void clearWindow() override;
         void displayWindow() override;
         void checkEvent() override;
         bool isOk() override;
 
-        void drawText(const std::string& text, int characterSize, std::pair<int, int> position) override;
-        void drawSquare(int size, std::pair<int, int> position) override;
+        void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
+        void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
+    };
+}
 
-
-};
-
-#endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_SDLMODULE
+#endif // __SDL_MODULE_HPP__

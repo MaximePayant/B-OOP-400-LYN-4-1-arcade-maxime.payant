@@ -1,15 +1,16 @@
 /*
 ** EPITECH PROJECT, 2021
-** liboui.cpp.c
+** Tek2
 ** File description:
-** liboui.cpp.c
+** libncurses.cpp
 */
 
 #include <iostream>
 #include <curses.h>
+
 #include "../inc/NcursesModule.hpp"
 
-NcursesModule::NcursesModule() :
+ncs::NcursesModule::NcursesModule() :
     m_isOk(true),
     m_name("Ncurses")
 {
@@ -31,39 +32,29 @@ NcursesModule::NcursesModule() :
     init_pair(arc::WHITE, COLOR_BLACK, COLOR_WHITE);
 }
 
-NcursesModule::~NcursesModule()
+ncs::NcursesModule::~NcursesModule()
 {
     std::cout << this->getName() << " stopping...\n";
     curs_set(true);
     endwin();
 }
 
-void NcursesModule::init()
-{
-    std::cout << this->getName() << " initializing..." << std::endl;
-}
-
-void NcursesModule::stop()
-{
-    std::cout << this->getName() << " stopping...\n";
-}
-
-std::string NcursesModule::getName() const
+std::string ncs::NcursesModule::getName() const
 {
     return (std::string("[" + m_name + "]"));
 }
 
-void NcursesModule::clearWindow()
+void ncs::NcursesModule::clearWindow()
 {
     clear();
 }
 
-void NcursesModule::displayWindow()
+void ncs::NcursesModule::displayWindow()
 {
     refresh();
 }
 
-void NcursesModule::checkEvent()
+void ncs::NcursesModule::checkEvent()
 {
     char c = getch();
 
@@ -71,12 +62,12 @@ void NcursesModule::checkEvent()
         m_isOk = false;
 }
 
-bool NcursesModule::isOk()
+bool ncs::NcursesModule::isOk()
 {
     return (m_isOk);
 }
 
-void NcursesModule::drawText(const std::string& message, int size, arc::Color color, std::pair<int, int> position)
+void ncs::NcursesModule::drawText(const std::string& message, int size, arc::Color color, std::pair<int, int> position)
 {
     (void)size;
     attron(COLOR_PAIR(color));
@@ -84,7 +75,7 @@ void NcursesModule::drawText(const std::string& message, int size, arc::Color co
     attron(COLOR_PAIR(arc::BLACK));
 }
 
-void NcursesModule::drawSquare(float size, arc::Color color, std::pair<int, int> position)
+void ncs::NcursesModule::drawSquare(float size, arc::Color color, std::pair<int, int> position)
 {
     for (int line = 0; line < size; line += 1)
         for (int col = 0; col < size; col += 1) {

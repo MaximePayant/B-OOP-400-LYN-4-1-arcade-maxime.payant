@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2021
-** main.c
+** Tek2
 ** File description:
-** main.c
+** main.cpp
 */
 
 #include <dlfcn.h>
@@ -42,7 +42,7 @@ int main(int ac, char **av)
         return (84);
     }
     auto *moduleFunc = static_cast<arc::IDisplayModule *>(moduleEntry());
-    auto *gameFunc = static_cast<IGame *>(gameEntry());
+    auto *gameFunc = static_cast<arc::IGame *>(gameEntry());
 
     gameFunc->start(moduleFunc);
     while (moduleFunc->isOk())

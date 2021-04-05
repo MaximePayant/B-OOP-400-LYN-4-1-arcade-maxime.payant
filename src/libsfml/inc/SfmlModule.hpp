@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2021
-** LibFooModule.hpp.h
+** Tek2
 ** File description:
-** LibFooModule.hpp.h
+** SfmlModule.hpp
 */
 
-#ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
-#define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
+#ifndef __SFML_MODULE_H__
+#define __SFML_MODULE_H__
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -17,34 +17,33 @@
 
 namespace sfml
 {
-    class SfmlModule : public arc::IDisplayModule
+    class SfmlModule :
+        public arc::IDisplayModule
     {
 
-    private:
-        sf::RenderWindow m_window;
-        sf::Event m_event;
-        std::string m_name;
-        sf::Font m_font;
+        private:
+            sf::RenderWindow m_window;
+            sf::Event m_event;
+            std::string m_name;
+            sf::Font m_font;
 
-    public:
-        SfmlModule();
-        ~SfmlModule() = default;
-        std::string getName() const override;
+        public:
+            SfmlModule();
+            ~SfmlModule();
+            std::string getName() const override;
 
-        void init() override;
-        void stop() override;
+            void clearWindow() override;
+            void displayWindow() override;
+            void checkEvent() override;
+            bool isOk() override;
 
-        void clearWindow() override;
-        void displayWindow() override;
-        void checkEvent() override;
-        bool isOk() override;
+            void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
+            void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
 
-        void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
-        void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
+    }; // class SfmlModule
 
-    };
-}
+} // namespace sfml
 
 extern "C" void *entryPoint();
 
-#endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_IDISPLAYMODULE
+#endif // __SFML_MODULE_H__

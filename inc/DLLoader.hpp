@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2021
-** DLLoader.hpp.h
+** Tek2
 ** File description:
-** DLLoader.hpp.h
+** DLLoader.hpp
 */
 
 #ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_DLLOADER

@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2021
-** IGame.hpp.h
+** Tek2
 ** File description:
-** IGame.hpp.h
+** IGame.hpp
 */
 
-#ifndef IGAME
-#define IGAME
+#ifndef __IGAME_HPP__
+#define __IGAME_HPP__
 
 namespace arc
 {
@@ -26,4 +26,4 @@ namespace arc
 
 } // namespace arc
 
-#endif //IGAME
+#endif // __IGAME_HPP__
