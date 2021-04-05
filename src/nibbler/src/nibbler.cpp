@@ -11,19 +11,20 @@
 __attribute__((constructor))
 void pacManConstructor()
 {
-    printf("[PacMan] Loading PacMan game...\n");
+    std::cout << "[Nibbler] Loading Nibbler game..." << std::endl;
 }
 
 __attribute__((destructor))
 void pacManDestructor()
 {
-    printf("[PacMan] PacMan game stopped.\n");
+    std::cout << "[Nibbler] Loading Nibbler stopped" << std::endl;
 }
 
 extern "C" void *entryPoint()
 {
     auto *game = new PacMan();
 
+    std::cout << "[Nibbler] Entrypoint created." << std::endl;
     return (game);
 }
 
@@ -33,12 +34,15 @@ PacMan::PacMan() : IGame()
 PacMan::~PacMan()
 = default;
 
-void PacMan::start(IDisplayModule *module)
+void PacMan::start(arc::IDisplayModule *module)
 {
     (void) module;
 }
 
-void PacMan::update(IDisplayModule *module)
+void PacMan::update(arc::IDisplayModule *module)
 {
-    (void) module;
+    module->checkEvent();
+    module->clearWindow();
+    module->drawText("UN JEU", 30, arc::WHITE, {10, 10});
+    module->displayWindow();
 }

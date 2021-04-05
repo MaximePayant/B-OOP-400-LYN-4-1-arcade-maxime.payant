@@ -11,19 +11,20 @@
 __attribute__((constructor))
 void pacManConstructor()
 {
-    printf("[PacMan] Loading PacMan game...\n");
+    std::cout << "[PacMan] Loading PacMan game..." << std::endl;
 }
 
 __attribute__((destructor))
 void pacManDestructor()
 {
-    printf("[PacMan] PacMan game stopped.\n");
+    std::cout << "[PacMan] PacMan game stopped." << std::endl;
 }
 
 extern "C" void *entryPoint()
 {
     auto *game = new PacMan();
 
+    std::cout << "[PacMan] Entrypoint created." << std::endl;
     return (game);
 }
 
