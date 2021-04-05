@@ -25,6 +25,6 @@ extern "C" void *entryPoint()
 {
     auto *module = new sfml::SfmlModule();
 
-    std::cout << module->getName() << ": Loaded!" << std::endl;
+    std::cout << module->getName() << " Entrypoint created." << std::endl;
     return (module);
 }

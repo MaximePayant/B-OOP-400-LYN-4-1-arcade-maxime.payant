@@ -20,9 +20,6 @@ namespace arc
         virtual ~IDisplayModule() = default;
         virtual std::string getName() const = 0;
 
-        virtual void init() = 0;
-        virtual void stop() = 0;
-
         virtual void clearWindow() = 0;
         virtual void displayWindow() = 0;
         virtual void checkEvent() = 0;

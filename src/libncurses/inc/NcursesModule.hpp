@@ -15,8 +15,10 @@
 #include "../../../inc/IDisplayModule.hpp"
 #include "../../../inc/Color.hpp"
 
-class NcursesModule : public arc::IDisplayModule
+namespace ncs
 {
+    class NcursesModule : public arc::IDisplayModule
+    {
     private:
         bool m_isOk;
         std::string m_name;
@@ -26,9 +28,6 @@ class NcursesModule : public arc::IDisplayModule
         ~NcursesModule() override;
         std::string getName() const override;
 
-        void init() override;
-        void stop() override;
-
         void clearWindow() override;
         void displayWindow() override;
         void checkEvent() override;
@@ -36,7 +35,9 @@ class NcursesModule : public arc::IDisplayModule
 
         void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
         void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
-};
+    };
+}
+
 
 extern "C" void *entryPoint();
 

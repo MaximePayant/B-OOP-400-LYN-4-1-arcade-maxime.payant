@@ -5,23 +5,25 @@
 ** libLoadFunc.cpp
 */
 
-#include "NcursesModule.hpp"
+#include <iostream>
+#include "../inc/NcursesModule.hpp"
 
 __attribute__((constructor))
 void libNcurses_constructor()
 {
-    printf("[Ncurses Module] Starting Ncurses module...\n");
+    std::cout << "[Ncurses Module] Starting Ncurses Module..." << std::endl;
 }
 
 __attribute__((destructor))
 void libNcurses_destructor()
 {
-    printf("[Ncurses Module] Ncurses module stopped.\n");
+    std::cout << "[Ncurses Module] Ncurses Module stopped." << std::endl;
 }
 
 extern "C" void *entryPoint()
 {
-    auto *module = new NcursesModule();
+    auto *module = new ncs::NcursesModule();
 
+    std::cout << module->getName() << " Entrypoint created." << std::endl;
     return (module);
 }

@@ -28,11 +28,8 @@ namespace sfml
 
     public:
         SfmlModule();
-        ~SfmlModule() = default;
+        ~SfmlModule();
         std::string getName() const override;
-
-        void init() override;
-        void stop() override;
 
         void clearWindow() override;
         void displayWindow() override;
