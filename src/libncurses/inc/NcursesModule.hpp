@@ -5,8 +5,8 @@
 ** LibFooModule.hpp.h
 */
 
-#ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
-#define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
+#ifndef NCURSESMODULE
+#define NCURSESMODULE
 
 #include <curses.h>
 #include <unordered_map>
@@ -40,4 +40,4 @@ class NcursesModule : public arc::IDisplayModule
 
 extern "C" void *entryPoint();
 
-#endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_IDISPLAYMODULE
+#endif //NCURSESMODULE
