@@ -26,7 +26,7 @@ TEST :=	$(filter-out $(IGNORE_TEST), $(sort $(shell find $(TEST_FOLDER) -ignore_
 LFOLDER :=
 LIB_FOLDER := 	#-L $(LFOLDER)
 LIB_NAME :=
-LIB_EXT :=	-lcriterion
+LIB_EXT :=
 
 OBJ_PATH :=	obj/
 OBJ_FOLDER := $(addprefix $(OBJ_PATH), $(SRC_FOLDER))
@@ -67,7 +67,7 @@ $(NAME):	$(OBJ)
 	echo -e "╠══Now, build your project!"
 	echo -e "║"
 	echo -e "╠══Build in progress..."
-	$(CC) -o $(NAME) $^ $(LDFLAGS) -shared -lSDL2 -lsdl2_ttf	\
+	$(CC) -o $(NAME) $^ $(LDFLAGS) -shared -lSDL2 -lSDL2_ttf	\
 		&& echo -e "╚$(COLOR)$(GREEN)$(END_COLOR)Your project was successfully built congratulation! $(RESET)"	\
 		|| echo -e "╠$(COLOR)$(BOLD);$(BLINK);$(RED)$(END_COLOR)WARNING$(R_BLINK)$(R_BOLD) Your project is bad change this and retry newbie!$(RESET)"\
 		"\n╚$(COLOR);$(RED)$(END_COLOR)Look in the error_list to see what is your problem.$(RESET)"

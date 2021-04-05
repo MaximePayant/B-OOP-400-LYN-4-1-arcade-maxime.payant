@@ -26,7 +26,7 @@ TEST :=	$(filter-out $(IGNORE_TEST), $(sort $(shell find $(TEST_FOLDER) -ignore_
 LFOLDER :=
 LIB_FOLDER := 	#-L $(LFOLDER)
 LIB_NAME :=
-LIB_EXT :=	-lcriterion
+LIB_EXT :=
 
 OBJ_PATH :=	obj/
 OBJ_FOLDER := $(addprefix $(OBJ_PATH), $(SRC_FOLDER))

@@ -28,9 +28,9 @@ extern "C" void *entryPoint()
     return (module);
 }
 
-SdlModule::SdlModule() : IDisplayModule(),
-m_name("libSdl"),
-m_window(nullptr)
+SdlModule::SdlModule() :
+    m_name("libSdl"),
+    m_window(nullptr)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         std::cerr << this->getName() << SDL_GetError() << std::endl;
@@ -69,7 +69,23 @@ void SdlModule::clearWindow()
     SDL_RenderClear(m_renderer);
 }
 
-void SdlModule::draw()
+void SdlModule::displayWindow()
 {
 
+}
+
+void SdlModule::checkEvent()
+{
+
+}
+
+void SdlModule::drawText(const std::string& text, int characterSize)
+{
+    (void)text;
+    (void)characterSize;
+}
+
+void SdlModule::drawSquare(float size)
+{
+    (void)size;
 }
