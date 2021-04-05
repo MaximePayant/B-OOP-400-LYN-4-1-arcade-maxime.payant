@@ -65,12 +65,11 @@ void sfml::SfmlModule::drawText(const std::string& message, int size, arc::Color
     m_window.draw(text);
 }
 
-void sfml::SfmlModule::drawSquare(int size, std::pair<int, int> position)
+void sfml::SfmlModule::drawSquare(float size, arc::Color color, std::pair<int, int> position)
 {
-    sf::Color color(sf::Color::Cyan);
     sf::RectangleShape shape({(float)size, (float)size});
 
-    shape.setFillColor(color);
+    shape.setFillColor(sfmlColorMap.find(color)->second);
     shape.setPosition(position.first * 10, position.second * 10);
     m_window.draw(shape);
 }

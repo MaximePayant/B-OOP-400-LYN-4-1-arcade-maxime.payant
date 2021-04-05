@@ -84,9 +84,12 @@ void NcursesModule::drawText(const std::string& message, int size, arc::Color co
     attron(COLOR_PAIR(arc::BLACK));
 }
 
-void NcursesModule::drawSquare(int size, std::pair<int, int> position)
+void NcursesModule::drawSquare(float size, arc::Color color, std::pair<int, int> position)
 {
     for (int line = 0; line < size; line += 1)
-        for (int col = 0; col < size; col += 1)
+        for (int col = 0; col < size; col += 1) {
+            attron(COLOR_PAIR(color));
             mvprintw(position.first + line, position.second + col, "O");
+            attron(COLOR_PAIR(arc::BLACK));
+        }
 }

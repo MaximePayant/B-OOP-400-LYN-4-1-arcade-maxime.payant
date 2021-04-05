@@ -35,7 +35,7 @@ class NcursesModule : public arc::IDisplayModule
         bool isOk() override;
 
         void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
-        void drawSquare(float size, std::pair<int, int> position) override;
+        void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
 };
 
 extern "C" void *entryPoint();

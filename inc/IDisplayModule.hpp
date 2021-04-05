@@ -29,7 +29,7 @@ namespace arc
         virtual bool isOk() = 0;
 
         virtual void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) = 0;
-        virtual void drawSquare(float size) = 0;
+        virtual void drawSquare(float size, arc::Color color, std::pair<int, int> position) = 0;
     };
 }
 
