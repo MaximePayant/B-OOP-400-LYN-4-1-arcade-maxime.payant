@@ -32,6 +32,9 @@ extern "C" void *entryPoint()
 sfml::SfmlModule::SfmlModule() : IDisplayModule(),
                                  m_window(),
                                  m_name("libSfml")
+SfmlModule::SfmlModule() :
+    m_window(),
+    m_name("libSfml")
 {
     std::cout << this->getName() << " initializing..." << std::endl;
     m_window.create({1920, 1080, 32}, "arcade_sfml");
@@ -72,19 +75,35 @@ void sfml::SfmlModule::clearWindow()
     m_window.clear();
 }
 
-void sfml::SfmlModule::draw()
+void sfml::SfmlModule::displayWindow()
 {
     m_window.display();
 }
 
-IText *sfml::SfmlModule::createText(std::string name, std::string text, unsigned int size,
-                                 std::string font)
+bool sfml::SfmlModule::pollEvent()
+{
+    return (m_window.pollEvent(m_event));
+}
+
+void sfml::SfmlModule::closeWindow()
+{
+    if (m_event.type == sf::Event::Closed)
+        m_window.close();
+}
+
+bool sfml::SfmlModule::isOk()
+{
+    return (m_window.isOpen());
+}
+
+IText *sfml::SfmlModule::createText(const std::string& name, const std::string& text, unsigned int size,
+                                 const std::string& font)
 {
     m_TextMap.emplace(name, new Text(text, size, font));
     return (getText(name));
 }
 
-IText *sfml::SfmlModule::getText(std::string name)
+IText *sfml::SfmlModule::getText(const std::string& name)
 {
     auto result = m_TextMap.find(name);
 
@@ -93,7 +112,16 @@ IText *sfml::SfmlModule::getText(std::string name)
     throw std::runtime_error("Text not found");
 }
 
-void sfml::SfmlModule::displayText(IText *text)
+void sfml::SfmlModule::deleteText(const std::string& name)
 {
-    m_window.draw(dynamic_cast<Text*>(text)->getComponent());
+    auto it = m_TextMap.find(name);
+
+    if (it == m_TextMap.end())
+        throw std::runtime_error("Text not found");
+    m_TextMap.erase(it);
+}
+
+void sfml::SfmlModule::drawText(const std::string& name)
+{
+    m_window.draw(dynamic_cast<Text*>(m_TextMap[name])->getComponent());
 }

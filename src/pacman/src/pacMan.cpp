@@ -40,5 +40,9 @@ void PacMan::start(arc::IDisplayModule *module)
 
 void PacMan::update(arc::IDisplayModule *module)
 {
-    module->displayText(module->getText("Title"));
+    while (module->pollEvent())
+        module->closeWindow();
+    module->clearWindow();
+    module->drawText("Title");
+    module->displayWindow();
 }

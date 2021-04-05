@@ -10,19 +10,29 @@
 #include "../inc/IDisplayModule.hpp"
 #include "../inc/IGame.hpp"
 
+void *loadLibrary(const char *filename, int mode)
+{
+    void *lib = dlopen(filename, mode);
+
+    if (!lib) {
+        std::cerr << "Lib " << filename << " cannot be loaded: " << dlerror() << std::endl;
+        return (NULL);
+    }
+    return (lib);
+}
+
 int main(int ac, char **av)
 {
     if (ac != 3)
         return (84);
-    void *module = dlopen(av[1], RTLD_LAZY);
-    void *game = dlopen(av[2], RTLD_LAZY);
+    void *module = loadLibrary(av[1], RTLD_LAZY);
+    void *game = loadLibrary(av[2], RTLD_LAZY);
     void *(*moduleEntry)();
     void *(*gameEntry)();
 
-    if (!module || !game) {
-        std::cerr << "Lib cannot be loaded: " << dlerror() << std::endl;
+    if (!module || !game)
         return (84);
-    }
+
     *(void **)(&moduleEntry) = dlsym(module, "entryPoint");
     *(void **)(&gameEntry) = dlsym(game, "entryPoint");
 
@@ -35,11 +45,8 @@ int main(int ac, char **av)
     auto *gameFunc = static_cast<arc::IGame *>(gameEntry());
 
     gameFunc->start(moduleFunc);
-    while (moduleFunc->isOk()) {
-        moduleFunc->clearWindow();
+    while (moduleFunc->isOk())
         gameFunc->update(moduleFunc);
-        moduleFunc->draw();
-    }
 
     delete (moduleFunc);
     delete (gameFunc);
