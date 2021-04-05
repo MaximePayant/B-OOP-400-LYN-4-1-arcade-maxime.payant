@@ -11,8 +11,10 @@
 
 SfmlModule::SfmlModule() :
     m_window(),
-    m_name("libSfml")
+    m_name("libSfml"),
+    m_font()
 {
+    m_font.loadFromFile("8bit.ttf");
     m_window.create({1920, 1080, 32}, "arcade_sfml");
 }
 
@@ -51,4 +53,22 @@ void SfmlModule::checkEvent()
 bool SfmlModule::isOk()
 {
     return (m_window.isOpen());
+}
+
+void SfmlModule::drawText(const std::string& message, int size)
+{
+    sf::Color color(sf::Color::White);
+    sf::Text text(message, m_font, size);
+
+    text.setFillColor(color);
+    m_window.draw(text);
+}
+
+void SfmlModule::drawSquare(float size)
+{
+    sf::Color color(sf::Color::Cyan);
+    sf::RectangleShape shape({size, size});
+
+    shape.setFillColor(color);
+    m_window.draw(shape);
 }

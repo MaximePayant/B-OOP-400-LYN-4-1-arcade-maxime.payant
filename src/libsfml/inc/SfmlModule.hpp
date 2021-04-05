@@ -8,10 +8,11 @@
 #ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
 #define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_LIBOUIMODULE
 
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <unordered_map>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+
 #include "../../../inc/IDisplayModule.hpp"
-#include "component.hpp"
 
 class SfmlModule :
     public IDisplayModule
@@ -21,7 +22,7 @@ class SfmlModule :
         sf::RenderWindow m_window;
         sf::Event m_event;
         std::string m_name;
-        std::unordered_map<std::string, Text*> m_TextMap;
+        sf::Font m_font;
 
     public:
         SfmlModule();
@@ -36,10 +37,8 @@ class SfmlModule :
         void checkEvent() override;
         bool isOk() override;
 
-        IText *createText(const std::string& name, const std::string& text, unsigned int size, const std::string& font) override;
-        IText *getText(const std::string& name) override;
-        void deleteText(const std::string& name) override;
-        void drawText(const std::string& name) override;
+        void drawText(const std::string& text, int characterSize) override;
+        void drawSquare(float size) override;
 
 };
 

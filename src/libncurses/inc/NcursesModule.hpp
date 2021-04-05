@@ -13,7 +13,6 @@
 #include <memory>
 
 #include "../../../inc/IDisplayModule.hpp"
-#include "component.hpp"
 
 class NcursesModule :
     public IDisplayModule
@@ -21,7 +20,6 @@ class NcursesModule :
     private:
         bool m_isOk;
         std::string m_name;
-        std::unordered_map<std::string, Text*> m_TextMap;
 
     public:
         NcursesModule();
@@ -36,10 +34,8 @@ class NcursesModule :
         void checkEvent() override;
         bool isOk() override;
 
-        IText *createText(const std::string& name, const std::string& text, unsigned int size, const std::string& font) override;
-        IText *getText(const std::string& name) override;
-        void deleteText(const std::string& name) override;
-        void drawText(const std::string& name) override;
+        void drawText(const std::string& text, int characterSize) override;
+        void drawSquare(float size) override;
 };
 
 extern "C" void *entryPoint();

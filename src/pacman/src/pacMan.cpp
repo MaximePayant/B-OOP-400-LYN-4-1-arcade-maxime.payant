@@ -35,13 +35,13 @@ PacMan::~PacMan()
 
 void PacMan::start(IDisplayModule *module)
 {
-    module->createText("Title", "Choose your game!", 10, "rsc/verdana.ttf")->setPosition(100, 100);
+    (void)module;
 }
 
 void PacMan::update(IDisplayModule *module)
 {
     module->checkEvent();
     module->clearWindow();
-    module->drawText("Title");
+    module->drawText("Title", 30);
     module->displayWindow();
 }

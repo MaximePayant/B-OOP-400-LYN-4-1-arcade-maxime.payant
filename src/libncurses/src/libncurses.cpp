@@ -27,8 +27,6 @@ NcursesModule::~NcursesModule()
     std::cout << this->getName() << " stopping...\n";
     curs_set(true);
     endwin();
-    for (auto& [_, obj] : m_TextMap)
-        delete (obj);
 }
 
 void NcursesModule::init()
@@ -67,4 +65,15 @@ void NcursesModule::checkEvent()
 bool NcursesModule::isOk()
 {
     return (m_isOk);
+}
+
+void NcursesModule::drawText(const std::string& message, int size)
+{
+    (void)size;
+    printw(message.c_str());
+}
+
+void NcursesModule::drawSquare(float size)
+{
+    (void)size;
 }

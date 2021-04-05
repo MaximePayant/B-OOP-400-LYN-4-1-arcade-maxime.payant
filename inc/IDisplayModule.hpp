@@ -10,8 +10,6 @@
 
 #include <string>
 
-#include "component.hpp"
-
 class IDisplayModule
 {
     public:
@@ -26,10 +24,8 @@ class IDisplayModule
         virtual void checkEvent() = 0;
         virtual bool isOk() = 0;
 
-        virtual IText *createText(const std::string& name, const std::string& text, unsigned int size, const std::string& font) = 0;
-        virtual IText *getText(const std::string& name) = 0;
-        virtual void deleteText(const std::string& cptName) = 0;
-        virtual void drawText(const std::string& name) = 0;
+        virtual void drawText(const std::string& text, int characterSize) = 0;
+        virtual void drawSquare(float size) = 0;
 };
 
 #endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_IDISPLAYMODULE
