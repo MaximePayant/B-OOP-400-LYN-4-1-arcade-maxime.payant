@@ -37,13 +37,23 @@ PacMan::~PacMan()
 void PacMan::start(arc::IDisplayModule *module)
 {
     (void)module;
+    x = 0;
+    y = 0;
 }
 
 void PacMan::update(arc::IDisplayModule *module)
 {
     module->checkEvent();
     module->clearWindow();
-    module->drawSquare(30, arc::WHITE, {10, 10});
-    module->drawText("Title", 50, arc::CYAN, {10, 10});
+    module->drawSquare(30, arc::WHITE, {x, y});
+    module->drawText("Title", 50, arc::CYAN, {x, y});
+    if (module->getKeyDown(arc::Keyboard::Up))
+        y -= 1;
+    if (module->getKeyDown(arc::Keyboard::Down))
+        y += 1;
+    if (module->getKeyDown(arc::Keyboard::Left))
+        x -= 1;
+    if (module->getKeyDown(arc::Keyboard::Right))
+        x += 1;
     module->displayWindow();
 }

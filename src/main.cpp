@@ -7,8 +7,9 @@
 
 #include <dlfcn.h>
 #include <iostream>
-#include "../inc/IDisplayModule.hpp"
-#include "../inc/IGame.hpp"
+#include "IDisplayModule.hpp"
+#include "IGame.hpp"
+#include "Chrono.hpp"
 
 void *loadLibrary(const char *filename, int mode)
 {
@@ -44,9 +45,17 @@ int main(int ac, char **av)
     auto *moduleFunc = static_cast<arc::IDisplayModule *>(moduleEntry());
     auto *gameFunc = static_cast<arc::IGame *>(gameEntry());
 
+    arc::Chrono clock;
+
+    clock.start();
     gameFunc->start(moduleFunc);
-    while (moduleFunc->isOk())
+    while (moduleFunc->isOk()) {
+        if (clock.getElapsedTime() < 0.03)
+            continue;
         gameFunc->update(moduleFunc);
+        clock.tour();
+    }
+    clock.stop();
 
     delete (moduleFunc);
     dlclose(module);
