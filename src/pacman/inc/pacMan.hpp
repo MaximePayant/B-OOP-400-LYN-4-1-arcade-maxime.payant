@@ -14,6 +14,11 @@
 class PacMan :
     public arc::IGame
 {
+
+    private:
+        int x;
+        int y;
+
     public:
         PacMan();
         ~PacMan();

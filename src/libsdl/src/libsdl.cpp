@@ -84,7 +84,9 @@ void sdl::SdlModule::drawSquare(int size, arc::Color color, std::pair<int, int> 
 
 bool sdl::SdlModule::getKeyDown(arc::Keyboard key)
 {
-    if (m_keystate[sdl::keyboardMap.find(key)->second])
+    if (!m_keystate)
+        return (false);
+    if (m_keystate[SDL_GetScancodeFromKey(sdl::keyboardMap.find(key)->second)])
         return (true);
     return (false);
 }
