@@ -6,10 +6,8 @@
 */
 
 #include <dlfcn.h>
-#include <exception>
 #include <iostream>
 #include "../../inc/DLLoader.hpp"
-#include "../../inc/Error.hpp"
 
 arc::DLLoader::DLLoader(const std::string &path) : m_library(nullptr), m_entry(nullptr)
 {

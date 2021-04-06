@@ -20,7 +20,8 @@ class Interface : public arc::IGame
     std::vector<std::string> m_game;
 
     void getList();
-    void DrawText(arc::IDisplayModule *module, int index, const std::string &name, bool game) const;
+    void drawText(arc::IDisplayModule *module, int index, const std::string &name, bool game) const;
+    void checkInput(arc::IDisplayModule *module);
 public:
     Interface() = default;
     ~Interface() = default;

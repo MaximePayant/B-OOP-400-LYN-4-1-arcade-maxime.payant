@@ -9,6 +9,7 @@
 #include "../../inc/IDisplayModule.hpp"
 #include "../../inc/IGame.hpp"
 #include "../../inc/DLLoader.hpp"
+#include "../../inc/DLManager.hpp"
 
 int main(int ac, char **av)
 {
@@ -18,10 +19,9 @@ int main(int ac, char **av)
     if (ac != 2)
         return (84);
     try {
-        arc::DLLoader module(av[1]);
-        arc::DLLoader game("lib/interface.so");
-        moduleFunc = module.getInstance<arc::IDisplayModule>();
-        gameFunc = game.getInstance<arc::IGame>();
+        arc::DLManager manager(av[1]);
+        moduleFunc = arc::DLManager::getGraphicsModule().getInstance<arc::IDisplayModule>();
+        gameFunc = arc::DLManager::getGameModule().getInstance<arc::IGame>();
 
         gameFunc->start(moduleFunc);
         while (moduleFunc->isOk())
