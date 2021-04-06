@@ -1,6 +1,5 @@
 .vscode
 obj/
-*.json
-*.so
+lib/
 errors
 arcade
