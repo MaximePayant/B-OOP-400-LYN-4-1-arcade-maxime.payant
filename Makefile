@@ -8,10 +8,10 @@
 CC	=	g++
 NAME	=	arcade
 NAME_TEST = unit_tests
-FLAGS	=	-W -c -Wall -Wextra -pedantic -g3 -std=c++2a
+FLAGS	=	-W -c -Wall -Wextra -Werror -pedantic -g3 -std=c++2a
 EXT := cpp
 
-SRC_FOLDER	:= src
+SRC_FOLDER	:= src/core
 IGNORE_SRC := .
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
@@ -105,7 +105,7 @@ games:
 graphicals:
 	make re -C src/libsfml
 	make re -C src/libncurses
-	make re -C src/libsdl
+	#make re -C src/libsdl
 
 $(LFOLDER):
 		make -C $@ $(LIBR)
