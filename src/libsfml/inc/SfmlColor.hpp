@@ -18,12 +18,12 @@ namespace sfml
     static const std::unordered_map<arc::Color, sf::Color> sfmlColorMap = {
             {arc::Color::BLACK, sf::Color::Black},
             {arc::Color::WHITE, sf::Color::White},
-            {arc::Color::RED, sf::Color::Red},
-            {arc::Color::GREEN, sf::Color::Green},
-            {arc::Color::BLUE, sf::Color::Blue},
-            {arc::Color::YELLOW, sf::Color::Yellow},
-            {arc::Color::MAGENTA, sf::Color::Magenta},
-            {arc::Color::CYAN, sf::Color::Cyan}
+            {arc::Color::RED, sf::Color(255, 0, 0)},
+            {arc::Color::GREEN, sf::Color(0, 255, 0)},
+            {arc::Color::BLUE, sf::Color(0, 0, 255)},
+            {arc::Color::YELLOW, sf::Color(127, 127, 0)},
+            {arc::Color::MAGENTA, sf::Color(127, 0, 127)},
+            {arc::Color::CYAN, sf::Color(0, 127, 127)}
     };
 }
 

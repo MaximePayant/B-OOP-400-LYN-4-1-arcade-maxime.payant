@@ -44,7 +44,7 @@ bool sdl::SdlModule::isOk()
 
 void sdl::SdlModule::clearWindow()
 {
-    SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
     SDL_RenderClear(m_renderer);
 }
 
@@ -63,9 +63,8 @@ void sdl::SdlModule::checkEvent()
 
 void sdl::SdlModule::drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position)
 {
-    (void)color;
-    SDL_Color tcolor = {255, 0, 0, 255};
-    SDL_Surface *surface = TTF_RenderText_Blended(m_font, text.c_str(), tcolor);
+    SDL_Color realColor = sdl::sdlColorMap.find(color)->second;
+    SDL_Surface *surface = TTF_RenderText_Blended(m_font, text.c_str(), realColor);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     SDL_Rect rect = {position.first * 10, position.second * 10, (surface->w * characterSize) / surface->h, characterSize};
 
@@ -76,11 +75,10 @@ void sdl::SdlModule::drawText(const std::string& text, int characterSize, arc::C
 
 void sdl::SdlModule::drawSquare(int size, arc::Color color, std::pair<int, int> position)
 {
-    (void)color;
     SDL_Rect rect = {position.first * 10, position.second * 10, size * 10, size * 10};
-    SDL_Color tcolor = {0, 0, 255, 255};
+    SDL_Color realColor = sdl::sdlColorMap.find(color)->second;
 
-    SDL_SetRenderDrawColor(m_renderer, tcolor.r, tcolor.g, tcolor.b, tcolor.a);
+    SDL_SetRenderDrawColor(m_renderer, realColor.r, realColor.g, realColor.b, realColor.a);
     SDL_RenderFillRect(m_renderer, &rect);
 }
 
