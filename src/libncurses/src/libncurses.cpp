@@ -72,7 +72,7 @@ void ncs::NcursesModule::drawText(const std::string& message, int size, arc::Col
 {
     (void)size;
     attron(COLOR_PAIR(color));
-    mvprintw(position.first, position.second, message.c_str());
+    mvprintw(position.second, position.first, message.c_str());
     attron(COLOR_PAIR(arc::BLACK));
 }
 
@@ -81,7 +81,7 @@ void ncs::NcursesModule::drawSquare(int size, arc::Color color, std::pair<int, i
     for (int line = 0; line < size; line += 1)
         for (int col = 0; col < size; col += 1) {
             attron(COLOR_PAIR(color));
-            mvprintw(position.first + line, position.second + col, " ");
+            mvprintw(position.second + line, position.first + col, " ");
             attron(COLOR_PAIR(arc::BLACK));
         }
 }
