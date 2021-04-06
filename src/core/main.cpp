@@ -5,40 +5,34 @@
 ** main.cpp
 */
 
-#include <dlfcn.h>
 #include <iostream>
 #include "../../inc/IDisplayModule.hpp"
 #include "../../inc/IGame.hpp"
 #include "../../inc/DLLoader.hpp"
 
-void *loadLibrary(const char *filename, int mode)
-{
-    void *lib = dlopen(filename, mode);
-
-    if (!lib) {
-        std::cerr << "Lib " << filename << " cannot be loaded: " << dlerror() << std::endl;
-        return (nullptr);
-    }
-    return (lib);
-}
-
 int main(int ac, char **av)
 {
-    arc::DLLoader module(av[1]);
-    arc::DLLoader game(av[2]);
-    auto *moduleFunc = module.getInstance<arc::IDisplayModule>();
-    auto *gameFunc = game.getInstance<arc::IGame>();
+    arc::IDisplayModule *moduleFunc = nullptr;
+    arc::IGame *gameFunc = nullptr;
 
-    if (ac != 3) {
+    if (ac != 3)
+        return (84);
+    try {
+        arc::DLLoader module(av[1]);
+        arc::DLLoader game(av[2]);
+        moduleFunc = module.getInstance<arc::IDisplayModule>();
+        gameFunc = game.getInstance<arc::IGame>();
+
+        gameFunc->start(moduleFunc);
+        while (moduleFunc->isOk())
+            gameFunc->update(moduleFunc);
+        delete (moduleFunc);
+        delete (gameFunc);
+    } catch (const arc::Error &e) {
+        std::cout << "Error: " << e << std::endl;
         delete (moduleFunc);
         delete (gameFunc);
         return (84);
     }
-    gameFunc->start(moduleFunc);
-    while (moduleFunc->isOk())
-        gameFunc->update(moduleFunc);
-
-    delete (moduleFunc);
-    delete (gameFunc);
     return (0);
 }

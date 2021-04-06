@@ -4,3 +4,5 @@ obj/
 *.so
 errors
 arcade
+CMakeLists.txt
+vgcore.*

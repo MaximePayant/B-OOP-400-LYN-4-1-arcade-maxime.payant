@@ -5,12 +5,14 @@
 ** DLLoader.inl
 */
 
+#include "Error.hpp"
+
 template <typename T>
 T* arc::DLLoader::getInstance()
 {
     T* module = static_cast<T *>(m_entry());
 
     if (!module)
-        throw (std::exception()); //TODO
+        throw (arc::Error("Cannot create an instance of the module!", "LIB003"));
     return (module);
 }
