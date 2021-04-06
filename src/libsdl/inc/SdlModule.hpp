@@ -22,9 +22,10 @@ namespace sdl
             std::string m_name;
             bool m_isOk;
             SDL_Window *m_window;
-            Uint8* m_keystate;
+            Uint8 *m_keystate;
             SDL_Event m_event;
             SDL_Renderer *m_renderer;
+            TTF_Font *m_font;
 
         public:
             SdlModule();

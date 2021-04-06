@@ -1,7 +1,6 @@
 .vscode
 obj/
-*.json
-*.so
+lib/
 errors
 arcade
 CMakeLists.txt

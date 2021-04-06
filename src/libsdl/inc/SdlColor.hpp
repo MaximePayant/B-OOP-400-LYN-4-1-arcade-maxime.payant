@@ -13,7 +13,7 @@
 
 #include "../../../inc/Color.hpp"
 
-namespace sfml
+namespace sdl
 {
     static const std::unordered_map<arc::Color, SDL_Color> sdlColorMap = {
             {arc::Color::BLACK, {0, 0, 0, 0}},
@@ -21,9 +21,9 @@ namespace sfml
             {arc::Color::RED, {255, 0, 0, 0}},
             {arc::Color::GREEN, {0, 255, 0, 0}},
             {arc::Color::BLUE, {0, 0, 255, 0}},
-            {arc::Color::YELLOW, {255, 255, 255, 0}}, //TODO
-            {arc::Color::MAGENTA, {255, 255, 255, 0}}, //TODO
-            {arc::Color::CYAN, {255, 255, 255, 0}} //TODO
+            {arc::Color::YELLOW, {127, 127, 0, 0}},
+            {arc::Color::MAGENTA, {127, 0, 127, 0}},
+            {arc::Color::CYAN, {0, 127, 127, 0}}
     };
 }
 
