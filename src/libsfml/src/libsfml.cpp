@@ -9,6 +9,7 @@
 #include <SFML/Window/Event.hpp>
 #include "../inc/SfmlModule.hpp"
 #include "../inc/SfmlColor.hpp"
+#include "../inc/SfmlKeyboard.hpp"
 
 sfml::SfmlModule::SfmlModule() :
     m_window(),
@@ -61,11 +62,18 @@ void sfml::SfmlModule::drawText(const std::string& message, int size, arc::Color
     m_window.draw(text);
 }
 
-void sfml::SfmlModule::drawSquare(float size, arc::Color color, std::pair<int, int> position)
+void sfml::SfmlModule::drawSquare(int size, arc::Color color, std::pair<int, int> position)
 {
     sf::RectangleShape shape({(float)size, (float)size});
 
     shape.setFillColor(sfmlColorMap.find(color)->second);
     shape.setPosition(position.first * 10, position.second * 10);
     m_window.draw(shape);
+}
+
+bool sfml::SfmlModule::getKeyDown(arc::Keyboard key)
+{
+    if (sf::Keyboard::isKeyPressed(sfml::keyboardMap.find(key)->second))
+        return (true);
+    return (false);
 }

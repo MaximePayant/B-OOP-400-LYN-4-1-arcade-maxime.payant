@@ -24,7 +24,7 @@ namespace sfml
             {arc::Color::YELLOW, {255, 255, 255, 0}}, //TODO
             {arc::Color::MAGENTA, {255, 255, 255, 0}}, //TODO
             {arc::Color::CYAN, {255, 255, 255, 0}} //TODO
-    }
+    };
 }
 
 #endif // __SDL_COLOR_HPP__

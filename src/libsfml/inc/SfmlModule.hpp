@@ -36,9 +36,10 @@ namespace sfml
             void displayWindow() override;
             void checkEvent() override;
             bool isOk() override;
+            bool getKeyDown(arc::Keyboard key) override;
 
             void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
-            void drawSquare(float size, arc::Color color, std::pair<int, int> position) override;
+            void drawSquare(int size, arc::Color color, std::pair<int, int> position) override;
 
     }; // class SfmlModule
 

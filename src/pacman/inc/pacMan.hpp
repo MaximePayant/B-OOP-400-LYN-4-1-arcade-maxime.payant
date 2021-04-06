@@ -15,8 +15,8 @@ class PacMan :
     public arc::IGame
 {
     public:
-        PacMan() = default;
-        ~PacMan() = default;
+        PacMan();
+        ~PacMan();
 
         void start(arc::IDisplayModule *) override;
         void update(arc::IDisplayModule *) override;

@@ -9,6 +9,7 @@
 #include <curses.h>
 
 #include "../inc/NcursesModule.hpp"
+#include "../inc/NcursesKeyboard.hpp"
 
 ncs::NcursesModule::NcursesModule() :
     m_isOk(true),
@@ -75,7 +76,7 @@ void ncs::NcursesModule::drawText(const std::string& message, int size, arc::Col
     attron(COLOR_PAIR(arc::BLACK));
 }
 
-void ncs::NcursesModule::drawSquare(float size, arc::Color color, std::pair<int, int> position)
+void ncs::NcursesModule::drawSquare(int size, arc::Color color, std::pair<int, int> position)
 {
     for (int line = 0; line < size; line += 1)
         for (int col = 0; col < size; col += 1) {
@@ -83,4 +84,11 @@ void ncs::NcursesModule::drawSquare(float size, arc::Color color, std::pair<int,
             mvprintw(position.first + line, position.second + col, "O");
             attron(COLOR_PAIR(arc::BLACK));
         }
+}
+
+bool ncs::NcursesModule::getKeyDown(arc::Keyboard key)
+{
+    if (getch() == ncs::keyboardMap.find(key)->second)
+        return (true);
+    return (false);
 }
