@@ -16,7 +16,7 @@
 namespace sdl
 {
 
-    static const std::unordered_map<arc::Keyboard, SDL_KeyCode> keyboardMap =
+    static const std::unordered_map<arc::Keyboard, SDL_Keycode> keyboardMap =
     {
 
         {arc::Keyboard::Unknown,    SDLK_UNKNOWN},
