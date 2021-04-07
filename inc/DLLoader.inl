@@ -8,9 +8,9 @@
 #include "Error.hpp"
 
 template <typename T>
-std::shared_ptr<T> arc::DLLoader::getInstance()
+T* arc::DLLoader::getInstance()
 {
-    auto module = std::shared_ptr<T>(static_cast<void *>(m_entry()));
+    auto *module = static_cast<T *>(m_entry() );
 
     if (!module)
         throw (arc::Error("Cannot create an instance of the module!", "LIB003"));

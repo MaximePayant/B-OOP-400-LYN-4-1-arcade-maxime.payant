@@ -34,14 +34,14 @@ PacMan::PacMan()
 PacMan::~PacMan()
 = default;
 
-void PacMan::start(std::shared_ptr<arc::IDisplayModule> module)
+void PacMan::start(arc::IDisplayModule* module)
 {
     (void)module;
     x = 0;
     y = 0;
 }
 
-void PacMan::update(std::shared_ptr<arc::IDisplayModule> module)
+void PacMan::update(arc::IDisplayModule* module)
 {
     module->checkEvent();
     module->clearWindow();

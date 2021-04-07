@@ -24,6 +24,12 @@ arc::DLLoader::DLLoader(const std::string &path) : m_library(nullptr), m_entry(n
     }
 }
 
+arc::DLLoader::DLLoader(DLLoader && loader)
+{
+    m_library = loader.m_library;
+    m_entry = loader.m_entry;
+}
+
 arc::DLLoader::~DLLoader()
 {
     dlclose(m_library);

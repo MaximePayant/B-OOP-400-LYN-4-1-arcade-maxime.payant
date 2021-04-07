@@ -44,12 +44,12 @@ arc::DLLoader& arc::DLManager::getGameModule()
     return (*m_game);
 }
 
-std::shared_ptr<arc::IDisplayModule>& arc::DLManager::getGraphicsInstance()
+arc::IDisplayModule* arc::DLManager::getGraphicsInstance()
 {
     return (m_moduleFunc);
 }
 
-std::shared_ptr<arc::IGame>& arc::DLManager::getGameInstance()
+arc::IGame* arc::DLManager::getGameInstance()
 {
     return (m_gameFunc);
 }
@@ -58,6 +58,7 @@ void arc::DLManager::updateGraphics()
 {
     if (!m_needGraphUpdate)
         return;
+    delete (m_moduleFunc);
     m_module = std::make_unique<DLLoader>(m_newGraph);
     m_moduleFunc = m_module->getInstance<IDisplayModule>();
     m_needGraphUpdate = false;
@@ -67,6 +68,7 @@ void arc::DLManager::updateGame()
 {
     if (!m_needGameUpdate)
         return;
+    delete (m_gameFunc);
     m_game = std::make_unique<DLLoader>(m_newGame);
     m_gameFunc = m_game->getInstance<arc::IGame>();
     m_needGameUpdate = false;

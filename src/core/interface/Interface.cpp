@@ -8,7 +8,7 @@
 #include <iostream>
 #include "../../../inc/Interface.hpp"
 
-void arc::Interface::start(std::shared_ptr<arc::IDisplayModule>& module)
+void arc::Interface::start(arc::IDisplayModule* module)
 {
     (void)module;
     m_libIndex = 0;
@@ -16,7 +16,7 @@ void arc::Interface::start(std::shared_ptr<arc::IDisplayModule>& module)
     getList();
 }
 
-void arc::Interface::drawText(std::shared_ptr<arc::IDisplayModule>& graph, int index, const std::string &name, bool game) const
+void arc::Interface::drawText(arc::IDisplayModule* graph, int index, const std::string &name, bool game) const
 {
     arc::Color color = ((game && index == m_gameIndex) || (!game && index == m_libIndex)) ? arc::BLUE : arc::WHITE;
     int xPos = (game) ? 100 : 50;
@@ -33,7 +33,7 @@ static std::string FormatName(const std::string &path)
     return (result);
 }
 
-void arc::Interface::checkInput(std::shared_ptr<arc::IDisplayModule>& graph, arc::DLManager& manager)
+void arc::Interface::checkInput(arc::IDisplayModule* graph, arc::DLManager& manager)
 {
     if (graph->getKeyDown(arc::PageDown))
         m_libIndex = (m_libIndex == 0) ? (int)m_lib.size() - 1 : m_libIndex - 1;
@@ -51,7 +51,7 @@ void arc::Interface::checkInput(std::shared_ptr<arc::IDisplayModule>& graph, arc
     }
 }
 
-void arc::Interface::update(std::shared_ptr<arc::IDisplayModule>& graph, arc::DLManager& manager)
+void arc::Interface::update(arc::IDisplayModule* graph, arc::DLManager& manager)
 {
     int index = 0;
 

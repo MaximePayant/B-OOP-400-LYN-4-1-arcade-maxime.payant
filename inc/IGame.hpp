@@ -21,8 +21,8 @@ namespace arc
         public:
             virtual ~IGame() = default;
 
-            virtual void start(std::shared_ptr<arc::IDisplayModule>) = 0;
-            virtual void update(std::shared_ptr<arc::IDisplayModule>) = 0;
+            virtual void start(arc::IDisplayModule*) = 0;
+            virtual void update(arc::IDisplayModule*) = 0;
 
     }; // class IGame
 

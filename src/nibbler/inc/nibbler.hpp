@@ -16,8 +16,8 @@ class Nibbler : public arc::IGame {
 public:
     Nibbler();
     ~Nibbler() override;
-    void start(std::shared_ptr<arc::IDisplayModule>) override;
-    void update(std::shared_ptr<arc::IDisplayModule>) override;
+    void start(arc::IDisplayModule*) override;
+    void update(arc::IDisplayModule*) override;
 };
 
 extern "C" void *entryPoint();

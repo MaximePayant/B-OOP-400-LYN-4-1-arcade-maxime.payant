@@ -22,8 +22,8 @@ namespace arc
     private:
         std::unique_ptr<DLLoader> m_module;
         std::unique_ptr<DLLoader> m_game;
-        std::shared_ptr<IDisplayModule> m_moduleFunc;
-        std::shared_ptr<IGame> m_gameFunc;
+        IDisplayModule* m_moduleFunc;
+        IGame* m_gameFunc;
         bool m_needGraphUpdate;
         bool m_needGameUpdate;
         std::string m_newGraph;
@@ -36,8 +36,8 @@ namespace arc
         void ChangeGameModule(const std::string module);
         DLLoader& getGraphicsModule();
         DLLoader& getGameModule();
-        std::shared_ptr<IDisplayModule>& getGraphicsInstance();
-        std::shared_ptr<IGame>& getGameInstance();
+        IDisplayModule* getGraphicsInstance();
+        IGame* getGameInstance();
         void updateGraphics();
         void updateGame();
     };

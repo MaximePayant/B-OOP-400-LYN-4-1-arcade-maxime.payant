@@ -19,9 +19,10 @@ namespace arc
         void *(*m_entry)();
     public:
         explicit DLLoader(const std::string &path);
+        DLLoader(DLLoader &&);
         ~DLLoader();
         template <typename T>
-        std::shared_ptr<T> getInstance();
+        T* getInstance();
     }; // class DLLoader
 } // namespace arc
 

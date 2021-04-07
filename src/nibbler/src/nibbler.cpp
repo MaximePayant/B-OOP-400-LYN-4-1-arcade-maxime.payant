@@ -34,12 +34,12 @@ Nibbler::Nibbler() : IGame()
 Nibbler::~Nibbler()
 = default;
 
-void Nibbler::start(std::shared_ptr<arc::IDisplayModule> module)
+void Nibbler::start(arc::IDisplayModule* module)
 {
     (void) module;
 }
 
-void Nibbler::update(std::shared_ptr<arc::IDisplayModule> module)
+void Nibbler::update(arc::IDisplayModule* module)
 {
     module->checkEvent();
     module->clearWindow();
