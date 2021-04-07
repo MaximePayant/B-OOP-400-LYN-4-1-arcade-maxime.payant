@@ -19,7 +19,6 @@ sdl::SdlModule::SdlModule() :
     TTF_Init();
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         std::cerr << this->getName() << SDL_GetError() << std::endl;
-    m_keystate = NULL;
     m_window = SDL_CreateWindow("arcade_sdl", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, 0);
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     m_font = TTF_OpenFont("rsc/8bitPix.ttf", 50);
@@ -58,7 +57,7 @@ void sdl::SdlModule::displayWindow()
 
 void sdl::SdlModule::checkEvent()
 {
-    m_keystate = const_cast<Uint8*>(SDL_GetKeyboardState(NULL));
+    m_keystate = const_cast<Uint8*>(SDL_GetKeyboardState(nullptr));
     while (SDL_PollEvent(&m_event))
         if (m_event.type == SDL_QUIT)
             m_isOk = false;
@@ -71,7 +70,7 @@ void sdl::SdlModule::drawText(const std::string& text, int characterSize, arc::C
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     SDL_FRect rect = {position.first * 10, position.second * 10, (surface->w * (float)characterSize) / surface->h, (float)characterSize};
 
-    SDL_RenderCopyF(m_renderer, texture, NULL, &rect);
+    SDL_RenderCopyF(m_renderer, texture, nullptr, &rect);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
 }
