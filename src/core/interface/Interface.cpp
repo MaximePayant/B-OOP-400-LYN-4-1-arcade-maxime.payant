@@ -38,11 +38,11 @@ void arc::Interface::checkInput(arc::IDisplayModule* graph, arc::DLManager& mana
     if (graph->getKeyDown(arc::PageDown))
         m_libIndex = (m_libIndex == 0) ? (int)m_lib.size() - 1 : m_libIndex - 1;
     else if (graph->getKeyDown(arc::PageUp))
-        m_libIndex = (m_libIndex == 0) ? 0 : m_libIndex + 1;
+        m_libIndex = (m_libIndex == (int)m_lib.size() - 1) ? 0 : m_libIndex + 1;
     if (graph->getKeyDown(arc::Down))
         m_gameIndex = (m_gameIndex == 0) ? (int)m_game.size() - 1 : m_gameIndex - 1;
-    else if (graph->getKeyDown(arc::U))
-        m_gameIndex = (m_gameIndex == 0) ? 0 : m_gameIndex + 1;
+    else if (graph->getKeyDown(arc::Up))
+        m_gameIndex = (m_gameIndex == (int)m_game.size() - 1) ? 0 : m_gameIndex + 1;
     if (graph->getKeyDown(arc::Space))
         manager.ChangeGraphicModule(m_lib.at(m_libIndex));
     if (graph->getKeyDown(arc::Enter)) {

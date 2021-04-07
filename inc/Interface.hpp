@@ -33,7 +33,9 @@ namespace arc
         void start(arc::IDisplayModule* graph);
         void update(arc::IDisplayModule* graph, arc::DLManager& manager);
 
+        friend void GameLoop(arc::DLManager& manager, arc::Interface& interface);
     };
+    void GameLoop(arc::DLManager& manager, arc::Interface& interface);
 }
 
 extern "C" void *entryPoint();

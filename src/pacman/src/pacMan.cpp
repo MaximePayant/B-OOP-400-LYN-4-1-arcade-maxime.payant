@@ -39,6 +39,7 @@ void PacMan::start(arc::IDisplayModule* module)
     (void)module;
     x = 0;
     y = 0;
+    std::cout << "Hello World" << std::endl;
 }
 
 void PacMan::update(arc::IDisplayModule* module)

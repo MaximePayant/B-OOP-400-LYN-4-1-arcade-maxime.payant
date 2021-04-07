@@ -72,4 +72,5 @@ void arc::DLManager::updateGame()
     m_game = std::make_unique<DLLoader>(m_newGame);
     m_gameFunc = m_game->getInstance<arc::IGame>();
     m_needGameUpdate = false;
+    m_gameFunc->start(m_moduleFunc);
 }
