@@ -38,8 +38,8 @@ namespace sdl
             bool isOk() override;
             bool getKeyDown(arc::Keyboard key) override;
 
-            void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<int, int> position) override;
-            void drawSquare(int size, arc::Color color, std::pair<int, int> position) override;
+            void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<float, float> position) override;
+            void drawSquare(int size, arc::Color color, std::pair<float, float> position) override;
     };
 }
 
