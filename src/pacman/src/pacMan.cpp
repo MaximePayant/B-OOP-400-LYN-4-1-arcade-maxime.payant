@@ -150,10 +150,10 @@ void PacMan::update(arc::IDisplayModule *module)
 {
     module->checkEvent();
     module->clearWindow();
-    drawing(module);
     checkDirection(module);
     chooseDirection();
     makeDirection();
     checkAround();
+    drawing(module);
     module->displayWindow();
 }
