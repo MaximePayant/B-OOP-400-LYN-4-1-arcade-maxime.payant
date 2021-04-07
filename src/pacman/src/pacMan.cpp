@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <fstream>
 #include "../inc/pacMan.hpp"
 
 __attribute__((constructor))
@@ -37,24 +38,121 @@ PacMan::~PacMan()
 void PacMan::start(arc::IDisplayModule* module)
 {
     (void)module;
-    x = 0;
-    y = 0;
-    std::cout << "Hello World" << std::endl;
+    std::ifstream filestream("pacmanMap.txt");
+
+    powerUp = false;
+    direction = None;
+    wantedDirection = None;
+    x = 3;
+    y = 3;
+    score = 0;
+    for (int line = 0; std::getline(filestream, m_map[line]); line += 1);
 }
 
-void PacMan::update(arc::IDisplayModule* module)
+void PacMan::checkDirection(arc::IDisplayModule *module)
 {
-    module->clearWindow();
-    module->checkEvent();
-    module->drawSquare(30, arc::WHITE, {x, y});
-    module->drawText("Title", 50, arc::CYAN, {x, y});
     if (module->getKeyDown(arc::Keyboard::Up))
-        y -= 1;
+        wantedDirection = Up;
     if (module->getKeyDown(arc::Keyboard::Down))
-        y += 1;
+        wantedDirection = Down;
     if (module->getKeyDown(arc::Keyboard::Left))
-        x -= 1;
+        wantedDirection = Left;
     if (module->getKeyDown(arc::Keyboard::Right))
+        wantedDirection = Right;
+}
+
+void PacMan::chooseDirection()
+{
+    int posX = x / 3;
+    int posY = y / 3;
+
+    if ((direction == Up || direction == Down) && (y % 3) != 0)
+        return;
+    if ((direction == Left || direction == Right) && (x % 3) != 0)
+        return;
+    if (wantedDirection == Up && m_map[posY - 1][posX] != 'X')
+        direction = Up;
+    else if (wantedDirection == Down && m_map[posY + 1][posX] != 'X')
+        direction = Down;
+    else if (wantedDirection == Left && m_map[posY][posX - 1] != 'X')
+        direction = Left;
+    else if (wantedDirection == Right && m_map[posY][posX + 1] != 'X')
+        direction = Right;
+}
+
+void PacMan::makeDirection()
+{
+    int posX = x / 3;
+    int posY = y / 3;
+
+    if (direction == Up
+    && (y % 3 != 0 || m_map[posY - 1][posX] != 'X'))
+        y -= 1;
+    else if (direction == Down
+    && (y % 3 != 0 || m_map[posY + 1][posX] != 'X'))
+        y += 1;
+    else if (direction == Left
+    && (x % 3 != 0 || m_map[posY][posX - 1] != 'X'))
+        x -= 1;
+    else if (direction == Right
+    && (x % 3 != 0 || m_map[posY][posX + 1] != 'X'))
         x += 1;
+}
+
+void PacMan::drawing(arc::IDisplayModule *module)
+{
+    int spacingX = 60;
+    int spacingY = 20;
+
+    for (std::size_t line = 0; line < m_map.size(); line += 1)
+        for (std::size_t col = 0; col < m_map[line].size(); col += 1)
+            switch (m_map[line][col]) {
+                case 'X':
+                    module->drawSquare(3, arc::Color::BLUE, {col * 3 + spacingX, line * 3 + spacingY});
+                    break;
+                case 'P':
+                    module->drawSquare(2, arc::Color::MAGENTA, {col * 3 + 0.5 + spacingX, line * 3 + 0.5 + spacingY});
+                    break;
+                case 'o':
+                    module->drawSquare(1, arc::Color::YELLOW, {col * 3 + 1 + spacingX, line * 3 + 1 + spacingY});
+                    break;
+            }
+    module->drawSquare(3, (powerUp ? arc::Color::MAGENTA : arc::Color::YELLOW), {x + spacingX, y + spacingY});
+    module->drawText("Score : " + std::to_string(score), 30, arc::WHITE, {20, 50});
+}
+
+void PacMan::checkAround()
+{
+    int posX = x / 3;
+    int posY = y / 3;
+
+    if (m_map[posY][posX] == 'o') {
+        score += 100;
+        m_map[posY][posX] = ' ';
+    }
+    if (m_map[posY][posX] == 'P') {
+        powerUp = true;
+        chrono.start();
+        m_map[posY][posX] = ' ';
+    }
+    if (posY == 10 && posX == 24)
+        x = 1 * 3;
+    else if (posY == 10 && posX == 0)
+        x = 23 * 3;
+    if (powerUp && chrono.getElapsedTime() > 6) {
+        powerUp = false;
+        chrono.stop();
+    }
+}
+
+void PacMan::update(arc::IDisplayModule *module)
+{
+    module->checkEvent();
+    module->clearWindow();
+    drawing(module);
+    checkDirection(module);
+    chooseDirection();
+    makeDirection();
+    checkAround();
     module->displayWindow();
 }
