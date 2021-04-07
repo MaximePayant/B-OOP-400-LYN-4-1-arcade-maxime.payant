@@ -22,6 +22,12 @@ state(MENU)
     m_gameFunc = m_game->getInstance<arc::IGame>();
 }
 
+arc::DLManager::~DLManager()
+{
+    delete (m_moduleFunc);
+    delete (m_gameFunc);
+}
+
 void arc::DLManager::ChangeGraphicModule(const std::string module)
 {
     m_newGraph = module;

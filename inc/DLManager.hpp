@@ -31,7 +31,7 @@ namespace arc
     public:
         enum State {GAME, MENU} state;
         explicit DLManager(const std::string& path);
-        ~DLManager() = default;
+        ~DLManager();
         void ChangeGraphicModule(const std::string module);
         void ChangeGameModule(const std::string module);
         DLLoader& getGraphicsModule();

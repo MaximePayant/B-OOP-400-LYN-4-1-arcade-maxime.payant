@@ -21,7 +21,7 @@ ncs::NcursesModule::NcursesModule() :
     keypad(stdscr, true);
     noecho();
     timeout(0);
-    curs_set(true);
+    curs_set(false);
     start_color();
     init_pair(arc::BLACK, COLOR_WHITE, COLOR_BLACK);
     init_pair(arc::RED, COLOR_BLACK, COLOR_RED);

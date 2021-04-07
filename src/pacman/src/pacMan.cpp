@@ -44,8 +44,8 @@ void PacMan::start(arc::IDisplayModule* module)
 
 void PacMan::update(arc::IDisplayModule* module)
 {
-    module->checkEvent();
     module->clearWindow();
+    module->checkEvent();
     module->drawSquare(30, arc::WHITE, {x, y});
     module->drawText("Title", 50, arc::CYAN, {x, y});
     if (module->getKeyDown(arc::Keyboard::Up))
