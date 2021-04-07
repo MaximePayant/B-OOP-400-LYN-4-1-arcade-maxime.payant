@@ -35,17 +35,17 @@ static std::string FormatName(const std::string &path)
 
 void arc::Interface::checkInput(arc::IDisplayModule* graph, arc::DLManager& manager)
 {
-    if (graph->getKeyDown(arc::PageDown))
+    if (graph->getKeyDown(arc::A))
         m_libIndex = (m_libIndex == 0) ? (int)m_lib.size() - 1 : m_libIndex - 1;
-    else if (graph->getKeyDown(arc::PageUp))
+    else if (graph->getKeyDown(arc::Q))
         m_libIndex = (m_libIndex == (int)m_lib.size() - 1) ? 0 : m_libIndex + 1;
-    if (graph->getKeyDown(arc::Down))
+    if (graph->getKeyDown(arc::O))
         m_gameIndex = (m_gameIndex == 0) ? (int)m_game.size() - 1 : m_gameIndex - 1;
-    else if (graph->getKeyDown(arc::Up))
+    else if (graph->getKeyDown(arc::L))
         m_gameIndex = (m_gameIndex == (int)m_game.size() - 1) ? 0 : m_gameIndex + 1;
-    if (graph->getKeyDown(arc::Space))
+    if (graph->getKeyDown(arc::E))
         manager.ChangeGraphicModule(m_lib.at(m_libIndex));
-    if (graph->getKeyDown(arc::Enter)) {
+    if (graph->getKeyDown(arc::R)) {
         manager.ChangeGameModule(m_game.at(m_gameIndex));
         manager.state = arc::DLManager::GAME;
     }
@@ -55,8 +55,8 @@ void arc::Interface::update(arc::IDisplayModule* graph, arc::DLManager& manager)
 {
     int index = 0;
 
-    graph->checkEvent();
     graph->clearWindow();
+    graph->checkEvent();
     checkInput(graph, manager);
     graph->drawText(std::string("Interface"), 50, arc::WHITE, {70, 5});
     graph->drawText(std::string("Library:"), 50, arc::WHITE, {50, 20});

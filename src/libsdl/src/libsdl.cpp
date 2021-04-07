@@ -11,7 +11,8 @@
 sdl::SdlModule::SdlModule() :
     m_name("libSdl"),
     m_isOk(true),
-    m_window(nullptr)
+    m_window(nullptr),
+    m_keystate(nullptr)
 {
     std::cout << getName() << " initializing..." << std::endl;
     TTF_Init();

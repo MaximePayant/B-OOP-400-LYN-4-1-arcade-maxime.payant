@@ -6,20 +6,22 @@
 */
 
 #include <iostream>
-#include <curses.h>
+#include <ncurses.h>
+#include <unistd.h>
 
 #include "../inc/NcursesModule.hpp"
 #include "../inc/NcursesKeyboard.hpp"
 
 ncs::NcursesModule::NcursesModule() :
     m_isOk(true),
-    m_name("Ncurses")
+    m_name("Ncurses"),
+    m_key(0)
 {
     std::cout << this->getName() << " initializing..." << std::endl;
     initscr();
+    noecho();
     cbreak();
     keypad(stdscr, true);
-    noecho();
     timeout(0);
     curs_set(false);
     start_color();
@@ -57,9 +59,9 @@ void ncs::NcursesModule::displayWindow()
 
 void ncs::NcursesModule::checkEvent()
 {
-    char c = getch();
+    m_key = getch();
 
-    if (c == 'l')
+    if (m_key == 'l')
         m_isOk = false;
 }
 
@@ -78,17 +80,17 @@ void ncs::NcursesModule::drawText(const std::string& message, int size, arc::Col
 
 void ncs::NcursesModule::drawSquare(int size, arc::Color color, std::pair<float, float> position)
 {
+    attron(COLOR_PAIR(color));
     for (int line = 0; line < size; line += 1)
         for (int col = 0; col < size; col += 1) {
-            attron(COLOR_PAIR(color));
             mvprintw(position.second + line, position.first + col, " ");
-            attron(COLOR_PAIR(arc::BLACK));
         }
+    attron(COLOR_PAIR(arc::BLACK));
 }
 
 bool ncs::NcursesModule::getKeyDown(arc::Keyboard key)
 {
-    if (getch() == ncs::keyboardMap.find(key)->second)
+    if (m_key == ncs::keyboardMap.find(key)->second)
         return (true);
     return (false);
 }

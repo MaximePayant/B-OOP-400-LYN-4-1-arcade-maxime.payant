@@ -148,8 +148,8 @@ void PacMan::checkAround()
 
 void PacMan::update(arc::IDisplayModule *module)
 {
-    module->checkEvent();
     module->clearWindow();
+    module->checkEvent();
     checkDirection(module);
     chooseDirection();
     makeDirection();
