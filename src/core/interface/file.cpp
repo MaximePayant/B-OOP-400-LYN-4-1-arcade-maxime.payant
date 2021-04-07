@@ -6,8 +6,7 @@
 */
 
 #include <filesystem>
-#include <iostream>
-#include "../inc/Interface.hpp"
+#include "../../../inc/Interface.hpp"
 
 static bool IsLibValid(const std::string &name)
 {
@@ -29,23 +28,14 @@ static bool IsGameValid(const std::string &name)
     return (false);
 }
 
-static std::string FormatName(const std::string &path)
-{
-    auto index = path.find_last_of('_');
-    auto lastIndex = path.length() - 4;
-    std::string result = path.substr(index + 1, lastIndex - index);
-
-    return (result);
-}
-
-void Interface::getList()
+void arc::Interface::getList()
 {
     std::string path = "./lib";
 
     for (const auto & entry : std::filesystem::directory_iterator(path)) {
         if (IsLibValid(entry.path()))
-            m_lib.push_back(FormatName(entry.path()));
+            m_lib.push_back(entry.path());
         if (IsGameValid(entry.path()))
-            m_game.push_back(FormatName(entry.path()));
+            m_game.push_back(entry.path());
     }
 }

@@ -8,15 +8,16 @@
 #ifndef NIBBLER
 #define NIBBLER
 
+#include <memory>
 #include "../../../inc/IDisplayModule.hpp"
 #include "../../../inc/IGame.hpp"
 
-class PacMan : public IGame {
+class Nibbler : public arc::IGame {
 public:
-    PacMan();
-    ~PacMan() override;
-    void start(arc::IDisplayModule *) override;
-    void update(arc::IDisplayModule *) override;
+    Nibbler();
+    ~Nibbler() override;
+    void start(std::shared_ptr<arc::IDisplayModule>) override;
+    void update(std::shared_ptr<arc::IDisplayModule>) override;
 };
 
 extern "C" void *entryPoint();

@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include "../../pacman/inc/pacMan.hpp"
+#include "../inc/nibbler.hpp"
 
 __attribute__((constructor))
 void pacManConstructor()
@@ -22,24 +22,24 @@ void pacManDestructor()
 
 extern "C" void *entryPoint()
 {
-    auto *game = new PacMan();
+    auto *game = new Nibbler();
 
     std::cout << "[Nibbler] Entrypoint created." << std::endl;
     return (game);
 }
 
-PacMan::PacMan() : IGame()
+Nibbler::Nibbler() : IGame()
 {}
 
-PacMan::~PacMan()
+Nibbler::~Nibbler()
 = default;
 
-void PacMan::start(arc::IDisplayModule *module)
+void Nibbler::start(std::shared_ptr<arc::IDisplayModule> module)
 {
     (void) module;
 }
 
-void PacMan::update(arc::IDisplayModule *module)
+void Nibbler::update(std::shared_ptr<arc::IDisplayModule> module)
 {
     module->checkEvent();
     module->clearWindow();

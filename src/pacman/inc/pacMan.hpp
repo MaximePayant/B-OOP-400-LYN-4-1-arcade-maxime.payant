@@ -8,6 +8,7 @@
 #ifndef __PACMAN_HPP__
 #define __PACMAN_HPP__
 
+#include <memory>
 #include "../../../inc/IDisplayModule.hpp"
 #include "../../../inc/IGame.hpp"
 
@@ -23,8 +24,8 @@ class PacMan :
         PacMan();
         ~PacMan();
 
-        void start(arc::IDisplayModule *) override;
-        void update(arc::IDisplayModule *) override;
+        void start(std::shared_ptr<arc::IDisplayModule>) override;
+        void update(std::shared_ptr<arc::IDisplayModule>) override;
 };
 
 extern "C" void *entryPoint();

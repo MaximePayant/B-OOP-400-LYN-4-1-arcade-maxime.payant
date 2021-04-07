@@ -8,6 +8,8 @@
 #ifndef __IGAME_HPP__
 #define __IGAME_HPP__
 
+#include <memory>
+
 namespace arc
 {
 
@@ -19,8 +21,8 @@ namespace arc
         public:
             virtual ~IGame() = default;
 
-            virtual void start(IDisplayModule *) = 0;
-            virtual void update(IDisplayModule *) = 0;
+            virtual void start(std::shared_ptr<arc::IDisplayModule>) = 0;
+            virtual void update(std::shared_ptr<arc::IDisplayModule>) = 0;
 
     }; // class IGame
 

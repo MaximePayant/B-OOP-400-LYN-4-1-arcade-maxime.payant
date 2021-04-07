@@ -11,8 +11,9 @@ NAME_TEST = unit_tests
 FLAGS	=	-W -c -Wall -Wextra -Werror -pedantic -g3 -std=c++2a
 EXT := cpp
 
-SRC_FOLDER	:= 	src/core	\
-				src/core/error
+SRC_FOLDER	:= 	src/core			\
+				src/core/error		\
+				src/core/interface
 IGNORE_SRC := .
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
@@ -102,7 +103,6 @@ core: introduction $(NAME)
 games:
 	make re -C src/pacman
 	make re -C src/nibbler
-	make re -C src/interface
 
 graphicals:
 	make re -C src/libsfml

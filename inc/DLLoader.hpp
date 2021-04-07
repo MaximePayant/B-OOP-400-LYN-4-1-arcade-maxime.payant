@@ -9,6 +9,7 @@
 #define DLLOADER
 
 #include <string>
+#include <memory>
 
 namespace arc
 {
@@ -20,7 +21,7 @@ namespace arc
         explicit DLLoader(const std::string &path);
         ~DLLoader();
         template <typename T>
-        T *getInstance();
+        std::shared_ptr<T> getInstance();
     }; // class DLLoader
 } // namespace arc
 

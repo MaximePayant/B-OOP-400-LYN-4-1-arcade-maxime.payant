@@ -23,6 +23,7 @@ sfml::SfmlModule::SfmlModule() :
 
 sfml::SfmlModule::~SfmlModule()
 {
+    m_window.close();
     std::cout << "[" << m_name << "] stopping...\n";
 }
 

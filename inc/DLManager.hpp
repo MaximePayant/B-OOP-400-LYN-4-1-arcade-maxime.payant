@@ -9,24 +9,37 @@
 #define DLMANAGER
 
 #include <string>
+#include <memory>
 
 #include "DLLoader.hpp"
+#include "IDisplayModule.hpp"
+#include "IGame.hpp"
 
 namespace arc
 {
     class DLManager
     {
     private:
-        static arc::DLLoader m_module;
-        static arc::DLLoader m_game;
+        std::unique_ptr<DLLoader> m_module;
+        std::unique_ptr<DLLoader> m_game;
+        std::shared_ptr<IDisplayModule> m_moduleFunc;
+        std::shared_ptr<IGame> m_gameFunc;
+        bool m_needGraphUpdate;
+        bool m_needGameUpdate;
+        std::string m_newGraph;
+        std::string m_newGame;
     public:
-        DLManager() = delete;
+        enum State {GAME, MENU} state;
+        explicit DLManager(const std::string& path);
         ~DLManager() = default;
-        static void init(const std::string& path);
-        static void ChangeGraphicModule(const std::string module);
-        static void ChangeGameModule(const std::string module);
-        static arc::DLLoader& getGraphicsModule();
-        static arc::DLLoader& getGameModule();
+        void ChangeGraphicModule(const std::string module);
+        void ChangeGameModule(const std::string module);
+        DLLoader& getGraphicsModule();
+        DLLoader& getGameModule();
+        std::shared_ptr<IDisplayModule>& getGraphicsInstance();
+        std::shared_ptr<IGame>& getGameInstance();
+        void updateGraphics();
+        void updateGame();
     };
 }
 
