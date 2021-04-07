@@ -3,3 +3,5 @@ obj/
 lib/
 errors
 arcade
+CMakeLists.txt
+vgcore.*

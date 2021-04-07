@@ -19,7 +19,7 @@ sdl::SdlModule::SdlModule() :
         std::cerr << this->getName() << SDL_GetError() << std::endl;
     m_window = SDL_CreateWindow("arcade_sdl", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, 0);
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-    m_font = TTF_OpenFont("8bit.ttf", 50);
+    m_font = TTF_OpenFont("rsc/8bit.ttf", 50);
 }
 
 sdl::SdlModule::~SdlModule()

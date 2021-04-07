@@ -81,7 +81,7 @@ void ncs::NcursesModule::drawSquare(int size, arc::Color color, std::pair<float,
     for (int line = 0; line < size; line += 1)
         for (int col = 0; col < size; col += 1) {
             attron(COLOR_PAIR(color));
-            mvprintw(position.second + line, position.first + col, "O");
+            mvprintw(position.first + line, position.second + col, " ");
             attron(COLOR_PAIR(arc::BLACK));
         }
 }

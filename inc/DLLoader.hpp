@@ -5,16 +5,25 @@
 ** DLLoader.hpp
 */
 
-#ifndef B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_DLLOADER
-#define B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_DLLOADER
+#ifndef DLLOADER
+#define DLLOADER
 
-template<typename T>
-class DLLoader
+#include <string>
+
+namespace arc
 {
+    class DLLoader
+    {
+        void *m_library;
+        void *(*m_entry)();
     public:
-    T *getInstance();
+        explicit DLLoader(const std::string &path);
+        ~DLLoader();
+        template <typename T>
+        T *getInstance();
+    }; // class DLLoader
+} // namespace arc
 
-};
+#include "DLLoader.inl"
 
-
-#endif //B_OOP_400_LYN_4_1_ARCADE_GUILLAUME_SOISSON_DLLOADER
+#endif //DLLOADER
