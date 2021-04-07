@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <math.h>
 #include "../inc/pacMan.hpp"
 
 __attribute__((constructor))
@@ -66,9 +67,9 @@ void PacMan::chooseDirection()
     int posX = x / 3;
     int posY = y / 3;
 
-    if ((direction == Up || direction == Down) && (y % 3) != 0)
+    if ((direction == Up || direction == Down) && fmod(y, 3) != 0)
         return;
-    if ((direction == Left || direction == Right) && (x % 3) != 0)
+    if ((direction == Left || direction == Right) && fmod(x, 3) != 0)
         return;
     if (wantedDirection == Up && m_map[posY - 1][posX] != 'X')
         direction = Up;
@@ -86,17 +87,17 @@ void PacMan::makeDirection()
     int posY = y / 3;
 
     if (direction == Up
-    && (y % 3 != 0 || m_map[posY - 1][posX] != 'X'))
-        y -= 1;
+    && (fmod(y, 3) != 0 || m_map[posY - 1][posX] != 'X'))
+        y -= 0.5;
     else if (direction == Down
-    && (y % 3 != 0 || m_map[posY + 1][posX] != 'X'))
-        y += 1;
+    && (fmod(y, 3) != 0 || m_map[posY + 1][posX] != 'X'))
+        y += 0.5;
     else if (direction == Left
-    && (x % 3 != 0 || m_map[posY][posX - 1] != 'X'))
-        x -= 1;
+    && (fmod(x, 3) != 0 || m_map[posY][posX - 1] != 'X'))
+        x -= 0.5;
     else if (direction == Right
-    && (x % 3 != 0 || m_map[posY][posX + 1] != 'X'))
-        x += 1;
+    && (fmod(x, 3) != 0 || m_map[posY][posX + 1] != 'X'))
+        x += 0.5;
 }
 
 void PacMan::drawing(arc::IDisplayModule *module)

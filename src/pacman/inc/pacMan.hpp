@@ -27,8 +27,8 @@ class PacMan :
         arc::Chrono chrono;
         bool powerUp;
 
-        int x;
-        int y;
+        float x;
+        float y;
         std::array<std::string, 22> m_map;
         int score;
 
