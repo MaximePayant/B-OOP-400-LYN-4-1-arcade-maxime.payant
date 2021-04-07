@@ -17,12 +17,13 @@ sfml::SfmlModule::SfmlModule() :
     m_font()
 {
     std::cout << "[" << m_name << "] initializing..." << std::endl;
-    m_font.loadFromFile("rsc/8bit.ttf");
+    m_font.loadFromFile("rsc/8bitPix.ttf");
     m_window.create({1920, 1080, 32}, "arcade_sfml");
 }
 
 sfml::SfmlModule::~SfmlModule()
 {
+    m_window.close();
     std::cout << "[" << m_name << "] stopping...\n";
 }
 

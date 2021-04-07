@@ -36,7 +36,7 @@ PacMan::PacMan()
 PacMan::~PacMan()
 = default;
 
-void PacMan::start(arc::IDisplayModule *module)
+void PacMan::start(arc::IDisplayModule* module)
 {
     (void)module;
     std::ifstream filestream("pacmanMap.txt");

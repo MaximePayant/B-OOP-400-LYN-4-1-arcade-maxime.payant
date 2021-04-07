@@ -29,7 +29,7 @@ namespace sfml
 
         public:
             SfmlModule();
-            ~SfmlModule();
+            ~SfmlModule() override;
             std::string getName() const override;
 
             void clearWindow() override;

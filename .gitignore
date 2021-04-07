@@ -5,3 +5,4 @@ errors
 arcade
 CMakeLists.txt
 vgcore.*
+log

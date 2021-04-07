@@ -29,7 +29,7 @@ namespace sdl
 
         public:
             SdlModule();
-            ~SdlModule();
+            ~SdlModule() override;
             std::string getName() const override;
 
             void clearWindow() override;

@@ -21,7 +21,7 @@ ncs::NcursesModule::NcursesModule() :
     keypad(stdscr, true);
     noecho();
     timeout(0);
-    curs_set(true);
+    curs_set(false);
     start_color();
     init_pair(arc::BLACK, COLOR_WHITE, COLOR_BLACK);
     init_pair(arc::RED, COLOR_BLACK, COLOR_RED);
@@ -81,7 +81,7 @@ void ncs::NcursesModule::drawSquare(int size, arc::Color color, std::pair<float,
     for (int line = 0; line < size; line += 1)
         for (int col = 0; col < size; col += 1) {
             attron(COLOR_PAIR(color));
-            mvprintw(position.first + line, position.second + col, " ");
+            mvprintw(position.second + line, position.first + col, " ");
             attron(COLOR_PAIR(arc::BLACK));
         }
 }
