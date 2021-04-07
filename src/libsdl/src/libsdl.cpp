@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <set>
 #include "../inc/SdlModule.hpp"
 
 sdl::SdlModule::SdlModule() :
@@ -17,9 +18,10 @@ sdl::SdlModule::SdlModule() :
     TTF_Init();
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         std::cerr << this->getName() << SDL_GetError() << std::endl;
+    m_keystate = NULL;
     m_window = SDL_CreateWindow("arcade_sdl", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, 0);
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-    m_font = TTF_OpenFont("rsc/8bit.ttf", 50);
+    m_font = TTF_OpenFont("rsc/8bitPix.ttf", 50);
 }
 
 sdl::SdlModule::~SdlModule()
@@ -84,9 +86,19 @@ void sdl::SdlModule::drawSquare(int size, arc::Color color, std::pair<float, flo
 
 bool sdl::SdlModule::getKeyDown(arc::Keyboard key)
 {
+    static std::set<arc::Keyboard> list;
+    auto value = sdl::keyboardMap.find(key)->second;
+
     if (!m_keystate)
         return (false);
-    if (m_keystate[SDL_GetScancodeFromKey(sdl::keyboardMap.find(key)->second)])
+    if (list.find(key) == list.end() && m_keystate[SDL_GetScancodeFromKey(value)]) {
+        list.insert(key);
         return (true);
+    }
+    else if (!m_keystate[SDL_GetScancodeFromKey(value)]) {
+        auto it = list.find(key);
+        if (it != list.end())
+            list.erase(it);
+    }
     return (false);
 }

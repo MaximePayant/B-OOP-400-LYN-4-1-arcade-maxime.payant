@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <SFML/Window/Event.hpp>
+#include <set>
 #include "../inc/SfmlModule.hpp"
 #include "../inc/SfmlColor.hpp"
 #include "../inc/SfmlKeyboard.hpp"
@@ -74,7 +75,17 @@ void sfml::SfmlModule::drawSquare(int size, arc::Color color, std::pair<float, f
 
 bool sfml::SfmlModule::getKeyDown(arc::Keyboard key)
 {
-    if (sf::Keyboard::isKeyPressed(sfml::keyboardMap.find(key)->second))
+    static std::set<arc::Keyboard> list;
+    auto value = sfml::keyboardMap.find(key)->second;
+
+    if (list.find(key) == list.end() && sf::Keyboard::isKeyPressed(value)) {
+        list.insert(key);
         return (true);
+    }
+    else if (!sf::Keyboard::isKeyPressed(value)) {
+        auto it = list.find(key);
+        if (it != list.end())
+            list.erase(it);
+    }
     return (false);
 }
