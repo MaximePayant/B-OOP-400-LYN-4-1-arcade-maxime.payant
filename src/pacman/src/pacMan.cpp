@@ -39,7 +39,7 @@ PacMan::~PacMan()
 void PacMan::start(arc::IDisplayModule* module)
 {
     (void)module;
-    std::ifstream filestream("pacmanMap.txt");
+    std::ifstream filestream("rsc/pacmanMap.txt");
 
     powerUp = false;
     direction = None;

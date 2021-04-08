@@ -61,7 +61,7 @@ void Nibbler::drawing(arc::IDisplayModule *module)
 void Nibbler::start(arc::IDisplayModule* module)
 {
     (void)module;
-    std::ifstream filestream("nibblerMap.txt");
+    std::ifstream filestream("rsc/nibblerMap.txt");
     
     direction = None;
     wantedDirection = None;
