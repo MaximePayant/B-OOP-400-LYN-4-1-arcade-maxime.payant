@@ -22,6 +22,10 @@ void arc::Interface::drawText(arc::IDisplayModule* graph, int index, const std::
     int xPos = (game) ? 100 : 50;
 
     graph->drawText(name, 50, color, {xPos, 25 + (index * 5)});
+    if (game) {
+        graph->drawText("Score: ", 50, arc::Color::WHITE, {xPos + 30, 25 + (index * 5)});
+        graph->drawText(m_score.find(name)->second, 50, arc::Color::WHITE, {xPos + 55, 25 + (index * 5)});
+    }
 }
 
 static std::string FormatName(const std::string &path)
@@ -58,7 +62,7 @@ void arc::Interface::update(arc::IDisplayModule* graph, arc::DLManager& manager)
     graph->clearWindow();
     graph->checkEvent();
     checkInput(graph, manager);
-    graph->drawText(std::string("Interface"), 50, arc::WHITE, {70, 5});
+    graph->drawText(std::string("Welcome ") + m_score.find("username")->second, 50, arc::GREEN, {70, 5});
     graph->drawText(std::string("Library:"), 50, arc::WHITE, {50, 20});
     for (auto& name : m_lib) {
         drawText(graph, index, FormatName(name), false);

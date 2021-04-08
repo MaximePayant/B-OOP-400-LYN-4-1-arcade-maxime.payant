@@ -10,6 +10,7 @@
 
 #include <string>
 #include <memory>
+#include <map>
 
 #include "DLLoader.hpp"
 #include "IDisplayModule.hpp"
@@ -28,6 +29,7 @@ namespace arc
         bool m_needGameUpdate;
         std::string m_newGraph;
         std::string m_newGame;
+        std::string m_userName;
     public:
         enum State {GAME, MENU} state;
         explicit DLManager(const std::string& path);

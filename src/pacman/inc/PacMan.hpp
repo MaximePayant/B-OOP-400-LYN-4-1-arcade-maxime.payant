@@ -30,6 +30,7 @@ class PacMan :
 
         void start(arc::IDisplayModule *) override;
         void update(arc::IDisplayModule *) override;
+        void terminate(arc::IDisplayModule* module) override;
 
         void playerTurn(arc::IDisplayModule *module);
         void ghostTurn();

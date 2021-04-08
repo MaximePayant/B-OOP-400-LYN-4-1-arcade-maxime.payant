@@ -9,7 +9,7 @@
 
 arc::DLManager::DLManager(const std::string& path) :
 m_module(std::make_unique<DLLoader>(path)),
-m_game(std::make_unique<DLLoader>("./lib/arcade_pacman.so")),
+m_game(nullptr),
 m_moduleFunc(nullptr),
 m_gameFunc(nullptr),
 m_needGraphUpdate(false),
@@ -19,7 +19,6 @@ m_newGame(),
 state(MENU)
 {
     m_moduleFunc = m_module->getInstance<arc::IDisplayModule>();
-    m_gameFunc = m_game->getInstance<arc::IGame>();
 }
 
 arc::DLManager::~DLManager()
@@ -74,6 +73,8 @@ void arc::DLManager::updateGame()
 {
     if (!m_needGameUpdate)
         return;
+    if (m_gameFunc)
+        m_gameFunc->terminate(m_moduleFunc);
     delete (m_gameFunc);
     m_game = std::make_unique<DLLoader>(m_newGame);
     m_gameFunc = m_game->getInstance<arc::IGame>();

@@ -19,6 +19,7 @@ public:
     ~Nibbler() override;
     void start(arc::IDisplayModule*) override;
     void update(arc::IDisplayModule*) override;
+    void terminate(arc::IDisplayModule*) override;
     void drawing(arc::IDisplayModule *module);
     void checkDirection(arc::IDisplayModule *module);
     int chooseDirection(arc::IDisplayModule *module);

@@ -5,7 +5,9 @@
 ** file.cpp.c
 */
 
+#include <iostream>
 #include <filesystem>
+#include <fstream>
 #include "../../../inc/Interface.hpp"
 
 static bool IsLibValid(const std::string &name)
@@ -28,6 +30,23 @@ static bool IsGameValid(const std::string &name)
     return (false);
 }
 
+void arc::Interface::getData()
+{
+    std::ifstream stream("./rsc/arcade_data.txt");
+    std::vector<std::string> lineTxt;
+    int index;
+    std::string content;
+
+    for (int line = 0; getline(stream, content); line += 1) {
+        lineTxt.push_back(content);
+        content.clear();
+    }
+    for (auto & line : lineTxt) {
+        index = line.find_first_of(':');
+        m_score.emplace(line.substr(0, index), line.substr(index + 1).c_str());
+    }
+}
+
 void arc::Interface::getList()
 {
     std::string path = "./lib";
@@ -38,4 +57,5 @@ void arc::Interface::getList()
         if (IsGameValid(entry.path()))
             m_game.push_back(entry.path());
     }
+    getData();
 }

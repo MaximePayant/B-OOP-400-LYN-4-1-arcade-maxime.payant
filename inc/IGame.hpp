@@ -23,6 +23,7 @@ namespace arc
 
             virtual void start(arc::IDisplayModule*) = 0;
             virtual void update(arc::IDisplayModule*) = 0;
+            virtual void terminate(arc::IDisplayModule*) = 0;
 
     }; // class IGame
 

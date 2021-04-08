@@ -33,12 +33,17 @@ extern "C" void *entryPoint()
 void PacMan::start(arc::IDisplayModule* module)
 {
     (void)module;
-    std::ifstream filestream("pacmanMap.txt");
+    std::ifstream filestream("rsc/pacmanMap.txt");
 
     std::srand(std::time(NULL));
     ghost.color = arc::Color::RED;
     pacGumNb = 3;//181;
     for (int line = 0; std::getline(filestream, m_map[line]); line += 1);
+}
+
+void PacMan::terminate(arc::IDisplayModule* module)
+{
+    (void)module;
 }
 
 void PacMan::playerTurn(arc::IDisplayModule *module)
