@@ -11,6 +11,7 @@
 #include <string>
 #include <array>
 
+#include "dependencies.hpp"
 #include "../../../inc/IDisplayModule.hpp"
 #include "../../../inc/Chrono.hpp"
 
@@ -26,8 +27,7 @@ class Entity
         Entity(float xVal, float yVal);
         ~Entity() = default;
 
-        virtual void chooseDirection(const std::array<std::string, 22>& map);
-        virtual void makeDirection(const std::array<std::string, 22>& map);
+        virtual void chooseDirection(const std::array<std::string, heightMap>& map);
         virtual void draw(arc::IDisplayModule *module) { (void)module; };
 };
 
@@ -37,6 +37,7 @@ class Player :
     public:
         arc::Chrono powerUpChrono;
         bool powerUp;
+        bool grailled;
         int score;
 
         Player();
@@ -44,8 +45,8 @@ class Player :
 
         void draw(arc::IDisplayModule *module) override;
         void checkDirection(arc::IDisplayModule *module);
-        void checkAround(std::array<std::string, 22>& map, int& pacGumNb);
-        void makeDirection(const std::array<std::string, 22>& map) override;
+        void checkAround(std::array<std::string, heightMap>& map, int& pacGumNb);
+        void makeDirection(const std::array<std::string, heightMap>& map);
 };
 
 class Ghost :
@@ -56,12 +57,13 @@ class Ghost :
         arc::Color color;
         bool needMoveChoice;
         bool powerLess;
+        bool grailled;
 
         Ghost();
         ~Ghost() = default;
 
         void draw(arc::IDisplayModule *module) override;
-        void makeDirection(const std::array<std::string, 22>& map) override;
+        void makeDirection(const std::array<std::string, heightMap>& map);
         void checkDirection();
 };
 

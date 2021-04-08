@@ -16,7 +16,7 @@ Entity::Entity(float xVal, float yVal) :
     y(yVal)
 {}
 
-void Entity::chooseDirection(const std::array<std::string, 22>& map)
+void Entity::chooseDirection(const std::array<std::string, heightMap>& map)
 {
     int posX = x / 3;
     int posY = y / 3;
@@ -32,23 +32,4 @@ void Entity::chooseDirection(const std::array<std::string, 22>& map)
         direction = Left;
     else if (wantedDirection == Right && map[posY][posX + 1] != 'X')
         direction = Right;
-}
-
-void Entity::makeDirection(const std::array<std::string, 22>& map)
-{
-    int posX = x / 3;
-    int posY = y / 3;
-
-    if (direction == Up
-    && (fmod(y, 3) != 0 || map[posY - 1][posX] != 'X'))
-        y -= 0.5;
-    else if (direction == Down
-    && (fmod(y, 3) != 0 || map[posY + 1][posX] != 'X'))
-        y += 0.5;
-    else if (direction == Left
-    && (fmod(x, 3) != 0 || map[posY][posX - 1] != 'X'))
-        x -= 0.5;
-    else if (direction == Right
-    && (fmod(x, 3) != 0 || map[posY][posX + 1] != 'X'))
-        x += 0.5;
 }

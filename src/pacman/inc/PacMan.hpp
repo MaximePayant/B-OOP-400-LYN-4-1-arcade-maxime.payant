@@ -8,9 +8,6 @@
 #ifndef __PACMAN_HPP__
 #define __PACMAN_HPP__
 
-#define spacingX 60
-#define spacingY 20
-
 #include <string>
 #include <array>
 
@@ -20,12 +17,11 @@
 class PacMan :
     public arc::IGame
 {
-
     private:
         Player player;
         Ghost ghost;
 
-        std::array<std::string, 22> m_map;
+        std::array<std::string, heightMap> m_map;
         int pacGumNb;
 
     public:
@@ -35,8 +31,10 @@ class PacMan :
         void start(arc::IDisplayModule *) override;
         void update(arc::IDisplayModule *) override;
 
+        void playerTurn(arc::IDisplayModule *module);
+        void ghostTurn();
+        void checkBoth();
         void drawing(arc::IDisplayModule *module);
-
 };
 
 extern "C" void *entryPoint();

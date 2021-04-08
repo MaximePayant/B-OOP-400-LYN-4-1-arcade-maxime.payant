@@ -5,6 +5,19 @@
 ** Chrono.inl
 */
 
+inline arc::Chrono::Chrono() :
+    m_isRuning(false)
+{}
+
+inline arc::Chrono::Chrono(ctorState state) :
+    m_isRuning(false)
+{
+    if (state == Lauch) {
+        m_isRuning = true;
+        start();
+    }
+}
+
 inline void arc::Chrono::start()
 {
     m_start = std::chrono::system_clock::now();
@@ -13,12 +26,14 @@ inline void arc::Chrono::start()
     m_isRuning = true;
 }
 
-inline void arc::Chrono::stop() {
+inline void arc::Chrono::stop()
+{
     m_end = std::chrono::system_clock::now();
     m_isRuning = false;
 }
 
-inline void arc::Chrono::tour() {
+inline void arc::Chrono::tour()
+{
     m_tour = m_end;
 }
 

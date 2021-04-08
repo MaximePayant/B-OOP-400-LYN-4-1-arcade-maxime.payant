@@ -11,9 +11,10 @@
 #include "PacMan.hpp"
 
 Ghost::Ghost() :
-    Entity(9 * 3, 10 * 3),
+    Entity(9 * gamingScale, 10 * gamingScale),
     needMoveChoice(false),
-    powerLess(false)
+    powerLess(false),
+    grailled(false)
 {
     dirChoiceChrono.start();
     direction = Right;
@@ -29,41 +30,44 @@ void Ghost::checkDirection()
     if (!needMoveChoice)
         return;
 
-    int random = std::rand() % 4;
+    int random = (std::rand() % 4) - 2;
 
-    if (random == 0 && direction != Down)
+    if (random == -2 && direction != Down)
         wantedDirection = Up;
-    else if (random == 1 && direction != Up)
+    else if (random == -1 && direction != Up)
         wantedDirection = Down;
-    else if (random == 2 && direction != Right)
+    else if (random == 0 && direction != Right)
         wantedDirection = Left;
-    else if (random == 3 && direction != Left)
+    else if (random == 1 && direction != Left)
         wantedDirection = Right;
     needMoveChoice = false;
 }
 
 void Ghost::draw(arc::IDisplayModule *module)
 {
-    module->drawSquare(3, color, {x + spacingX, y + spacingY});
+    if (!grailled)
+        module->drawSquare(gamingScale, (powerLess ? arc::Color::CYAN : color), {x + spacingX, y + spacingY});
+    module->drawSquare(1, arc::Color::WHITE, {x + spacingX, y + spacingY + 1});
+    module->drawSquare(1, arc::Color::WHITE, {x + spacingX + 2, y + spacingY + 1});
 }
 
-void Ghost::makeDirection(const std::array<std::string, 22>& map)
+void Ghost::makeDirection(const std::array<std::string, heightMap>& map)
 {
-    int posX = x / 3;
-    int posY = y / 3;
+    int posX = x / gamingScale;
+    int posY = y / gamingScale;
 
     if (direction == Up
-    && (fmod(y, 3) != 0 || (map[posY - 1][posX] != 'X' && map[posY - 1][posX] != 'x')))
-        y -= 0.5;
+    && (fmod(y, gamingScale) != 0 || (map[posY - 1][posX] != 'X' && map[posY - 1][posX] != 'x')))
+        y -= (powerLess ? 0.25 : 0.5);
     else if (direction == Down
-    && (fmod(y, 3) != 0 || (map[posY + 1][posX] != 'X' && map[posY + 1][posX] != 'x')))
-        y += 0.5;
+    && (fmod(y, gamingScale) != 0 || (map[posY + 1][posX] != 'X' && map[posY + 1][posX] != 'x')))
+        y += (powerLess ? 0.25 : 0.5);
     else if (direction == Left
-    && (fmod(x, 3) != 0 || (map[posY][posX - 1] != 'X' && map[posY][posX - 1] != 'x')))
-        x -= 0.5;
+    && (fmod(x, gamingScale) != 0 || (map[posY][posX - 1] != 'X' && map[posY][posX - 1] != 'x')))
+        x -= (powerLess ? 0.25 : 0.5);
     else if (direction == Right
-    && (fmod(x, 3) != 0 || (map[posY][posX + 1] != 'X' && map[posY][posX + 1] != 'x')))
-        x += 0.5;
+    && (fmod(x, gamingScale) != 0 || (map[posY][posX + 1] != 'X' && map[posY][posX + 1] != 'x')))
+        x += (powerLess ? 0.25 : 0.5);
     else
         needMoveChoice = true;
 }

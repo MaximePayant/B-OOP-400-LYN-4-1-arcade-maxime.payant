@@ -10,9 +10,10 @@
 #include "PacMan.hpp"
 
 Player::Player() :
-    Entity(3, 3),
+    Entity(11 * gamingScale, 15 * gamingScale),
     powerUpChrono(),
     powerUp(false),
+    grailled(false),
     score(0)
 {}
 
@@ -28,29 +29,29 @@ void Player::checkDirection(arc::IDisplayModule *module)
         wantedDirection = Right;
 }
 
-void Player::makeDirection(const std::array<std::string, 22>& map)
+void Player::makeDirection(const std::array<std::string, heightMap>& map)
 {
-    int posX = x / 3;
-    int posY = y / 3;
+    int posX = x / gamingScale;
+    int posY = y / gamingScale;
 
     if (direction == Up
-    && (fmod(y, 3) != 0 || (map[posY - 1][posX] != 'X' && map[posY - 1][posX] != '-')))
+    && (fmod(y, gamingScale) != 0 || (map[posY - 1][posX] != 'X' && map[posY - 1][posX] != '-')))
         y -= 0.5;
     else if (direction == Down
-    && (fmod(y, 3) != 0 || (map[posY + 1][posX] != 'X' && map[posY + 1][posX] != '-')))
+    && (fmod(y, gamingScale) != 0 || (map[posY + 1][posX] != 'X' && map[posY + 1][posX] != '-')))
         y += 0.5;
     else if (direction == Left
-    && (fmod(x, 3) != 0 || (map[posY][posX - 1] != 'X' && map[posY][posX - 1] != '-')))
+    && (fmod(x, gamingScale) != 0 || (map[posY][posX - 1] != 'X' && map[posY][posX - 1] != '-')))
         x -= 0.5;
     else if (direction == Right
-    && (fmod(x, 3) != 0 || (map[posY][posX + 1] != 'X' && map[posY][posX + 1] != '-')))
+    && (fmod(x, gamingScale) != 0 || (map[posY][posX + 1] != 'X' && map[posY][posX + 1] != '-')))
         x += 0.5;
 }
 
-void Player::checkAround(std::array<std::string, 22>& map, int& pacGumNb)
+void Player::checkAround(std::array<std::string, heightMap>& map, int& pacGumNb)
 {
-    int posX = x / 3;
-    int posY = y / 3;
+    int posX = x / gamingScale;
+    int posY = y / gamingScale;
 
     if (map[posY][posX] == 'o') {
         score += 100;
@@ -62,11 +63,11 @@ void Player::checkAround(std::array<std::string, 22>& map, int& pacGumNb)
         powerUpChrono.start();
         map[posY][posX] = ' ';
     }
-    if (posY == 10 && posX == 23)
-        x = 0 * 3;
-    else if (posY == 10 && posX == -1)
-        x = 22 * 3;
-    if (powerUp && powerUpChrono.getElapsedTime() > 6) {
+    if (posY == 12 && posX == 23)
+        x = 0 * gamingScale;
+    else if (posY == 12 && posX == -1)
+        x = 22 * gamingScale;
+    if (powerUp && powerUpChrono.getElapsedTime() > powerUpTime) {
         powerUp = false;
         powerUpChrono.stop();
     }
@@ -74,5 +75,5 @@ void Player::checkAround(std::array<std::string, 22>& map, int& pacGumNb)
 
 void Player::draw(arc::IDisplayModule *module)
 {
-    module->drawSquare(3, (powerUp ? arc::Color::MAGENTA : arc::Color::YELLOW), {x + spacingX, y + spacingY});
+    module->drawSquare(gamingScale, arc::Color::YELLOW, {x + spacingX, y + spacingY});
 }

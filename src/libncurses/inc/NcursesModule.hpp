@@ -23,6 +23,7 @@ namespace ncs
         private:
             bool m_isOk;
             std::string m_name;
+            char m_key;
 
         public:
             NcursesModule();
@@ -41,8 +42,5 @@ namespace ncs
     }; // class NcursesModule
 
 } // namespace ncs
-
-
-extern "C" void *entryPoint();
 
 #endif // __NCURSES_MODULE_HPP__

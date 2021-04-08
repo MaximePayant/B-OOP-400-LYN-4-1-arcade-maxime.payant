@@ -23,7 +23,9 @@ namespace arc
             bool m_isRuning;
 
         public:
-            Chrono() = default;
+            enum ctorState { Wait, Lauch };
+            Chrono();
+            Chrono(ctorState state);
             ~Chrono() = default;
 
             void start();
