@@ -5,7 +5,7 @@
 ** Chrono.inl
 */
 
-void arc::Chrono::start()
+inline void arc::Chrono::start()
 {
     m_start = std::chrono::system_clock::now();
     m_end = m_start;
@@ -13,16 +13,16 @@ void arc::Chrono::start()
     m_isRuning = true;
 }
 
-void arc::Chrono::stop() {
+inline void arc::Chrono::stop() {
     m_end = std::chrono::system_clock::now();
     m_isRuning = false;
 }
 
-void arc::Chrono::tour() {
+inline void arc::Chrono::tour() {
     m_tour = m_end;
 }
 
-double arc::Chrono::getElapsedTime()
+inline double arc::Chrono::getElapsedTime()
 {
     if (m_isRuning)
         m_end = std::chrono::system_clock::now();
@@ -30,7 +30,7 @@ double arc::Chrono::getElapsedTime()
     return (step / 1000);
 }
 
-double arc::Chrono::getTotalTime()
+inline double arc::Chrono::getTotalTime()
 {
     if (m_isRuning)
         m_end = std::chrono::system_clock::now();
