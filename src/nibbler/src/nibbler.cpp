@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <math.h>
+#include <cmath>
 #include "../inc/nibbler.hpp"
 
 __attribute__((constructor))
@@ -190,4 +190,25 @@ void Nibbler::update(arc::IDisplayModule* module)
         module->displayWindow();
     } else
         gameOver(module);
+}
+
+void Nibbler::terminate(arc::IDisplayModule *)
+{
+    std::ifstream stream("./rsc/arcade_data.txt");
+    std::vector<std::string> lineTxt;
+    int index;
+    std::string content;
+
+    for (int line = 0; getline(stream, content); line += 1)
+        lineTxt.push_back(content);
+    std::ofstream output("./rsc/arcade_data.txt");
+    for (auto & line : lineTxt) {
+        index = line.find_first_of(':');
+        if (line.substr(0, index) == "nibbler")
+            line.replace(index + 1, line.size(), std::to_string(score));
+        output << line << std::endl;
+        std::cout << line << std::endl;
+    }
+    stream.close();
+    output.close();
 }

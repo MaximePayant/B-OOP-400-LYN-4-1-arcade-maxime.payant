@@ -1,3 +1,3 @@
 username:xX_DarkVadore_du_69_Xx
-pacman:0
-nibbler:0
+pacman:1000
+nibbler:600

@@ -15,8 +15,10 @@
 
 void arc::GameLoop(arc::DLManager& manager, arc::Interface& interface)
 {
-    if (manager.getGraphicsInstance()->getKeyDown(arc::P))
+    if (manager.getGraphicsInstance()->getKeyDown(arc::P)) {
+        manager.getGameInstance()->terminate(manager.getGraphicsInstance());
         manager.state = arc::DLManager::MENU;
+    }
     if (manager.getGraphicsInstance()->getKeyDown(arc::N)) {
         interface.m_libIndex = (interface.m_libIndex == (int)interface.m_lib.size() - 1) ? 0 : interface.m_libIndex + 1;
         manager.ChangeGraphicModule(interface.m_lib.at(interface.m_libIndex));
