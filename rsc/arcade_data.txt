@@ -1,5 +1,5 @@
 username:xX_DarkVadore_du_69_Xx
-pacman:1000
+pacman:100
 nibbler:600
 quix:0
 centipede:0

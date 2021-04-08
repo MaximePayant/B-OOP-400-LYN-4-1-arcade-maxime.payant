@@ -16,9 +16,9 @@ sdl::SdlModule::SdlModule() :
     m_keystate(nullptr)
 {
     std::cout << getName() << " initializing..." << std::endl;
-    TTF_Init();
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         std::cerr << this->getName() << SDL_GetError() << std::endl;
+    TTF_Init();
     m_window = SDL_CreateWindow("arcade_sdl", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, 0);
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     m_font = TTF_OpenFont("rsc/8bitPix.ttf", 50);
@@ -27,10 +27,10 @@ sdl::SdlModule::SdlModule() :
 sdl::SdlModule::~SdlModule()
 {
     std::cout << getName() << " stopping..." << std::endl;
-    SDL_DestroyWindow(m_window);
     SDL_DestroyRenderer(m_renderer);
-    SDL_Quit();
     TTF_CloseFont(m_font);
+    SDL_DestroyWindow(m_window);
+    SDL_Quit();
     TTF_Quit();
 }
 
