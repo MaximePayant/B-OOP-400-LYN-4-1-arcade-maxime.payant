@@ -47,6 +47,7 @@ void PacMan::start(arc::IDisplayModule* module)
 
     std::srand(std::time(NULL));
     for (int line = 0; std::getline(filestream, m_map[line]); line += 1);
+    filestream.close();
 }
 
 void PacMan::terminate(arc::IDisplayModule* module)
