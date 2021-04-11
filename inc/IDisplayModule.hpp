@@ -11,6 +11,7 @@
 #include <string>
 
 #include "Color.hpp"
+#include "Vector.hpp"
 #include "Keyboard.hpp"
 
 namespace arc
@@ -29,8 +30,8 @@ namespace arc
             virtual bool isOk() = 0;
             virtual bool getKeyDown(arc::Keyboard key) = 0;
 
-            virtual void drawText(const std::string& text, int characterSize, Color color, std::pair<float, float> position) = 0;
-            virtual void drawSquare(int size, Color color, std::pair<float, float> position) = 0;
+            virtual void drawText(const std::string& text, int characterSize, Color color, arc::Vector<float> position) = 0;
+            virtual void drawSquare(int size, Color color, arc::Vector<float> position) = 0;
 
     }; // class IDisplayModule
 

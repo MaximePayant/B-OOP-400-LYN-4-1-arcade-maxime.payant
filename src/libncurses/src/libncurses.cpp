@@ -70,21 +70,23 @@ bool ncs::NcursesModule::isOk()
     return (m_isOk);
 }
 
-void ncs::NcursesModule::drawText(const std::string& message, int size, arc::Color color, std::pair<float, float> position)
+void ncs::NcursesModule::drawText(const std::string& message, int size, arc::Color color, arc::Vector<float> position)
 {
     (void)size;
     attron(COLOR_PAIR(color));
-    mvprintw(position.second, position.first, message.c_str());
+    mvprintw(position.y, position.x, message.c_str());
     attron(COLOR_PAIR(arc::BLACK));
 }
 
-void ncs::NcursesModule::drawSquare(int size, arc::Color color, std::pair<float, float> position)
+void ncs::NcursesModule::drawSquare(int size, arc::Color color, arc::Vector<float> position)
 {
+    size /= 2;
+    position.x /= 3;
+    position.y /= 3;
     attron(COLOR_PAIR(color));
     for (int line = 0; line < size; line += 1)
-        for (int col = 0; col < size; col += 1) {
-            mvprintw(position.second + line, position.first + col, " ");
-        }
+        for (int col = 0; col < size; col += 1)
+            mvprintw(position.y + line, position.x + col, " ");
     attron(COLOR_PAIR(arc::BLACK));
 }
 

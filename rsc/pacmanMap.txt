@@ -1,25 +1,25 @@
 XXXXXXXXXXXXXXXXXXXXXXX|
-X     ooo  X          X|
-XPXXX XXXX X XXXX XXXPX|
-X XXX XXXX X XXXX XXX X|
-X                     X|
-X XXX X XXXXXXX X XXX X|
-X     X    X    X     X|
-XXXXX XXXX X XXXX XXXXX|
-    X X         X X    |
-    X X XXX-XXX X X    |
-    X X X     X X X    |
-XXXXX X X     X X XXXXX|
-    x   X     X   x    |
-XXXXX X X     X X XXXXX|
-    X X XXXXXXX X X    |
-    X X         X X    |
-XXXXX X XXXXXXX X XXXXX|
-X          X          X|
-X XXX XXXX X XXXX XXX X|
-X   X             X   X|
-XXX X X XXXXXXX X X XXX|
-X     X    X    X     X|
-XPXXXXXXXX X XXXXXXXXPX|
-X                     X|
+XooooooooooXooooooooooX|
+XPXXXoXXXXoXoXXXXoXXXPX|
+XoXXXoXXXXoXoXXXXoXXXoX|
+XoooooooooooooooooooooX|
+XoXXXoXoXXXXXXXoXoXXXoX|
+XoooooXooooXooooXoooooX|
+XXXXXoXXXX X XXXXoXXXXX|
+    XoX         XoX    |
+    XoX XXX-XXX XoX    |
+    XoX X     X XoX    |
+XXXXXoX X     X XoXXXXX|
+    xo  X     X  ox    |
+XXXXXoX X     X XoXXXXX|
+    XoX XXXXXXX XoX    |
+    XoX         XoX    |
+XXXXXoX XXXXXXX XoXXXXX|
+XooooooooooXooooooooooX|
+XoXXXoXXXXoXoXXXXoXXXoX|
+XoooXoooooooooooooXoooX|
+XXXoXoXoXXXXXXXoXoXoXXX|
+XoooooXooooXooooXoooooX|
+XPXXXXXXXXoXoXXXXXXXXPX|
+XoooooooooooooooooooooX|
 XXXXXXXXXXXXXXXXXXXXXXX|

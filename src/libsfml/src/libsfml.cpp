@@ -55,21 +55,21 @@ bool sfml::SfmlModule::isOk()
     return (m_window.isOpen());
 }
 
-void sfml::SfmlModule::drawText(const std::string& message, int size, arc::Color color, std::pair<float, float> position)
+void sfml::SfmlModule::drawText(const std::string& message, int size, arc::Color color, arc::Vector<float> position)
 {
     sf::Text text(message, m_font, size);
 
     text.setFillColor(sfml::sfmlColorMap.find(color)->second);
-    text.setPosition(position.first * 10, position.second * 10);
+    text.setPosition(position.x * 10, position.y * 10);
     m_window.draw(text);
 }
 
-void sfml::SfmlModule::drawSquare(int size, arc::Color color, std::pair<float, float> position)
+void sfml::SfmlModule::drawSquare(int size, arc::Color color, arc::Vector<float> position)
 {
     sf::RectangleShape shape({(float)size * 10, (float)size * 10});
 
     shape.setFillColor(sfml::sfmlColorMap.find(color)->second);
-    shape.setPosition(position.first * 10, position.second * 10);
+    shape.setPosition(position.x * 10, position.y * 10);
     m_window.draw(shape);
 }
 

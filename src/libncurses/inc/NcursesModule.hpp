@@ -23,7 +23,7 @@ namespace ncs
         private:
             bool m_isOk;
             std::string m_name;
-            char m_key;
+            int m_key;
 
         public:
             NcursesModule();
@@ -36,8 +36,8 @@ namespace ncs
             bool isOk() override;
             bool getKeyDown(arc::Keyboard key) override;
 
-            void drawText(const std::string& text, int characterSize, arc::Color color, std::pair<float, float> position) override;
-            void drawSquare(int size, arc::Color color, std::pair<float, float> position) override;
+            void drawText(const std::string& text, int characterSize, arc::Color color, arc::Vector<float> position) override;
+            void drawSquare(int size, arc::Color color, arc::Vector<float> position) override;
 
     }; // class NcursesModule
 

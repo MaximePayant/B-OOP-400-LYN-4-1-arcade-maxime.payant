@@ -37,7 +37,7 @@ void PacMan::start(arc::IDisplayModule* module)
 
     std::srand(std::time(NULL));
     ghost.color = arc::Color::RED;
-    pacGumNb = 3;//181;
+    pacGumNb = 191;
     for (int line = 0; std::getline(filestream, m_map[line]); line += 1);
 }
 
@@ -61,16 +61,41 @@ void PacMan::ghostTurn()
     if (startingChrono.getElapsedTime() < waitGhostStart)
         return;
     startingChrono.stop();
-    ghost.checkDirection();
-    ghost.chooseDirection(m_map);
+    ghost.chooseDirection(m_map, {player.pos.x, player.pos.y});
     ghost.makeDirection(m_map);
+    ghost.checkAround();
 }
 
 void PacMan::checkBoth()
 {
-    ghost.powerLess = (player.powerUp ? true : false);
-    if (abs(player.x - ghost.x) < 1 && abs(player.y - ghost.y) < 1)
-        player.powerUp ? ghost.grailled = true : player.grailled = true;
+    int pPosX = player.pos.x / gamingScale;
+    int pPosY = player.pos.y / gamingScale;
+
+    if (m_map[pPosY][pPosX] == 'P') {
+        player.powerUp = true;
+        player.powerUpChrono.start();
+        if (ghost.mode != Ghost::mode_e::Grailled)
+            ghost.mode = Ghost::mode_e::PowerLess;
+        player.score += 100;
+        m_map[pPosY][pPosX] = ' ';
+        pacGumNb -= 1;
+    }
+    else if (player.powerUp && player.powerUpChrono.getElapsedTime() > powerUpTime) {
+        player.powerUp = false;
+        if (ghost.mode == Ghost::mode_e::PowerLess)
+            ghost.mode = Ghost::mode_e::Hunting;
+        player.powerUpChrono.stop();
+    }
+    if (abs(player.pos.x - ghost.pos.x) < 1 && abs(player.pos.y - ghost.pos.y) < 1) {
+        if (player.powerUp) {
+            if (ghost.mode != Ghost::mode_e::Grailled) {
+                ghost.mode = Ghost::mode_e::Grailled;
+                ghost.pos.x = (fmod(ghost.pos.x, 3) ? ghost.pos.x + 0.25 : ghost.pos.x);
+                ghost.pos.y = (fmod(ghost.pos.y, 3) ? ghost.pos.y + 0.25 : ghost.pos.y);
+            }
+        } else
+            player.grailled = true;
+    }
 }
 
 static void lose(arc::IDisplayModule *module)

@@ -45,15 +45,15 @@ void Nibbler::drawing(arc::IDisplayModule *module)
         for (std::size_t col = 0; col < m_map[line].size(); col += 1)
             switch (m_map[line][col]) {
             case 'X':
-                module->drawSquare(3, arc::Color::BLUE, {col * 3 + spacingX, line * 3 + spacingY});
+                module->drawSquare(3, arc::Color::BLUE, arc::Vector<float>(col * 3 + spacingX, line * 3 + spacingY));
                 break;
             case ' ':
-                module->drawSquare(3, arc::Color::YELLOW, {col * 3 + spacingX, line * 3 + spacingY});
+                module->drawSquare(3, arc::Color::YELLOW, arc::Vector<float>(col * 3 + spacingX, line * 3 + spacingY));
                 break;
             case 'o':
-                module->drawSquare(3, arc::Color::RED, {col * 3 + spacingX, line * 3 + spacingY});
+                module->drawSquare(3, arc::Color::RED, arc::Vector<float>(col * 3 + spacingX, line * 3 + spacingY));
             }
-    module->drawSquare(3, arc::Color::GREEN, {x + spacingX, y + spacingY});
+    module->drawSquare(3, arc::Color::GREEN, arc::Vector<float>(x + spacingX, y + spacingY));
     module->drawText("Score : " + std::to_string(score), 30, arc::WHITE, {20, 50});
     module->drawText("Speed : " + std::to_string(speed_mult), 30, arc::WHITE, {20, 70});
 }
@@ -62,7 +62,7 @@ void Nibbler::start(arc::IDisplayModule* module)
 {
     (void)module;
     std::ifstream filestream("rsc/nibblerMap.txt");
-    
+
     direction = None;
     wantedDirection = None;
     x = 6;

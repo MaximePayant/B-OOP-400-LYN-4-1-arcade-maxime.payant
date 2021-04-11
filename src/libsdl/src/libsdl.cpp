@@ -63,21 +63,21 @@ void sdl::SdlModule::checkEvent()
             m_isOk = false;
 }
 
-void sdl::SdlModule::drawText(const std::string& text, int characterSize, arc::Color color, std::pair<float, float> position)
+void sdl::SdlModule::drawText(const std::string& text, int characterSize, arc::Color color, arc::Vector<float> position)
 {
     SDL_Color realColor = sdl::sdlColorMap.find(color)->second;
     SDL_Surface *surface = TTF_RenderText_Blended(m_font, text.c_str(), realColor);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
-    SDL_FRect rect = {position.first * 10, position.second * 10, (surface->w * (float)characterSize) / surface->h, (float)characterSize};
+    SDL_FRect rect = {position.x * 10, position.y * 10, (surface->w * (float)characterSize) / surface->h, (float)characterSize};
 
     SDL_RenderCopyF(m_renderer, texture, nullptr, &rect);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
 }
 
-void sdl::SdlModule::drawSquare(int size, arc::Color color, std::pair<float, float> position)
+void sdl::SdlModule::drawSquare(int size, arc::Color color, arc::Vector<float> position)
 {
-    SDL_FRect rect = {position.first * 10, position.second * 10, (float)size * 10, (float)size * 10};
+    SDL_FRect rect = {position.x * 10, position.y * 10, (float)size * 10, (float)size * 10};
     SDL_Color realColor = sdl::sdlColorMap.find(color)->second;
 
     SDL_SetRenderDrawColor(m_renderer, realColor.r, realColor.g, realColor.b, realColor.a);

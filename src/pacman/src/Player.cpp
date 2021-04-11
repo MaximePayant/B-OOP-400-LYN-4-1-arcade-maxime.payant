@@ -17,6 +17,24 @@ Player::Player() :
     score(0)
 {}
 
+void Player::chooseDirection(const std::array<std::string, heightMap>& map)
+{
+    int posX = pos.x / 3;
+    int posY = pos.y / 3;
+
+    if (((direction == Up || direction == Down) && fmod(pos.y, 3) != 0)
+    || ((direction == Left || direction == Right) && fmod(pos.x, 3) != 0))
+        return;
+    if (wantedDirection == Up && map[posY - 1][posX] != 'X')
+        direction = Up;
+    else if (wantedDirection == Down && map[posY + 1][posX] != 'X')
+        direction = Down;
+    else if (wantedDirection == Left && map[posY][posX - 1] != 'X')
+        direction = Left;
+    else if (wantedDirection == Right && map[posY][posX + 1] != 'X')
+        direction = Right;
+}
+
 void Player::checkDirection(arc::IDisplayModule *module)
 {
     if (module->getKeyDown(arc::Keyboard::Up))
@@ -31,49 +49,40 @@ void Player::checkDirection(arc::IDisplayModule *module)
 
 void Player::makeDirection(const std::array<std::string, heightMap>& map)
 {
-    int posX = x / gamingScale;
-    int posY = y / gamingScale;
+    int posX = pos.x / gamingScale;
+    int posY = pos.y / gamingScale;
 
     if (direction == Up
-    && (fmod(y, gamingScale) != 0 || (map[posY - 1][posX] != 'X' && map[posY - 1][posX] != '-')))
-        y -= 0.5;
+    && (fmod(pos.y, gamingScale) != 0 || (map[posY - 1][posX] != 'X' && map[posY - 1][posX] != '-')))
+        pos.y -= 0.5;
     else if (direction == Down
-    && (fmod(y, gamingScale) != 0 || (map[posY + 1][posX] != 'X' && map[posY + 1][posX] != '-')))
-        y += 0.5;
+    && (fmod(pos.y, gamingScale) != 0 || (map[posY + 1][posX] != 'X' && map[posY + 1][posX] != '-')))
+        pos.y += 0.5;
     else if (direction == Left
-    && (fmod(x, gamingScale) != 0 || (map[posY][posX - 1] != 'X' && map[posY][posX - 1] != '-')))
-        x -= 0.5;
+    && (fmod(pos.x, gamingScale) != 0 || (map[posY][posX - 1] != 'X' && map[posY][posX - 1] != '-')))
+        pos.x -= 0.5;
     else if (direction == Right
-    && (fmod(x, gamingScale) != 0 || (map[posY][posX + 1] != 'X' && map[posY][posX + 1] != '-')))
-        x += 0.5;
+    && (fmod(pos.x, gamingScale) != 0 || (map[posY][posX + 1] != 'X' && map[posY][posX + 1] != '-')))
+        pos.x += 0.5;
 }
 
 void Player::checkAround(std::array<std::string, heightMap>& map, int& pacGumNb)
 {
-    int posX = x / gamingScale;
-    int posY = y / gamingScale;
+    int posX = pos.x / gamingScale;
+    int posY = pos.y / gamingScale;
 
     if (map[posY][posX] == 'o') {
         score += 100;
         map[posY][posX] = ' ';
         pacGumNb -= 1;
     }
-    if (map[posY][posX] == 'P') {
-        powerUp = true;
-        powerUpChrono.start();
-        map[posY][posX] = ' ';
-    }
     if (posY == 12 && posX == 23)
-        x = 0 * gamingScale;
+        pos.x = 0 * gamingScale;
     else if (posY == 12 && posX == -1)
-        x = 22 * gamingScale;
-    if (powerUp && powerUpChrono.getElapsedTime() > powerUpTime) {
-        powerUp = false;
-        powerUpChrono.stop();
-    }
+        pos.x = 22 * gamingScale;
 }
 
 void Player::draw(arc::IDisplayModule *module)
 {
-    module->drawSquare(gamingScale, arc::Color::YELLOW, {x + spacingX, y + spacingY});
+    module->drawSquare(gamingScale, arc::Color::YELLOW, {pos.x + spacingX, pos.y + spacingY});
 }
