@@ -14,7 +14,8 @@ Player::Player() :
     powerUpChrono(),
     powerUp(false),
     grailled(false),
-    score(0)
+    score(0),
+    grailleCombo(0)
 {}
 
 void Player::chooseDirection(const std::array<std::string, heightMap>& map)

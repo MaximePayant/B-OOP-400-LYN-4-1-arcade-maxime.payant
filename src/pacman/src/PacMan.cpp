@@ -30,14 +30,22 @@ extern "C" void *entryPoint()
     return (game);
 }
 
+PacMan::PacMan() :
+    player(),
+    ghosts({Ghost({9, 12}, arc::Color::GREEN),
+            Ghost({9, 13}, arc::Color::MAGENTA),
+            Ghost({13, 12}, arc::Color::RED),
+            Ghost({13, 13}, arc::Color::ORANGE)}),
+    m_map(),
+    pacGumNb(191)
+{}
+
 void PacMan::start(arc::IDisplayModule* module)
 {
     (void)module;
     std::ifstream filestream("rsc/pacmanMap.txt");
 
     std::srand(std::time(NULL));
-    ghost.color = arc::Color::RED;
-    pacGumNb = 191;
     for (int line = 0; std::getline(filestream, m_map[line]); line += 1);
 }
 
@@ -61,9 +69,11 @@ void PacMan::ghostTurn()
     if (startingChrono.getElapsedTime() < waitGhostStart)
         return;
     startingChrono.stop();
-    ghost.chooseDirection(m_map, {player.pos.x, player.pos.y});
-    ghost.makeDirection(m_map);
-    ghost.checkAround();
+    for (auto& ghost : ghosts) {
+        ghost.chooseDirection(m_map, {player.pos.x, player.pos.y});
+        ghost.makeDirection(m_map);
+        ghost.checkAround();
+    }
 }
 
 void PacMan::checkBoth()
@@ -74,28 +84,43 @@ void PacMan::checkBoth()
     if (m_map[pPosY][pPosX] == 'P') {
         player.powerUp = true;
         player.powerUpChrono.start();
-        if (ghost.mode != Ghost::mode_e::Grailled)
-            ghost.mode = Ghost::mode_e::PowerLess;
+        for (auto& ghost : ghosts) {
+            if (ghost.mode != Ghost::mode_e::Grailled)
+                ghost.mode = Ghost::mode_e::PowerLess;
+            if (ghost.direction == Entity::direction_e::Up)
+                ghost.direction = Entity::direction_e::Down;
+            else if (ghost.direction == Entity::direction_e::Down)
+                ghost.direction = Entity::direction_e::Up;
+            else if (ghost.direction == Entity::direction_e::Left)
+                ghost.direction = Entity::direction_e::Right;
+            else if (ghost.direction == Entity::direction_e::Right)
+                ghost.direction = Entity::direction_e::Left;
+        }
         player.score += 100;
         m_map[pPosY][pPosX] = ' ';
         pacGumNb -= 1;
     }
     else if (player.powerUp && player.powerUpChrono.getElapsedTime() > powerUpTime) {
         player.powerUp = false;
-        if (ghost.mode == Ghost::mode_e::PowerLess)
-            ghost.mode = Ghost::mode_e::Hunting;
+        for (auto& ghost : ghosts)
+            if (ghost.mode == Ghost::mode_e::PowerLess)
+                ghost.mode = Ghost::mode_e::Hunting;
         player.powerUpChrono.stop();
+        player.grailleCombo = 0;
     }
-    if (abs(player.pos.x - ghost.pos.x) < 1 && abs(player.pos.y - ghost.pos.y) < 1) {
-        if (player.powerUp) {
-            if (ghost.mode != Ghost::mode_e::Grailled) {
-                ghost.mode = Ghost::mode_e::Grailled;
-                ghost.pos.x = (fmod(ghost.pos.x, 3) ? ghost.pos.x + 0.25 : ghost.pos.x);
-                ghost.pos.y = (fmod(ghost.pos.y, 3) ? ghost.pos.y + 0.25 : ghost.pos.y);
-            }
-        } else
-            player.grailled = true;
-    }
+    for (auto& ghost : ghosts)
+        if (abs(player.pos.x - ghost.pos.x) < 3 && abs(player.pos.y - ghost.pos.y) < 3) {
+            if (player.powerUp) {
+                if (ghost.mode != Ghost::mode_e::Grailled) {
+                    ghost.mode = Ghost::mode_e::Grailled;
+                    ghost.pos.x = (fmod(ghost.pos.x, 1) == 0.75 || fmod(ghost.pos.x, 1) == 0.25 ? ghost.pos.x + 0.25 : ghost.pos.x);
+                    ghost.pos.y = (fmod(ghost.pos.y, 1) == 0.75 || fmod(ghost.pos.y, 1) == 0.25 ? ghost.pos.y + 0.25 : ghost.pos.y);
+                    player.grailleCombo += 1;
+                    player.score += 200 * pow(2, player.grailleCombo);
+                }
+            } else
+                player.grailled = true;
+        }
 }
 
 static void lose(arc::IDisplayModule *module)

@@ -19,13 +19,13 @@ class PacMan :
 {
     private:
         Player player;
-        Ghost ghost;
+        std::array<Ghost, 4> ghosts;
 
         std::array<std::string, heightMap> m_map;
         int pacGumNb;
 
     public:
-        PacMan() = default;
+        PacMan();
         ~PacMan() = default;
 
         void start(arc::IDisplayModule *) override;

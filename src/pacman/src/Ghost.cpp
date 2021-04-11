@@ -10,16 +10,14 @@
 
 #include "PacMan.hpp"
 
-Ghost::Ghost() :
-    Entity(9 * gamingScale, 10 * gamingScale),
+Ghost::Ghost(arc::Vector<float> pos, arc::Color colorVal) :
+    Entity(pos.x * gamingScale, pos.y * gamingScale),
+    dirChoiceChrono(arc::Chrono::Lauch),
+    color(colorVal),
     mode(Hunting),
     needMoveChoice(false),
     houseKeeping(true)
-{
-    dirChoiceChrono.start();
-    direction = None;
-    wantedDirection = None;
-}
+{}
 
 std::array<bool, 4> Ghost::checkPossibleDirection(const std::array<std::string, heightMap>& map)
 {

@@ -23,7 +23,8 @@ namespace sfml
             {arc::Color::BLUE, sf::Color(0, 0, 255)},
             {arc::Color::YELLOW, sf::Color(127, 127, 0)},
             {arc::Color::MAGENTA, sf::Color(127, 0, 127)},
-            {arc::Color::CYAN, sf::Color(0, 127, 127)}
+            {arc::Color::CYAN, sf::Color(0, 127, 127)},
+            {arc::Color::ORANGE, sf::Color(255, 127, 0)}
     };
 }
 

@@ -28,7 +28,8 @@ void PacMan::drawing(arc::IDisplayModule *module)
                     break;
             }
     player.draw(module);
-    ghost.draw(module);
+    for (auto& ghost : ghosts)
+        ghost.draw(module);
     module->drawText("PACMAN", 100, arc::YELLOW, arc::Vector<float>(10, 30));
     module->drawText("Score : " + std::to_string(player.score), 40, arc::WHITE, arc::Vector<float>(20, 50));
 }

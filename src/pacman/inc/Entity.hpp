@@ -37,6 +37,7 @@ class Player :
         bool powerUp;
         bool grailled;
         int score;
+        int grailleCombo;
 
         Player();
         ~Player() = default;
@@ -67,7 +68,7 @@ class Ghost :
         bool needMoveChoice;
         bool houseKeeping;
 
-        Ghost();
+        Ghost(arc::Vector<float> pos, arc::Color colorVal);
         ~Ghost() = default;
 
         void draw(arc::IDisplayModule *module);

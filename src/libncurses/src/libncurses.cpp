@@ -33,6 +33,7 @@ ncs::NcursesModule::NcursesModule() :
     init_pair(arc::MAGENTA, COLOR_BLACK, COLOR_MAGENTA);
     init_pair(arc::CYAN, COLOR_BLACK, COLOR_CYAN);
     init_pair(arc::WHITE, COLOR_BLACK, COLOR_WHITE);
+    init_pair(arc::ORANGE, COLOR_BLACK, COLOR_RED);
 }
 
 ncs::NcursesModule::~NcursesModule()
