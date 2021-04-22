@@ -17,13 +17,15 @@ namespace arc
     {
 
         private:
-            std::chrono::time_point<std::chrono::system_clock> m_start;
-            std::chrono::time_point<std::chrono::system_clock> m_tour;
-            std::chrono::time_point<std::chrono::system_clock> m_end;
+            std::chrono::time_point<std::chrono::steady_clock> m_start;
+            std::chrono::time_point<std::chrono::steady_clock> m_tour;
+            std::chrono::time_point<std::chrono::steady_clock> m_end;
             bool m_isRuning;
 
         public:
-            Chrono() = default;
+            enum ctorState { Wait, Lauch };
+            Chrono();
+            Chrono(ctorState state);
             ~Chrono() = default;
 
             void start();

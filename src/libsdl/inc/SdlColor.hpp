@@ -23,7 +23,8 @@ namespace sdl
             {arc::Color::BLUE, {0, 0, 255, 0}},
             {arc::Color::YELLOW, {127, 127, 0, 0}},
             {arc::Color::MAGENTA, {127, 0, 127, 0}},
-            {arc::Color::CYAN, {0, 127, 127, 0}}
+            {arc::Color::CYAN, {0, 127, 127, 0}},
+            {arc::Color::ORANGE, {255, 127, 0, 0}}
     };
 }
 

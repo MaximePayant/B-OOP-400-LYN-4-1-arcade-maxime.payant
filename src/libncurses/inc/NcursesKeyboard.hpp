@@ -76,7 +76,7 @@ namespace ncs
         {arc::Keyboard::Equal,      -1},
         {arc::Keyboard::Hyphen,     -1},
         {arc::Keyboard::Space,      ' '},
-        {arc::Keyboard::Enter,      KEY_ENTER},
+        {arc::Keyboard::Enter,      '\n'},
         {arc::Keyboard::Backspace,  KEY_BACKSPACE},
         {arc::Keyboard::Tab,        -1},
         {arc::Keyboard::PageUp,     KEY_PPAGE},

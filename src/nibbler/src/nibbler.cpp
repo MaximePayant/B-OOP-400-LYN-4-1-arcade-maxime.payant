@@ -46,19 +46,19 @@ void Nibbler::drawing(arc::IDisplayModule *module)
         for (std::size_t col = 0; col < m_map[line].size(); col += 1)
             switch (m_map[line][col]) {
             case 'X':
-                module->drawSquare(3, arc::Color::BLUE, {col * 3 + spacingX, line * 3 + spacingY});
+                module->drawSquare(3, arc::Color::BLUE, {(float)col * 3 + spacingX, (float)line * 3 + spacingY});
                 break;
             case ' ':
-                module->drawSquare(3, arc::Color::YELLOW, {col * 3 + spacingX, line * 3 + spacingY});
+                module->drawSquare(3, arc::Color::YELLOW, {(float)col * 3 + spacingX, (float)line * 3 + spacingY});
                 break;
             case 'o':
-                module->drawSquare(3, arc::Color::RED, {col * 3 + spacingX, line * 3 + spacingY});
+                module->drawSquare(3, arc::Color::RED, {(float)col * 3 + spacingX, (float)line * 3 + spacingY});
             }
     for (size_t j = 0; j < snake.size(); j++)
         if (j == 0)
-            module->drawSquare(3, arc::Color::MAGENTA, {snake.at(j).first * 3 + spacingX, snake.at(j).second * 3 + spacingY});
+            module->drawSquare(3, arc::Color::MAGENTA, {(float)snake.at(j).first * 3 + spacingX, (float)snake.at(j).second * 3 + spacingY});
         else
-            module->drawSquare(3, arc::Color::GREEN, {snake.at(j).first * 3 + spacingX, snake.at(j).second * 3 + spacingY});
+            module->drawSquare(3, arc::Color::GREEN, {(float)snake.at(j).first * 3 + spacingX, (float)snake.at(j).second * 3 + spacingY});
     module->drawText("Score : " + std::to_string(score), 30, arc::WHITE, {20, 50});
     module->drawText("Body size : " + std::to_string(snake.size()), 30, arc::WHITE, {20, 70});
 }
@@ -81,6 +81,11 @@ void Nibbler::start(arc::IDisplayModule* module)
     speed_mult = 1;
     for (int line = 0; std::getline(filestream, m_map[line]); line += 1);
     spawnObstacle();
+}
+
+void Nibbler::terminate(arc::IDisplayModule* module)
+{
+    (void)module;
 }
 
 void Nibbler::spawnObstacle()
@@ -121,8 +126,8 @@ void Nibbler::gameOver(arc::IDisplayModule *module)
     if (!over)
         over = true;
     module->checkEvent();
-    module->clearWindow();
-    module->drawText("GAME OVER, PRESS P TO ACCESS MENU", 30, arc::WHITE, {50, 50});
+    module->drawText("GAME OVER, PRESS P TO ACCESS MENU", 30, arc::WHITE, {20, 80});
+    module->drawText("OR R TO RESTART", 30, arc::WHITE, {20, 85});
     module->displayWindow();
 }
 

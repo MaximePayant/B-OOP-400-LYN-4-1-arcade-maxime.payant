@@ -22,10 +22,12 @@ namespace arc
         int m_libIndex;
         std::vector<std::string> m_lib;
         std::vector<std::string> m_game;
+        std::map<std::string, std::string> m_score;
 
         void getList();
         void drawText(arc::IDisplayModule* graph, int index, const std::string &name, bool game) const;
         void checkInput(arc::IDisplayModule* graph, arc::DLManager& manager);
+        void getData();
     public:
         Interface() = default;
         ~Interface() = default;

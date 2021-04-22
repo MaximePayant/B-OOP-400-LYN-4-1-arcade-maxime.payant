@@ -7,9 +7,12 @@ XoXXXoXoXXXXXXXoXoXXXoX|
 XoooooXooooXooooXoooooX|
 XXXXXoXXXX X XXXXoXXXXX|
     XoX         XoX    |
-XXXXXoX XXX XXX XoXXXXX|
-     o  X     X  o     |
-XXXXXoX XXXXXXX XoXXXXX|
+    XoX XXX-XXX XoX    |
+    XoX X     X XoX    |
+XXXXXoX X     X XoXXXXX|
+    xo  X     X  ox    |
+XXXXXoX X     X XoXXXXX|
+    XoX XXXXXXX XoX    |
     XoX         XoX    |
 XXXXXoX XXXXXXX XoXXXXX|
 XooooooooooXooooooooooX|

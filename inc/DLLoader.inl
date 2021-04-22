@@ -10,7 +10,7 @@
 template <typename T>
 T* arc::DLLoader::getInstance()
 {
-    auto *module = static_cast<T *>(m_entry() );
+    auto *module = static_cast<T *>(m_entry());
 
     if (!module)
         throw (arc::Error("Cannot create an instance of the module!", "LIB003"));

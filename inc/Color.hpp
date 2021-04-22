@@ -19,7 +19,8 @@ namespace arc
         BLUE,
         MAGENTA,
         CYAN,
-        WHITE
+        WHITE,
+        ORANGE
     };
 }
 
